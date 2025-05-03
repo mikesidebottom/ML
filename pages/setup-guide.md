@@ -4,39 +4,40 @@ title: Setup Guide
 permalink: /pages/setup-guide/
 ---
 
-# Setup Guide 🛠️
+# SETUP GUIDE 🛠️
 
-## Recommended Platform: Google Colab
+## RECOMMENDED PLATFORM: GOOGLE COLAB
 
 We recommend using [Google Colab](https://colab.research.google.com/) for this workshop as it provides a free, GPU-enabled environment.
 
-### What You Need
+### WHAT YOU NEED
 
 * A Google account
 * Reliable internet connection
 
-### Running the Notebooks
+### RUNNING THE NOTEBOOKS
 
 1. Navigate to the [Workshop Sessions](/pages/workshop-sessions) page
 2. Click the "Open in Colab" button for the notebook you want to run
 
-### Enable GPU in Colab
+### ENABLE GPU IN COLAB
 
 For best performance, enable GPU acceleration:
 
-1. **Runtime > Change runtime type**
-2. Set **Hardware Accelerator** to `GPU`
-3. Click **Save**
+<div class="card">
+  <ol>
+    <li><strong>Runtime > Change runtime type</strong></li>
+    <li>Set <strong>Hardware Accelerator</strong> to <code>GPU</code></li>
+    <li>Click <strong>Save</strong></li>
+  </ol>
+</div>
 
-### Install Dependencies
+<div class="info-box">
+  <strong>📘 Resources:</strong> 
+  <a href="https://colab.research.google.com/notebooks/basic_features_overview.ipynb">Colab Tips</a> | 
+  <a href="https://research.google.com/colaboratory/faq.html">Colab FAQ</a>
+</div>
+
+### INSTALL DEPENDENCIES
 
 Each notebook starts with a setup cell. Run it first to install all required libraries.
-
-## Alternative: Local Setup
-
-If you prefer running the notebooks locally:
-
-1. Clone the repository:
-```bash
-git clone https://github.com/CLDiego/uom_fse_dl_workshop.git
-cd UoM_fse_dl_workshop
