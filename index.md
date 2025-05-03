@@ -5,15 +5,13 @@ title: Deep Learning with PyTorch Workshop
 
 ![Workshop Banner](https://i.imgur.com/mTltzAc.png)
 
-# DEEP LEARNING WITH PYTORCH WORKSHOP
-
 <div class="info-box">
   Welcome to the University of Manchester FSE Deep Learning workshop! This course provides a hands-on introduction to deep learning using PyTorch.
 </div>
 
 ## OVERVIEW 📋
 
-This hands-on workshop introduces the fundamentals of deep learning using PyTorch. Participants will learn by building real models and solving practical tasks.
+This hands-on workshop introduces the fundamentals of deep learning using PyTorch. Participants will learn by building real models and solving practical tasks. The workshop is designed for beginners and covers essential concepts.
 
 <div class="card">
   <h3>WHAT YOU'LL LEARN</h3>
@@ -56,7 +54,7 @@ This hands-on workshop introduces the fundamentals of deep learning using PyTorc
           </tr>
           <tr>
             <td><strong>3</strong></td>
-            <td>Model Training & Optimization</td>
+            <td>Model Training & Optimization & PINNS </td>
             <td>~1.5 hr</td>
           </tr>
           <tr>
