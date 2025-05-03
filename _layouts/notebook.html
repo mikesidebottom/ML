@@ -1,0 +1,22 @@
+---
+layout: default
+---
+
+<div class="notebook-container">
+  <div class="notebook-header">
+    <h1>{{ page.title }}</h1>
+    <div class="notebook-actions">
+      <a href="https://colab.research.google.com/github/CLDiego/uom_fse_dl_workshop/blob/main/notebooks/{{ page.notebook_file }}" class="colab-button" target="_blank">
+        <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/> Open in Colab
+      </a>
+    </div>
+  </div>
+
+  <div class="notebook-content">
+    {{ content }}
+  </div>
+
+  <div class="notebook-footer">
+    <a href="{{ site.baseurl }}/pages/workshop-sessions">← Back to All Sessions</a>
+  </div>
+</div>
