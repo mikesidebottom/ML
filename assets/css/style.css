@@ -548,3 +548,134 @@ footer {
     border-radius: 6px;
     box-shadow: var(--shadow-1);
   }
+
+/* VS Code-like code styling */
+pre {
+  background-color: #1e1e1e; /* VS Code-like dark background */
+  border-radius: 6px;
+  margin: 1.2rem 0;
+  padding: 1rem;
+  box-shadow: var(--shadow-2);
+  border-left: 3px solid var(--accent-color);
+  overflow-x: auto;
+}
+
+code {
+  font-family: 'IBM Plex Mono', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+/* Syntax highlighting colors - VS Code dark+ theme inspired */
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-built_in,
+.hljs-name,
+.hljs-tag {
+  color: #569cd6; /* blue */
+}
+
+.hljs-string,
+.hljs-title,
+.hljs-section,
+.hljs-attribute,
+.hljs-literal,
+.hljs-template-tag,
+.hljs-template-variable,
+.hljs-type,
+.hljs-addition {
+  color: #ce9178; /* orange/string */
+}
+
+.hljs-comment,
+.hljs-quote,
+.hljs-deletion,
+.hljs-meta {
+  color: #6a9955; /* green */
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-literal,
+.hljs-doctag,
+.hljs-title,
+.hljs-section,
+.hljs-type,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-selector-attr,
+.hljs-selector-pseudo,
+.hljs-number {
+  color: #b5cea8; /* light green/numbers */
+}
+
+.hljs-symbol,
+.hljs-bullet,
+.hljs-link,
+.hljs-regexp {
+  color: #d16969; /* red */
+}
+
+.hljs-variable,
+.hljs-template-variable {
+  color: #9cdcfe; /* light blue */
+}
+
+.hljs-function {
+  color: #dcdcaa; /* yellow */
+}
+
+/* Make cell outputs distinct from code */
+.cell-output {
+  background-color: #2d2d2d;
+  border-left: 3px solid var(--secondary-color);
+  border-radius: 0 6px 6px 0;
+  margin: 0.5rem 0 1.5rem 0;
+  padding: 1rem;
+}
+
+/* Improve notebook container styling */
+.notebook-container {
+  max-width: 900px;
+  margin: 0;
+  background-color: var(--card-bg-color);
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: var(--shadow-1);
+}
+
+/* Add a cool line number effect to code blocks */
+pre.line-numbers {
+  position: relative;
+  padding-left: 3.8em;
+  counter-reset: linenumber;
+}
+
+pre.line-numbers > code {
+  position: relative;
+}
+
+.line-numbers .line-numbers-rows {
+  position: absolute;
+  pointer-events: none;
+  top: 0;
+  font-size: 100%;
+  left: -3.8em;
+  width: 3em;
+  letter-spacing: -1px;
+  border-right: 1px solid #999;
+  user-select: none;
+}
+
+.line-numbers-rows > span {
+  display: block;
+  counter-increment: linenumber;
+}
+
+.line-numbers-rows > span:before {
+  content: counter(linenumber);
+  color: #999;
+  display: block;
+  padding-right: 0.8em;
+  text-align: right;
+}
