@@ -30,7 +30,7 @@ permalink: /pages/workshop-sessions/
     </div>
     <div class="notebook-footer">
       <a href="{{ site.baseurl }}/_notebooks/session1">Browse Notebook</a>
-      <a href="https://colab.research.google.com/github/CLDiego/uom_fse_dl_workshop/blob/main/notebooks/session1.ipynb" class="colab-button" target="_blank">
+      <a href="https://colab.research.google.com/github/CLDiego/uom_fse_dl_workshop/blob/main/_notebooks/session1.ipynb" class="colab-button" target="_blank">
         <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/> Open in Colab
     </a>
 </div>
