@@ -105,6 +105,22 @@ permalink: /notebooks/session{session_num}/
                     content
                 )
                 
+                # Transform markdown code blocks to have a special class for styling
+                content = re.sub(
+                    r'```python\n(.*?)```',
+                    r'<pre class="snippet-code"><code class="python">\1</code></pre>',
+                    content,
+                    flags=re.DOTALL
+                )
+                
+                # Transform other markdown code blocks
+                content = re.sub(
+                    r'```([a-z]*)\n(.*?)```',
+                    r'<pre class="snippet-code"><code class="\1">\2</code></pre>',
+                    content,
+                    flags=re.DOTALL
+                )
+                
                 # Fix math equations for MathJax
                 # Preserve double dollar signs (display math)
                 content = re.sub(r'\$\$(.*?)\$\$', r'$$\1$$', content)
