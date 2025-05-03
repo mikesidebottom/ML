@@ -5,6 +5,9 @@ notebook_file: SE03_CA_Training_neural_networks.ipynb
 permalink: /notebooks/session3/
 ---
 
+![](https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/se_03.png)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/CLDiego/uom_fse_dl_workshop/blob/main/SE03_CA_Training_neural_networks.ipynb)
+
 ```python
 # Download utils from GitHub
 !wget -q --show-progress https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/colab_utils.txt -O colab_utils.txt

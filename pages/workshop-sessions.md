@@ -29,7 +29,7 @@ permalink: /pages/workshop-sessions/
       </div>
     </div>
     <div class="notebook-footer">
-  <a href="{{ site.baseurl }}/_notebooks/session1">Browse Notebook</a>
+  <a href="{{ site.baseurl }}/notebooks/session1"> Browse Notebook</a>
       <a href="https://colab.research.google.com/github/CLDiego/uom_fse_dl_workshop/blob/main/_notebooks/session1.ipynb" class="colab-button" target="_blank">
         <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/> Open in Colab
     </a>
@@ -53,7 +53,7 @@ permalink: /pages/workshop-sessions/
       </div>
     </div>
     <div class="notebook-footer">
-  <a href="{{ site.baseurl }}/_notebooks/session2">Browse Notebook</a>
+  <a href="{{ site.baseurl }}/notebooks/session2">Browse Notebook</a>
       <a href="https://colab.research.google.com/github/CLDiego/uom_fse_dl_workshop/blob/main/notebooks/session2.ipynb" class="colab-button" target="_blank">
         <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/> Open in Colab
       </a>
@@ -77,7 +77,7 @@ permalink: /pages/workshop-sessions/
       </div>
     </div>
     <div class="notebook-footer">
-  <a href="{{ site.baseurl }}/_notebooks/session3">Browse Notebook</a>
+  <a href="{{ site.baseurl }}/notebooks/session3">Browse Notebook</a>
       <a href="https://colab.research.google.com/github/CLDiego/uom_fse_dl_workshop/blob/main/notebooks/session3.ipynb" class="colab-button" target="_blank">
         <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/> Open in Colab
       </a>
@@ -101,7 +101,7 @@ permalink: /pages/workshop-sessions/
       </div>
     </div>
     <div class="notebook-footer">
-  <a href="{{ site.baseurl }}/_notebooks/session4">Browse Notebook</a>
+  <a href="{{ site.baseurl }}/notebooks/session4">Browse Notebook</a>
       <a href="https://colab.research.google.com/github/CLDiego/uom_fse_dl_workshop/blob/main/notebooks/session4.ipynb" class="colab-button" target="_blank">
         <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/> Open in Colab
       </a>
@@ -125,7 +125,7 @@ permalink: /pages/workshop-sessions/
       </div>
     </div>
     <div class="notebook-footer">
-  <a href="{{ site.baseurl }}/_notebooks/session5">Browse Notebook</a>
+  <a href="{{ site.baseurl }}/notebooks/session5">Browse Notebook</a>
       <a href="https://colab.research.google.com/github/CLDiego/uom_fse_dl_workshop/blob/main/notebooks/session5.ipynb" class="colab-button" target="_blank">
         <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/> Open in Colab
       </a>

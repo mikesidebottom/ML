@@ -5,6 +5,9 @@ notebook_file: SE01_CA_Intro_to_pytorch.ipynb
 permalink: /notebooks/session1/
 ---
 
+![Workshop Banner](https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/se_01.png)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/CLDiego/uom_fse_dl_workshop/blob/main/SE01_CA_Intro_to_pytorch.ipynb)
+
 ```python
 # Download utils from GitHub
 !wget -q --show-progress https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/colab_utils.txt -O colab_utils.txt

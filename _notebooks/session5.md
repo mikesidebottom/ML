@@ -5,6 +5,9 @@ notebook_file: SE05_CA_Transfer_Learning.ipynb
 permalink: /notebooks/session5/
 ---
 
+![](https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/se05.png)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/CLDiego/uom_fse_dl_workshop/blob/main/SE05_CA_Transfer_Learning.ipynb)
+
 ```python
 # Download utils from GitHub
 !wget -q --show-progress https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/colab_utils.txt -O colab_utils.txt
