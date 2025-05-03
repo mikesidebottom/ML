@@ -24,6 +24,21 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
+    // Updated hover effect for notebook cards
+    const notebookCards = document.querySelectorAll('.notebook-card');
+    notebookCards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-3px)';
+            this.style.transition = 'all 0.3s ease';
+            this.style.borderLeft = '3px solid var(--accent-color)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+            this.style.borderLeft = '';
+        });
+    });
+    
     // Add smooth scrolling to internal links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
