@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Deep Learning with PyTorch Workshop
+title: FSE DL Workshop
 ---
 
 ![Workshop Banner](https://i.imgur.com/mTltzAc.png)
