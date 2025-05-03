@@ -5,7 +5,7 @@ show_downloads: true
 google_analytics: # your analytics ID if needed
 
 # Site settings
-url: "https://CLDiego.github.io/uom_fse_dl_workshop"
+url: "https://cldiego.github.io/uom_fse_dl_workshop"
 baseurl: "/uom_fse_dl_workshop"
 permalink: pretty
 

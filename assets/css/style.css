@@ -1,26 +1,30 @@
 :root {
-    /* Material Design Dark Theme Colors */
-    --bg-color: #121212;
-    --surface-color: #1e1e1e;
-    --primary-color: #bb86fc;
-    --primary-variant-color: #3700b3;
-    --secondary-color: #03dac6;
-    --error-color: #cf6679;
-    --text-primary: #e0e0e0;
-    --text-secondary: #b0b0b0;
-    --border-color: #2d2d2d;
+    /* Updated Dark Theme Colors based on #241e20 background */
+    --bg-color: #241e20;
+    --surface-color: #2d2528;
+    --card-bg-color: #332a2d;
+    --header-color: #1a1617;
     
-    /* Component specific */
-    --header-color: #1f1f1f;
-    --code-bg-color: #2d2d2d;
-    --card-bg-color: #1f1f1f;
+    /* New accent colors that work well with #241e20 */
+    --primary-color: #a78bfa;    /* Soft purple */
+    --secondary-color: #38b2ac;  /* Teal */
+    --accent-color: #f97316;     /* Muted orange for highlights */
+    
+    /* Text colors */
+    --text-primary: #f3f4f6;
+    --text-secondary: #d1d5db;
+    --text-muted: #9ca3af;
+    
+    /* Functional colors */
+    --border-color: #4b4347;
+    --code-bg-color: #332a2d;
     --button-bg: var(--primary-color);
-    --button-text: #121212;
+    --button-text: #1a1617;
     
     /* Elevation shadows */
-    --shadow-1: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-    --shadow-2: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-    --shadow-3: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    --shadow-1: 0 1px 3px rgba(0,0,0,0.18), 0 1px 2px rgba(0,0,0,0.24);
+    --shadow-2: 0 3px 6px rgba(0,0,0,0.22), 0 3px 6px rgba(0,0,0,0.32);
+    --shadow-3: 0 10px 20px rgba(0,0,0,0.25), 0 6px 6px rgba(0,0,0,0.30);
     
     /* Animation */
     --transition-speed: 0.3s;
@@ -29,11 +33,12 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     background-color: var(--bg-color);
     color: var(--text-primary);
     line-height: 1.6;
     transition: all var(--transition-speed) ease;
+    font-size: 16px;
 }
 
 .container {
@@ -47,9 +52,10 @@ body {
     background-color: var(--card-bg-color);
     border-radius: 8px;
     padding: 24px;
-    margin: 16px 0;
+    margin: 24px 0;
     box-shadow: var(--shadow-1);
-    transition: box-shadow var(--transition-speed);
+    transition: all var(--transition-speed);
+    border-left: 3px solid var(--primary-color);
 }
 
 .card:hover {
@@ -83,7 +89,7 @@ header .container {
 
 .logo h1 {
     margin: 0;
-    font-family: 'JetBrains Mono', 'Roboto Mono', 'SF Mono', monospace;
+    font-family: 'IBM Plex Mono', monospace;
     font-size: 1.5rem;
     color: var(--primary-color);
     letter-spacing: 0.5px;
@@ -109,6 +115,7 @@ nav a {
     padding-bottom: 4px;
     font-size: 0.95rem;
     letter-spacing: 0.3px;
+    font-family: 'IBM Plex Sans', sans-serif;
 }
 
 nav a:after {
@@ -145,7 +152,7 @@ main {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'JetBrains Mono', 'Roboto Mono', 'SF Mono', monospace;
+    font-family: 'IBM Plex Mono', monospace;
     color: var(--text-primary);
     margin-top: 1.5em;
     margin-bottom: 0.8em;
@@ -166,6 +173,7 @@ h2 {
 
 h3 {
     font-size: 1.5rem;
+    color: var(--secondary-color);
 }
 
 h4 {
@@ -189,7 +197,7 @@ p {
 }
 
 code, pre {
-    font-family: 'JetBrains Mono', 'Roboto Mono', monospace;
+    font-family: 'IBM Plex Mono', monospace;
     background-color: var(--code-bg-color);
     border-radius: 4px;
 }
@@ -208,7 +216,7 @@ code {
 }
 
 blockquote {
-    border-left: 4px solid var(--primary-color);
+    border-left: 4px solid var(--accent-color);
     margin-left: 0;
     padding: 8px 16px;
     color: var(--text-secondary);
@@ -240,10 +248,10 @@ th, td {
 }
 
 th {
-    background-color: var(--primary-color);
-    color: var(--button-text);
+    background-color: var(--header-color);
+    color: var(--primary-color);
     font-weight: 600;
-    text-transform: uppercase;
+    font-family: 'IBM Plex Mono', monospace;
     font-size: 0.9rem;
     letter-spacing: 0.5px;
 }
@@ -274,7 +282,7 @@ tr:last-child {
     box-shadow: var(--shadow-1);
     border: none;
     cursor: pointer;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'IBM Plex Sans', sans-serif;
     letter-spacing: 0.3px;
     text-transform: uppercase;
     font-size: 0.9rem;
@@ -302,7 +310,7 @@ tr:last-child {
 /* Footer styles */
 footer {
     background-color: var(--header-color);
-    color: var(--text-secondary);
+    color: var(--text-muted);
     padding: 24px 0;
     text-align: center;
     border-top: 1px solid var(--border-color);
@@ -315,17 +323,19 @@ footer {
     display: inline-block;
     padding: 4px 12px;
     background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
     border-radius: 16px;
     margin-right: 8px;
     margin-bottom: 8px;
     font-size: 0.85rem;
-    color: var(--text-secondary);
+    color: var(--accent-color);
+    font-family: 'IBM Plex Mono', monospace;
 }
 
 /* Notification or info box */
 .info-box {
     padding: 16px;
-    background-color: rgba(187, 134, 252, 0.1);
+    background-color: rgba(167, 139, 250, 0.1); /* Based on primary color */
     border-left: 4px solid var(--primary-color);
     margin: 16px 0;
     border-radius: 0 4px 4px 0;
@@ -333,8 +343,8 @@ footer {
 
 .warning-box {
     padding: 16px;
-    background-color: rgba(255, 213, 79, 0.1);
-    border-left: 4px solid #ffd54f;
+    background-color: rgba(249, 115, 22, 0.1); /* Based on accent color */
+    border-left: 4px solid var(--accent-color);
     margin: 16px 0;
     border-radius: 0 4px 4px 0;
 }
@@ -351,9 +361,52 @@ footer {
 
 .progress-bar {
     height: 100%;
-    background-color: var(--primary-color);
+    background-color: var(--secondary-color);
     width: 0;
     transition: width 0.6s ease;
+}
+
+/* Notebook browser styling */
+.notebook-browser {
+    margin: 24px 0;
+}
+
+.notebook-card {
+    background-color: var(--card-bg-color);
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-1);
+    transition: all var(--transition-speed);
+    overflow: hidden;
+}
+
+.notebook-card:hover {
+    box-shadow: var(--shadow-2);
+    transform: translateY(-3px);
+}
+
+.notebook-header {
+    padding: 16px;
+    background-color: var(--header-color);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.notebook-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.notebook-content {
+    padding: 16px;
+}
+
+.notebook-footer {
+    padding: 12px 16px;
+    background-color: var(--surface-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--border-color);
 }
 
 /* Responsive design */
@@ -376,6 +429,11 @@ footer {
     
     h2 {
         font-size: 1.5rem;
+    }
+    
+    .notebook-footer {
+        flex-direction: column;
+        gap: 10px;
     }
 }
 
