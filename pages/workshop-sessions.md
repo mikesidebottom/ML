@@ -29,9 +29,9 @@ permalink: /pages/workshop-sessions/
       </div>
     </div>
     <div class="notebook-footer">
-      <a href="{{ site.baseurl }}/notebooks/session1">Browse Notebook</a>
-      <a href="https://colab.research.google.com/github/CLDiego/uom_fse_dl_workshop/blob/main/notebooks/session1.ipynb" class="colab-button" target="_blank">
-        <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/> Open in Colab
+      <a href="{{ site.baseurl }}/notebooks/SE01_CA_Intro_to_pytorch" class="browse-button">Browse Notebook</a>
+      <a href="https://colab.research.google.com/github/CLDiego/uom_fse_dl_workshop/blob/main/notebooks/SE01_CA_Intro_to_pytorch" class="colab-button" target="_blank">
+        <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
       </a>
     </div>
   </div>
