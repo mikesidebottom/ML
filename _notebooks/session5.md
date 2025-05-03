@@ -1,19 +1,9 @@
 ---
 layout: notebook
-title: "Se05 Ca Transfer Learning"
-permalink: /notebooks/SE05_CA_Transfer_Learning/
+title: "SESSION 5: TRANSFER LEARNING & U-NET"
 notebook_file: SE05_CA_Transfer_Learning.ipynb
+permalink: /notebooks/session5/
 ---
-
-![](https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/se05.png)
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/CLDiego/uom_fse_dl_workshop/blob/main/SE05_CA_Transfer_Learning.ipynb)
-# Workshop Instructions
-***
-- <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/icons/write.svg" width="20"/> Follow along by typing the code yourself - this helps with learning!
-- <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/icons/code.svg" width="20"/> Code cells marked as "Exercise" are for you to complete
-- <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/icons/reminder.svg" width="20"/> Look for hints if you get stuck
-- <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/icons/success.svg" width="20" /> Compare your solution with the provided answers
-- <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/icons/list.svg" width="20" /> Don't worry if you make mistakes - debugging is part of learning!
 
 ```python
 # Download utils from GitHub
@@ -56,7 +46,7 @@ quizzer = utils.core.QuizManager("SE05")
 
 # 1. Introduction to Transfer Learning
 ***
-> <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/icons/write.svg" width="20"/> **Definition**: Transfer learning is a machine learning technique where a model developed for one task is reused as a starting point for a model on a second task. It's particularly effective for deep learning models, as it allows us to leverage pre-trained models' knowledge rather than starting from scratch.
+> <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/write.svg" width="20"/> **Definition**: Transfer learning is a machine learning technique where a model developed for one task is reused as a starting point for a model on a second task. It's particularly effective for deep learning models, as it allows us to leverage pre-trained models' knowledge rather than starting from scratch.
 
 In previous sessions, we learned how to build and train neural networks from scratch. However, training large deep learning models requires:
 
@@ -67,7 +57,7 @@ In previous sessions, we learned how to build and train neural networks from scr
 Transfer learning addresses these challenges by letting us capitalise on existing models that have already been trained on large datasets.
 
 <div align="center">
-  <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/transfer.png" width="60%">
+  <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/transfer.png" width="60%">
 </div>
 
 ## 1.1 Transfer Learning Analogy
@@ -101,7 +91,7 @@ Transfer learning is particularly useful in the following scenarios:
 
 ***
 
-> <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/icons/reminder.svg" width="20"/> **Key Insight**: The effectiveness of transfer learning depends on the similarity between the source and target domains. The more similar they are, the more beneficial transfer learning becomes.
+> <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/reminder.svg" width="20"/> **Key Insight**: The effectiveness of transfer learning depends on the similarity between the source and target domains. The more similar they are, the more beneficial transfer learning becomes.
 
 
 ```python
@@ -112,7 +102,7 @@ quizzer.run_quiz(1)
 
 # 2. Case Study: Image Segmentation for Medical Imaging
 ***
-> <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/icons/write.svg" width="20"/> **Image Segmentation**: The process of partitioning an image into multiple segments or regions, often used in medical imaging to identify and delineate structures within images (e.g., tumors, organs). It is a crucial step in many computer vision tasks, including object detection and recognition.
+> <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/write.svg" width="20"/> **Image Segmentation**: The process of partitioning an image into multiple segments or regions, often used in medical imaging to identify and delineate structures within images (e.g., tumors, organs). It is a crucial step in many computer vision tasks, including object detection and recognition.
 
 For this session, we are going to be using the [**ISIC 2016 Skin Lesion Segmentation Challenge**](https://challenge.isic-archive.com/landing/2016/) dataset. This dataset contains dermoscopic images of skin lesions, along with their corresponding segmentation masks. The goal is to train a model to accurately segment the lesions from the background.
 
@@ -173,7 +163,7 @@ For image segmentation, our dataset needs to handle both input images and their 
 
 ***
 
-> <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/icons/code.svg" width="20"/> **Snippet 1**: Create a custom dataset class for loading
+> <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/code.svg" width="20"/> **Snippet 1**: Create a custom dataset class for loading
 
 ``` python
 from torch.utils.data import Dataset
@@ -253,7 +243,6 @@ ds = ISICDataset(
     img_transform=resize_transform,
     mask_transform=resize_transform
 )
-
 ```
 
 ```python
@@ -360,11 +349,11 @@ For segmentation tasks, we need to ensure that the same transformations are appl
 
 ***
 
-> <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/icons/reminder.svg" width="20"/> **Important**: When augmenting for segmentation tasks, always ensure that geometric transformations (flips, rotations, etc.) are applied identically to both the image and its mask to maintain pixel-to-pixel correspondence.
+> <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/reminder.svg" width="20"/> **Important**: When augmenting for segmentation tasks, always ensure that geometric transformations (flips, rotations, etc.) are applied identically to both the image and its mask to maintain pixel-to-pixel correspondence.
 
 ***
 
-> <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/icons/code.svg" width="20"/> **Snippet 2**: Using albumentations for data augmentation
+> <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/code.svg" width="20"/> **Snippet 2**: Using albumentations for data augmentation
 
 ``` python
 import albumentations as A
@@ -416,7 +405,6 @@ valid_img_ts = A.Compose([
     # Your code here: Normalize with mean and std
     # Your code here: Convert to PyTorch tensor
 ])
-
 ```
 
 ```python
@@ -506,7 +494,7 @@ Unfortunately, PyTorch `Dataset` class does not have a built-in method for split
 
 ***
 
-> <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/icons/code.svg" width="20"/> **Snippet 3**: Splitting the dataset into training and validation sets
+> <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/code.svg" width="20"/> **Snippet 3**: Splitting the dataset into training and validation sets
 
 ``` python
 from torch.utils.data import random_split
@@ -560,12 +548,12 @@ utils.plotting.show_binary_segmentation_batch(train_dl,
 # 4. Baseline Model: U-Net Architecture
 ***
 
-> <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/icons/write.svg" width="20" /> **U-Net**: A convolutional neural network architecture designed for biomedical image segmentation. It consists of a contracting path (encoder) and an expansive path (decoder), allowing it to capture both context and localization information.
+> <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/write.svg" width="20" /> **U-Net**: A convolutional neural network architecture designed for biomedical image segmentation. It consists of a contracting path (encoder) and an expansive path (decoder), allowing it to capture both context and localization information.
 
 The U-Net architecture is widely used in medical image segmentation tasks due to its ability to learn both local and global features. The architecture is shown below:
 
 <div align="center">
-  <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/unet.png" width="100%">
+  <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/unet.png" width="100%">
 </div>
 
 The U-Net architecture consists of two main parts: the encoder and the decoder, connected by skip connections. Each component plays a specific role:
@@ -628,7 +616,6 @@ class DoubleConv(torch.nn.Module):
     def forward(self, x):
         # Your code here: Apply the sequential module to the input
         return # Your code here
-
 ```
 
 ```python
@@ -792,7 +779,6 @@ class UNet(torch.nn.Module):
         output = # Your code here
         # Your code here: Apply sigmoid activation
         return # Your code here
-
 ```
 
 ```python
@@ -824,7 +810,7 @@ Where:
 - $|X \cap Y|$ is the number of pixels in the intersection of the predicted and ground truth masks
 
 <div align="center">
-  <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/dice.png" width="80%">
+  <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/dice.png" width="80%">
 </div>
 
 The Dice Loss is defined as:
@@ -964,7 +950,7 @@ In essence, the process of transfer learning involves taking a model that has be
 The process can be visualized as follows:
 
 <div align="center">
-  <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/transfer_custom.png" width="70%">
+  <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/transfer_custom.png" width="70%">
 </div>
 
 ## 5.1 Pre-trained Models for Computer Vision
@@ -984,7 +970,7 @@ Several pre-trained models are available for computer vision tasks. Each has its
 In this section, we are going to use a pre-trained model for the segmentation task. We are going to use an EfficientNet model that has been pre-trained on the ImageNet dataset. The EfficientNet model is a state-of-the-art convolutional neural network architecture that achieves high accuracy with fewer parameters compared to other architectures. 
 
 <div align="center">
-  <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/efficient.png" width="90%">
+  <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/efficient.png" width="90%">
 </div>
 
 ## 5.2 Transfer Learning Process
@@ -1019,7 +1005,7 @@ There are several approaches to implementing transfer learning:
 The EfficientNet model is going to act as the encoder part of the U-Net architecture. We are going to replace the encoder part of the U-Net architecture with the EfficientNet model. The decoder part of the U-Net architecture will remain the same.
 
 <div align="center">
-  <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/unet_efficient.png" width="100%">
+  <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/unet_efficient.png" width="100%">
 </div>
 
 ### 5.4.1 Transfer Learning Process for Segmentation
@@ -1035,7 +1021,7 @@ The EfficientNet model is going to act as the encoder part of the U-Net architec
 
 ***
 
-> <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/icons/code.svg" width="20"/> **Snippet 4**: Loading the EfficientNet model and freezing layers
+> <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/code.svg" width="20"/> **Snippet 4**: Loading the EfficientNet model and freezing layers
 
 ``` python
 from torchvision import models as tvm
@@ -1162,8 +1148,6 @@ class UNetEfficient(torch.nn.Module):
         
         # Your code here: Apply sigmoid activation and return
         return # Your code here
-
-
 ```
 
 ```python

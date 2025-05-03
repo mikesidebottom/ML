@@ -1,19 +1,9 @@
 ---
 layout: notebook
-title: "Se02 Ca Artificial Neural Networks"
-permalink: /notebooks/SE02_CA_Artificial_neural_networks/
+title: "SESSION 2: ARTIFICIAL NEURAL NETWORKS"
 notebook_file: SE02_CA_Artificial_neural_networks.ipynb
+permalink: /notebooks/session2/
 ---
-
-![](https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/se_02.png)
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/CLDiego/uom_fse_dl_workshop/blob/main/SE02_CA_Artificial_neural_networks.ipynb)
-# Workshop Instructions
-***
-- <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/icons/write.svg" width="20"/> Follow along by typing the code yourself - this helps with learning!
-- <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/icons/code.svg" width="20"/> Code cells marked as "Exercise" are for you to complete
-- <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/icons/reminder.svg" width="20"/> Look for hints if you get stuck
-- <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/icons/success.svg" width="20" /> Compare your solution with the provided answers
-- <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/icons/list.svg" width="20" /> Don't worry if you make mistakes - debugging is part of learning!
 
 ```python
 # Download utils from GitHub
@@ -59,17 +49,17 @@ Artificial Neural Networks (ANNs) are machine learning models inspired by the hu
 Each neuron connects to neurons in the next layer through weighted connections that are adjusted during training to minimize the difference between predicted and actual outputs.
 
 <div align="center">
-  <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/ann.png" width="60%">
+  <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/ann.png" width="60%">
 </div>
 
 ## 1.1 Neurons
 ***
-> <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/icons/write.svg" width="20"/> **Definition**: Neurons are the basic building blocks of ANNs, similar to biological neurons. Each neuron receives inputs, applies a transformation, and produces an output.
+> <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/write.svg" width="20"/> **Definition**: Neurons are the basic building blocks of ANNs, similar to biological neurons. Each neuron receives inputs, applies a transformation, and produces an output.
 
 The basic structure of a neuron can be seen below:
 
 <div align="center">
-  <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/non_linenar_neuron.png" width="80%">
+  <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/non_linenar_neuron.png" width="80%">
 </div>
 
 ### Neuron Output Formula
@@ -85,12 +75,12 @@ where:
 - $ b $  Bias term (shifts the activation function) 
 - $ \cdot $  Dot product between weight and input vectors 
 
-> <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/icons/write.svg" width="20"/> **Definition**: Weights and biases are learnable parameters of a neural network. Weights determine the strength of connections between neurons, while biases allow the neuron to shift the activation function.
+> <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/write.svg" width="20"/> **Definition**: Weights and biases are learnable parameters of a neural network. Weights determine the strength of connections between neurons, while biases allow the neuron to shift the activation function.
 
 ### 1.1.1 Features and Targets
 ***
 
-> <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/icons/write.svg" width="20"/> **Definition**: In machine learning, we refer to inputs as features and outputs as targets.
+> <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/write.svg" width="20"/> **Definition**: In machine learning, we refer to inputs as features and outputs as targets.
 
 In neural networks:
 
@@ -99,11 +89,11 @@ In neural networks:
 
 Now let's implement a neuron in Python using PyTorch. We'll create a `Neuron` class that handles the *forward pass* - passing inputs to the neuron and computing the output.
 
-> <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/icons/reminder.svg" width="20"/> **Note**: We'll use PyTorch's `torch.nn.Module` as a base class and `torch.nn.Parameter` to define weights and biases, making them learnable parameters that can be updated during training.
+> <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/reminder.svg" width="20"/> **Note**: We'll use PyTorch's `torch.nn.Module` as a base class and `torch.nn.Parameter` to define weights and biases, making them learnable parameters that can be updated during training.
 
 ***
 
-> <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/icons/code.svg" width="20"/> **Snippet 1**: nn.Module and nn.Parameter
+> <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/code.svg" width="20"/> **Snippet 1**: nn.Module and nn.Parameter
 
 ```python
 weight = torch.nn.Parameter(torch.randn(2, 1), requires_grad=True)
@@ -200,7 +190,7 @@ print(f"  - Number of edges: {G.number_of_edges()}")
 The explosion of the Space Shuttle Challenger on January 28, 1986, resulted from the failure of O-rings sealing the propulsion system. Critical components hadn't been properly tested at low temperatures, leading to catastrophic failure.
 
 <div align="center">
-  <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/challenger.png" width="50%">
+  <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/challenger.png" width="50%">
 </div>
 
 We'll analyze data from the Challenger disaster, examining the relationship between temperature at launch and O-ring failures. This real-world example demonstrates how neural networks can identify crucial patterns that might prevent disasters.
@@ -242,11 +232,11 @@ We'll build a model that predicts launch success based on temperature. Our goal 
 4. Split the data into training and test sets
 
 ***
-> <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/icons/reminder.svg" width="20"/> **Hint**: Our input and target are one-dimensional, but we need to reshape them to be two-dimensional to represent the number of samples and the number of features. Use `.view(-1, 1)` for reshaping in PyTorch.
+> <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/reminder.svg" width="20"/> **Hint**: Our input and target are one-dimensional, but we need to reshape them to be two-dimensional to represent the number of samples and the number of features. Use `.view(-1, 1)` for reshaping in PyTorch.
 
 ***
 
-> <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/icons/code.svg" width="20"/> **Snippet 2**: Splitting data with sklearn
+> <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/code.svg" width="20"/> **Snippet 2**: Splitting data with sklearn
 
 ```python
 from sklearn.model_selection import train_test_split
@@ -321,7 +311,7 @@ utils.plotting.make_fig_pretty(ax, title="O-Ring Distress vs Temperature",
 
 ## 2.2 The Forward Pass
 ***
-> <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/icons/write.svg" width="20"/> **Definition**: The forward pass is the process of feeding input data through the neural network to get predictions.
+> <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/write.svg" width="20"/> **Definition**: The forward pass is the process of feeding input data through the neural network to get predictions.
 
 In our O-ring example:
 - **Feature**: Temperature (X_normalized) - what our model uses for predictions
@@ -358,7 +348,7 @@ predictions = model(X_normalized)  # For batch-compatible models
 
 ## 2.3 Loss Functions and Error Measurement
 ***
-> <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/icons/write.svg" width="20"/> **Definition**: A loss function measures how far the predicted output of a model is from the actual target value.
+> <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/write.svg" width="20"/> **Definition**: A loss function measures how far the predicted output of a model is from the actual target value.
 
 ### Why Measure Error?
 
@@ -379,7 +369,7 @@ Where:
 - $ y_i $ actual target value for sample $ i $
 - $ \hat{y}_i $ predicted target value for sample $ i $
 
-> <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/icons/reminder.svg" width="20"/> **Note**: For binary classification problems, Binary Cross-Entropy (BCE) loss is typically more suitable than MSE, but we're using MSE here for simplicity.
+> <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/reminder.svg" width="20"/> **Note**: For binary classification problems, Binary Cross-Entropy (BCE) loss is typically more suitable than MSE, but we're using MSE here for simplicity.
 
 
 ```python
@@ -437,7 +427,7 @@ checker.check_exercise(3, answer)
 
 ## 2.4 The Backward Pass (Backpropagation)
 ***
-> <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/icons/write.svg" width="20"/> **Definition**: The backward pass computes gradients of the loss with respect to the network parameters, which are used to update those parameters.
+> <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/write.svg" width="20"/> **Definition**: The backward pass computes gradients of the loss with respect to the network parameters, which are used to update those parameters.
 
 After computing the loss, we need to adjust our model's parameters (weights and bias) to improve predictions. This is done through **backpropagation**.
 
@@ -463,7 +453,7 @@ Where:
 
 ### PyTorch's Autograd System
 
-> <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/icons/write.svg" width="20"/> **Important**: PyTorch automatically computes gradients using autograd, simplifying the backpropagation process.
+> <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/write.svg" width="20"/> **Important**: PyTorch automatically computes gradients using autograd, simplifying the backpropagation process.
 
 When `requires_grad=True` is set on tensors (default for `nn.Parameter`):
 
@@ -684,4 +674,4 @@ The Rogers Commission, which investigated the disaster, found that NASA managers
 ***
 Our analysis demonstrates a sobering point: proper data analysis could have potentially prevented this disaster. As our model shows, the probability of O-ring failure increases dramatically at lower temperatures, and the launch temperature of 31°F (-0.56°C) was well within the danger zone.
 
-> <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/icons/reminder.svg" width="20"/> **Ethics Note**: When lives depend on our analyses, data scientists have a responsibility to be thorough, transparent, and to clearly communicate risks to decision-makers.
+> <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/reminder.svg" width="20"/> **Ethics Note**: When lives depend on our analyses, data scientists have a responsibility to be thorough, transparent, and to clearly communicate risks to decision-makers.

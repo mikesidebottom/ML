@@ -1,19 +1,9 @@
 ---
 layout: notebook
-title: "Se01 Ca Intro To Pytorch"
-permalink: /notebooks/SE01_CA_Intro_to_pytorch/
+title: "SESSION 1: INTRODUCTION TO PYTORCH"
 notebook_file: SE01_CA_Intro_to_pytorch.ipynb
+permalink: /notebooks/session1/
 ---
-
-![Workshop Banner](https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/se_01.png)
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/CLDiego/uom_fse_dl_workshop/blob/main/SE01_CA_Intro_to_pytorch.ipynb)
-# Workshop Instructions
-***
-- <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/write.svg" width="20"/> Follow along by typing the code yourself - this helps with learning!
-- <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/code.svg" width="20"/> Code cells marked as "Exercise" are for you to complete
-- <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/reminder.svg" width="20"/> Look for hints if you get stuck
-- <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/success.svg" width="20" /> Compare your solution with the provided answers
-- <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/list.svg" width="20" /> Don't worry if you make mistakes - debugging is part of learning!
 
 ```python
 # Download utils from GitHub
@@ -110,7 +100,7 @@ answer = {
     'scalar_tensor': scalar_tensor,
     'float_tensor': float_tensor
 }
-checker.check_exercise(1, answer) 
+checker.check_exercise(1, answer)
 ```
 
 ```python
@@ -150,8 +140,7 @@ print(scalar_tensor)
 # with the .to() method that is used to move tensors
 # to different devices
 scalar_tensor = scalar_tensor.to(torch.float64) 
-print(scalar_tensor) 
-
+print(scalar_tensor)
 ```
 
 ## 2.2 Initializing tensors
@@ -192,7 +181,7 @@ answer = {
     'spaced_tensor': spaced_tensor,
     'zero_tensor': zero_tensor
 }
-checker.check_exercise('2', answer) 
+checker.check_exercise('2', answer)
 ```
 
 # 3. Indexing tensors

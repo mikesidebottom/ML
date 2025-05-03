@@ -1,19 +1,9 @@
 ---
 layout: notebook
-title: "Se04 Ca Convolutional Neural Networks"
-permalink: /notebooks/SE04_CA_Convolutional_Neural_Networks/
+title: "SESSION 4: CONVOLUTIONAL NEURAL NETWORKS"
 notebook_file: SE04_CA_Convolutional_Neural_Networks.ipynb
+permalink: /notebooks/session4/
 ---
-
-![](https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/se04.png)
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/CLDiego/uom_fse_dl_workshop/blob/main/SE04_CA_Convolutional_Neural_Networks.ipynb)
-# Workshop Instructions
-***
-- <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/write.svg" width="20"/> Follow along by typing the code yourself - this helps with learning!
-- <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/code.svg" width="20"/> Code cells marked as "Exercise" are for you to complete
-- <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/reminder.svg" width="20"/> Look for hints if you get stuck
-- <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/success.svg" width="20" /> Compare your solution with the provided answers
-- <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/list.svg" width="20" /> Don't worry if you make mistakes - debugging is part of learning!
 
 ```python
 # Download utils from GitHub
@@ -77,7 +67,7 @@ Images present unique challenges that make standard fully-connected neural netwo
 ***
 
 <div align="center">
-  <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/image_rgb.png" width="90%">
+  <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/image_rgb.png" width="90%">
 </div>
 
 CNNs address these challenges through specialized architecture components that we'll explore in this workshop.
@@ -104,7 +94,7 @@ In simple terms, convolution involves sliding a small window (called a filter or
 ***
 
 <div align="center">
-  <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/convolution_hyperparameters.gif" width="70%">
+  <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/convolution_hyperparameters.gif" width="70%">
 </div>
 
 This process creates what's called a feature map, which highlights specific patterns or features in the image that match the filter pattern.
@@ -704,7 +694,7 @@ As we discussed in the previous session, when training a model we need to load t
 The model expects our image data to be formatted as a 4D tensor with the shape `(batch_size, channels, height, width)`.
 
 <div align="center">
-  <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/image_batches.png" width="70%">
+  <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/image_batches.png" width="70%">
 </div>
 
 The `DataLoader` class provides several key parameters to customize the data loading process:
@@ -763,7 +753,7 @@ The output of the CNN is then passed through one or more fully connected layers 
 A diagram of a conventional CNN architecture is shown below.
 
 <div align="center">
-  <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/cnn.png" width="90%">
+  <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/cnn.png" width="90%">
 </div>
 
 We are going to implement a simple CNN architecture for the crack detection task. The architecture consists of the following layers:
@@ -888,7 +878,7 @@ There are many different CNN architectures that have been proposed in the litera
 These architectures have been shown to perform well on a variety of tasks, and they can be used as a starting point for building custom CNNs. Furthermore, many of these architectures are often visualised as a series of blocks, where each block consists of a convolutional layer followed by an activation function and a pooling layer. We are going to implement a version of the original VGG architecture, which looks like this:
 
 <div align="center">
-  <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/vgg.png" width="90%">
+  <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/vgg.png" width="90%">
 </div>
 
 
@@ -908,7 +898,7 @@ Pooling helps to reduce the number of parameters and computations in the network
 The pooling operation can be visualised like this:
 
 <div align="center">
-  <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/pooling.png" width="60%">
+  <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/pooling.png" width="60%">
 </div>
 
 Most commonly, we use max pooling, as it helps to retain the most important features while discarding less relevant information. The pooling operation is typically applied after a convolutional layer and an activation function. 
@@ -931,7 +921,7 @@ For our tiny VGG architecture, we are going to use dropout and batch normalisati
 Our tiny VGG architecture will look like this:
 
 <div align="center">
-  <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/tiny_vgg.png" width="90%">
+  <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/tiny_vgg.png" width="90%">
 </div>
 
 ```python

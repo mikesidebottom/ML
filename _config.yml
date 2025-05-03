@@ -16,5 +16,8 @@ header_pages:
   - pages/setup-guide.md
   - pages/resources.md
 
+include:
+  - _notebooks
+
 # Theme settings
 dark_mode: true

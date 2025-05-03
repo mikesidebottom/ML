@@ -1,19 +1,9 @@
 ---
 layout: notebook
-title: "Se03 Ca Training Neural Networks"
-permalink: /notebooks/SE03_CA_Training_neural_networks/
+title: "SESSION 3: MODEL TRAINING & OPTIMIZATION"
 notebook_file: SE03_CA_Training_neural_networks.ipynb
+permalink: /notebooks/session3/
 ---
-
-![](https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/se_03.png)
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/CLDiego/uom_fse_dl_workshop/blob/main/SE03_CA_Training_neural_networks.ipynb)
-# Workshop Instructions
-***
-- <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/icons/write.svg" width="20"/> Follow along by typing the code yourself - this helps with learning!
-- <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/icons/code.svg" width="20"/> Code cells marked as "Exercise" are for you to complete
-- <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/icons/reminder.svg" width="20"/> Look for hints if you get stuck
-- <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/icons/success.svg" width="20" /> Compare your solution with the provided answers
-- <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/icons/list.svg" width="20" /> Don't worry if you make mistakes - debugging is part of learning!
 
 ```python
 # Download utils from GitHub
@@ -53,7 +43,7 @@ The previous session we had a look at the basics of neural networks and how to t
 Most deep learning projects follow a similar workflow. The following figure illustrates the typical workflow of a PyTorch project:
 
 <div align="center">
-  <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/pytorch_workflow.png" width="80%">
+  <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/pytorch_workflow.png" width="80%">
 </div>
 
 The workflow consists of the following steps:
@@ -105,7 +95,6 @@ dataset_path = utils.data.download_dataset('ARKOMA',
                                    dest_path=data_path,
                                    extract=True,
                                    remove_compressed=True)
-
 ```
 
 ```python
@@ -128,7 +117,6 @@ feats_val = dataset_files['Val']['features']
 targets_val = dataset_files['Val']['targets']
 feats_test = dataset_files['Test']['features']
 targets_test = dataset_files['Test']['targets']
-
 ```
 
 ## Step 2 and 3: Prepare and Pre-process Data
@@ -147,7 +135,7 @@ One of the crucial steps in machine learning is to split the data into training,
 
 The ARKOMA dataset has already been split into these three sets for us, which simplifies our workflow.
 
-> <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/icons/reminder.svg" width="20"/>  **Note**: The test set is our generalisation benchmark. It is important to keep the test set separate from the training and validation sets to ensure that the model's performance is evaluated on unseen data. This helps us understand how well the model will perform in real-world scenarios. 
+> <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/reminder.svg" width="20"/>  **Note**: The test set is our generalisation benchmark. It is important to keep the test set separate from the training and validation sets to ensure that the model's performance is evaluated on unseen data. This helps us understand how well the model will perform in real-world scenarios. 
 
 ```python
 # Load the datasets
@@ -164,7 +152,6 @@ y_val = pd.read_csv(targets_val)
 print(f"X_train shape: {X_train.shape} | y_train shape: {y_train.shape}")
 print(f"X_test shape: {X_test.shape} | y_test shape: {y_test.shape}")
 print(f"X_val shape: {X_val.shape} | y_val shape: {y_val.shape}")
-
 ```
 
 ```python
@@ -196,7 +183,7 @@ The normalisation parameters will be computed from the training set and then app
 | **Better Generalization** | Helps models transfer between different images | Improves performance on unseen data |
 
 ***
-> <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/icons/code.svg" width="20"/> **Snippet 1**: Normalisation using Min-Max scaling
+> <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/code.svg" width="20"/> **Snippet 1**: Normalisation using Min-Max scaling
 
 ```python
 from sklearn.preprocessing import MinMaxScaler
@@ -257,7 +244,6 @@ answer = {
     'scale_range_max': X_train_scaled.max().item(),
 }
 checker.check_exercise(1, answer)
-
 ```
 
 ## Step 4: Activation Function
@@ -274,11 +260,11 @@ The next step is to choose an activation function for the model. The activation 
 
 The choice of activation function depends on the specific problem and the architecture of the neural network. 
 
-> <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/icons/reminder.svg" width="20"/> **Tips**:
+> <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/reminder.svg" width="20"/> **Tips**:
 > - ReLU is the most commonly used activation function in hidden layers of deep networks due to its simplicity and effectiveness.
 > - The activation function for the output layer depends on the type of problem being solved (e.g., regression, binary classification, multi-class classification).
 ***
-> <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/icons/list.svg" width="20"/> **Common Mistakes to Avoid**: 
+> <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/list.svg" width="20"/> **Common Mistakes to Avoid**: 
 > - Mixing activation functions in the same layer (e.g., using ReLU and sigmoid together) can lead to unexpected behavior.
 > - Using activation functions that saturate (like sigmoid) in hidden layers can lead to vanishing gradients, making training difficult.
 > - Forgetting to apply the activation function to the output layer can lead to incorrect predictions (e.g., not using softmax for multi-class classification).
@@ -301,7 +287,7 @@ The next step is to define the model architecture. In order to create a Neural N
    - **Output Layer**: Produces the final output.
 
 <div align="center">
-  <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/layers.png" width="35%">
+  <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/layers.png" width="35%">
 </div>
 
 
@@ -331,7 +317,7 @@ The number of layers and neurons in each layer is a hyperparameter that needs to
 | Number of Neurons | Common practices: 2^n, where n is the number of layers. A common practice is to start with a number of neurons equal to the number of input features and then reduce the number of neurons in each subsequent layer. |
 ***
 
-> <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/icons/reminder.svg" width="20" /> **Tips**:
+> <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/reminder.svg" width="20" /> **Tips**:
 > - Start with a simple architecture and gradually increase complexity as needed.
 > - The number of neurons in each layer can be adjusted based on the complexity of the problem.
 > - Use activation functions after each layer to introduce non-linearity.
@@ -370,7 +356,7 @@ The importance of initialising weights and biases lies in the fact that they can
 | Zero Initialisation | $\displaystyle W = 0$ | `torch.nn.init.zeros_(tensor)` | All weights are set to zero. Not recommended. |
 | Random Initialisation | $\displaystyle W \sim \mathcal{U}(-1, 1)$ | `torch.nn.init.uniform_(tensor)` | Weights are randomly initialised between -1 and 1. |
 ***
-> <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/icons/reminder.svg" width="20"/> **Tips**:
+> <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/reminder.svg" width="20"/> **Tips**:
 > - Use Xavier or He initialisation for most cases, as they are designed to maintain the variance of activations across layers.
 > - Avoid zero initialisation, as it can lead to symmetry problems where all neurons learn the same features.
 > - PyTorch uses Kaiming initialisation by default for `torch.nn.Linear` layers, which is suitable for ReLU activations.
@@ -462,7 +448,7 @@ checker.check_exercise(2, answer)
 
 ## Step 6: Choose Optimiser
 ***
-> <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/icons/write.svg" width="20"/> **Definition**: Optimisers are algorithms used to update the model parameters during training to minimise the loss function.
+> <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/write.svg" width="20"/> **Definition**: Optimisers are algorithms used to update the model parameters during training to minimise the loss function.
 
 The next step is to choose an optimiser for the model.
 
@@ -483,7 +469,7 @@ The Adam optimiser is a popular choice for training deep learning models due to 
 The learning rate is a hyperparameter that determines the step size at each iteration while moving toward a minimum of the loss function. A small learning rate may lead to slow convergence, while a large learning rate may cause the model to diverge. It is important to choose an appropriate learning rate for the optimizer to work effectively
 
 <div align="center">
-  <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/learning_rate.png" width="50%">
+  <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/learning_rate.png" width="50%">
 </div>
 
 ## Step 7: Choose Loss Function
@@ -502,12 +488,12 @@ The next step is to choose a loss function for the model. The choice of loss fun
 The loss works in conjunction with the optimiser. While there are loss functions that can work for the same task, the choice of loss will have an effect on the final performance of the model. For instance, using MSE (L2-Norm) loss for a regression task will penalise larger errors more than smaller ones, while MAE (L1-Norm) loss treats all errors equally. This can lead to different model performance depending on the distribution of the data.
 
 <div align="center">
-  <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/losses.png" width="60%">
+  <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/losses.png" width="60%">
 </div>
 
 ***
 
-> <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/icons/reminder.svg" width="20"/> **Tips**:
+> <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/reminder.svg" width="20"/> **Tips**:
 > - Choose a loss function that is appropriate for the type of problem being solved (e.g., regression, classification).
 > - Monitor the loss during training to ensure that the model is converging and not overfitting.
 > - Experiment with different loss functions to see their impact on model performance.
@@ -560,7 +546,7 @@ The training loop implements the key steps for training a neural network model:
 The next step is to fit the model using the training data. The model is trained for a specified number of epochs, and the training and validation loss is monitored during training. The number of epochs is a hyperparameter that determines how many times the model will be trained on the entire training dataset.
 
 ***
-> <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/icons/code.svg" width="20"/> **Snippet 2**: Training Loop Structure
+> <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/code.svg" width="20"/> **Snippet 2**: Training Loop Structure
 
 ```python
 for epoch in range(num_epochs):
@@ -680,12 +666,12 @@ checker.check_exercise(4, answer)
 
 ### Overfitting, Underfitting, and Early Stopping
 ***
-> <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/icons/write.svg" width="20"/> **Definition**: Overfitting occurs when a model learns the training data too well, including noise and outliers, leading to poor generalisation on unseen data. Underfitting occurs when a model is too simple to capture the underlying patterns in the data.
+> <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/write.svg" width="20"/> **Definition**: Overfitting occurs when a model learns the training data too well, including noise and outliers, leading to poor generalisation on unseen data. Underfitting occurs when a model is too simple to capture the underlying patterns in the data.
 
 As we can see in the following figure, the training loss decreases over time, while the validation loss follows a similar trend. However, the validation loss starts to slowly deviate from the training loss after a certain number of epochs. This indicates that the model is starting to overfit the training data. The point at which the validation loss starts to increase is known as the "early stopping" point. This is the point at which we should stop training the model to prevent overfitting.
 
 <div align="center">
-  <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/over_under_fit.png" width="70%">
+  <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/over_under_fit.png" width="70%">
 </div>
 
 ## Step 10: Evaluate Model
@@ -699,7 +685,7 @@ We can also compute the R-squared value to quantify the performance of the model
 For this step we are going to use the test set to evaluate the model. 
 
 ***
-> <img src="https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/icons/code.svg" width="20"/> **Snippet 3**: Evaluate Model
+> <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/code.svg" width="20"/> **Snippet 3**: Evaluate Model
 
 ```python
 # Set model to evaluation mode
