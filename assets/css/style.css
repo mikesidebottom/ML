@@ -720,3 +720,51 @@ pre.python-terminal:after {
 pre.code-terminal code {
   padding-top: 0.5rem;
 }
+
+/* Markdown code snippets styling - different from executable code */
+.notebook-content p code,
+.notebook-content li code,
+.notebook-content blockquote code,
+.notebook-content h1 code,
+.notebook-content h2 code,
+.notebook-content h3 code,
+.notebook-content h4 code {
+  background-color: #2b2b2b;
+  color: #e6e6e6;
+  padding: 2px 5px;
+  border-radius: 3px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.85em;
+  border: 1px solid #444;
+  box-shadow: none;
+}
+
+/* Style code blocks in markdown differently */
+.notebook-content pre:not(.code-terminal) {
+  background-color: #2b2b2b;
+  border-left: 3px solid var(--primary-color);
+  border-radius: 4px;
+  padding: 12px;
+  margin: 1rem 0;
+  overflow-x: auto;
+}
+
+.notebook-content pre:not(.code-terminal) code {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.9em;
+  line-height: 1.5;
+  color: #e6e6e6;
+}
+
+/* Add a subtle indicator to markdown code blocks */
+.notebook-content pre:not(.code-terminal):before {
+  content: "Example / Snippet";
+  display: block;
+  font-size: 0.8em;
+  color: #888;
+  margin-bottom: 8px;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-style: italic;
+  border-bottom: 1px solid #444;
+  padding-bottom: 5px;
+}
