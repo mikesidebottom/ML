@@ -6,11 +6,9 @@ permalink: /notebooks/session1/
 banner_image: https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/se_01.png
 ---
 
-```python
-# Download utils from GitHub
+<pre class='code-terminal python-terminal'><code class='python'># Download utils from GitHub
 !wget -q --show-progress https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/colab_utils.txt -O colab_utils.txt
-!wget -q --show-progress -x -nH --cut-dirs=3 -i colab_utils.txt
-```
+!wget -q --show-progress -x -nH --cut-dirs=3 -i colab_utils.txt</code></pre>
 
 # 1. PyTorch
 ***
@@ -30,8 +28,7 @@ PyTorch is a popular starting point for deep learning research due to its flexib
 
 We are going to use different python modules throughout this course. It is not necessary to be familiar with all of them at the moment. Some of these libraries enable us to work with data and perform numerical operations, while others are used for visualization purposes.
 
-```python
-import sys
+<pre class='code-terminal python-terminal'><code class='python'>import sys
 from pathlib import Path
 
 repo_path = Path.cwd()
@@ -48,8 +45,7 @@ if torch.cuda.is_available():
 else:
     print("No GPU available. Please ensure you've enabled GPU in Runtime > Change runtime type")
 
-checker = utils.core.ExerciseChecker("SE01")
-```
+checker = utils.core.ExerciseChecker("SE01")</code></pre>
 
 # 2. Introduction to tensors
 ***
@@ -85,8 +81,7 @@ x = torch.tensor(101)
 print(f'x: {x}, type: {type(x)}, shape: {x.shape}')
 ```
 
-```python
-# Exercise 1: Creating Your First Tensor 🎯
+<pre class='code-terminal python-terminal'><code class='python'># Exercise 1: Creating Your First Tensor 🎯
 # Try to create:
 # 1. A scalar tensor with value 42
 # 2. A float tensor with value 3.14
@@ -101,14 +96,11 @@ answer = {
     'scalar_tensor': scalar_tensor,
     'float_tensor': float_tensor
 }
-checker.check_exercise(1, answer)
-```
+checker.check_exercise(1, answer)</code></pre>
 
-```python
-# Check the characteristics of the tensors you created
+<pre class='code-terminal python-terminal'><code class='python'># Check the characteristics of the tensors you created
 print(f"Scalar tensor: {scalar_tensor}, type: {type(scalar_tensor)}, shape: {scalar_tensor.shape}, dtype: {scalar_tensor.dtype}")
-print(f"Float tensor: {float_tensor}, type: {type(float_tensor)}, shape: {float_tensor.shape}, dtype: {float_tensor.dtype}")
-```
+print(f"Float tensor: {float_tensor}, type: {type(float_tensor)}, shape: {float_tensor.shape}, dtype: {float_tensor.dtype}")</code></pre>
 
 In the above example, we created a scalar tensor with a single element. Looking at its attributes, we can see that the tensor has a shape of `torch.Size([])`, which means that it has no dimensions. We can also see that the tensor has a data type of `torch.int64`, which means that it is an integer tensor.
 
@@ -118,14 +110,11 @@ In the above example, we created a scalar tensor with a single element. Looking 
 
 As we can see our single element is now stored in a type of container, which means that we can perform operations on it but not directly on the element itself. To access the element, we can use the method `item()`.
 
-```python
-scalar_tensor, scalar_tensor.item()
-```
+<pre class='code-terminal python-terminal'><code class='python'>scalar_tensor, scalar_tensor.item()</code></pre>
 
 We can specify the data type of a tensor by passing the `dtype` argument to the `torch.Tensor` constructor. Alternatively, we can use the 'torch.tensor.type` method to change the data type of a tensor.
 
-```python
-# Create a scalar tensor with a specific data type
+<pre class='code-terminal python-terminal'><code class='python'># Create a scalar tensor with a specific data type
 scalar_tensor = torch.tensor(42, dtype=torch.float32)
 print(scalar_tensor)
 
@@ -141,8 +130,7 @@ print(scalar_tensor)
 # with the .to() method that is used to move tensors
 # to different devices
 scalar_tensor = scalar_tensor.to(torch.float64) 
-print(scalar_tensor)
-```
+print(scalar_tensor)</code></pre>
 
 ## 2.2 Initializing tensors
 ***
@@ -161,8 +149,7 @@ PyTorch provides multiple ways to initialize tensors. Sometimes, we want to crea
 | `torch.eye()` | Identity matrix | `torch.eye(3)` | `(3, 3)` |
 | `torch.randint()` | Random integers | `torch.randint(0, 10, (2, 3))` | `(2, 3)` |
 
-```python
-# Exercise 2: Tensor Initialization 🎯
+<pre class='code-terminal python-terminal'><code class='python'># Exercise 2: Tensor Initialization 🎯
 # Create the following tensors:
 # 1. A 3x3 tensor of random integers between 1-10
 # 2. A 3x3 identity matrix
@@ -182,8 +169,7 @@ answer = {
     'spaced_tensor': spaced_tensor,
     'zero_tensor': zero_tensor
 }
-checker.check_exercise('2', answer)
-```
+checker.check_exercise('2', answer)</code></pre>
 
 # 3. Indexing tensors
 ***
@@ -220,8 +206,7 @@ last_row = tensor[-1,...]  # Last row of all columns
 diagonal = tensor.diagonal()  # More efficient than indexing
 ```
 
-```python
-# Create a 4x4 tensor for practice
+<pre class='code-terminal python-terminal'><code class='python'># Create a 4x4 tensor for practice
 practice_tensor = torch.tensor([
     [1, 2, 3, 4],
     [5, 6, 7, 8],
@@ -269,8 +254,7 @@ answer = {
     'all_corners': all_corners,
     'middle_block': middle_block,
 }
-checker.check_exercise(3, answer)
-```
+checker.check_exercise(3, answer)</code></pre>
 
 # 4. Tensor operations
 ***
@@ -309,8 +293,7 @@ x.add_(1)  # Inplace addition
 y.add_(x)  # Inplace addition with another tensor
 ```
 
-```python
-# Exercise 4: Basic Operations 🎯
+<pre class='code-terminal python-terminal'><code class='python'># Exercise 4: Basic Operations 🎯
 # Create two 2x2 matrices:
 a = torch.tensor([[1, 2], [3, 4]])
 b = torch.tensor([[5, 6], [7, 8]])
@@ -334,8 +317,7 @@ answer = {
     'matrix_mult': matrix_mult,
     'sqrt_a': sqrt_a
 }
-checker.check_exercise(4, answer)
-```
+checker.check_exercise(4, answer)</code></pre>
 
 ## 4.1 Matrix operations
 ***
@@ -363,8 +345,7 @@ Matrix multiplication is a common operation in algebra and is used in many machi
 </div>
 
 
-```python
-# Exercise 5: Matrix Operations 🎯
+<pre class='code-terminal python-terminal'><code class='python'># Exercise 5: Matrix Operations 🎯
 a = torch.tensor([[1, 2], [3, 4]], dtype=torch.float32)
 
 # Perform:
@@ -385,8 +366,7 @@ answer = {
     'determinant': determinant,
     'inverse': inverse
 }
-checker.check_exercise(5, answer)
-```
+checker.check_exercise(5, answer)</code></pre>
 
 ## 4.2 Tensor Broadcasting
 ***
@@ -410,8 +390,7 @@ c = a + b  # Broadcasting occurs here
 print(c)  # Output: tensor([[ 2,  4], [ 6,  8], [10, 12]])
 ```
 
-```python
-# Exercise 6: Broadcasting 🎯
+<pre class='code-terminal python-terminal'><code class='python'># Exercise 6: Broadcasting 🎯
 # Setup tensors
 matrix = torch.tensor([[1, 2], [3, 4]])
 scalar = torch.tensor([2])
@@ -448,8 +427,7 @@ answer = {
     'col_mult': col_mult,
     'batch_scale': batch_scale
 }
-checker.check_exercise(6, answer)
-```
+checker.check_exercise(6, answer)</code></pre>
 
 ## 4.3 Reshaping Methods
 ***
@@ -473,8 +451,7 @@ x = torch.tensor([1, 2, 3, 4, 5, 6])
 print(x.reshape(2, 3))  # Output: tensor([[1, 2, 3], [4, 5, 6]])
 ```
 
-```python
-# Exercise 7: Reshaping 🎯
+<pre class='code-terminal python-terminal'><code class='python'># Exercise 7: Reshaping 🎯
 # Setup tensors
 flat = torch.tensor([1, 2, 3, 4, 5, 6])
 ones = torch.ones(1)
@@ -500,8 +477,7 @@ answer = {
     'expanded': expanded,
     'broadcast_ready': broadcast_ready
 }
-checker.check_exercise(7, answer)
-```
+checker.check_exercise(7, answer)</code></pre>
 
 # 5. Automatic Differentiation (Autograd)
 ***
@@ -555,8 +531,7 @@ y.backward()
 x.grad  # Should be 2.0
 ```
 
-```python
-# Exercise 8: Autograd 🎯
+<pre class='code-terminal python-terminal'><code class='python'># Exercise 8: Autograd 🎯
 x = torch.tensor([2.0], requires_grad=True)
 
 # Compute y = 3x^3 + 2x^2 - 5x + 1
@@ -575,8 +550,7 @@ answer = {
     'grad_value': x.grad,
     'requires_grad': x.requires_grad
 }
-checker.check_exercise(8, answer)
-```
+checker.check_exercise(8, answer)</code></pre>
 
 # 6. Data to tensors
 ***
@@ -588,32 +562,26 @@ First, let's download the data. We will be using the [ARKOMA dataset](https://ww
 
 
 
-```python
-data_path = Path(Path.cwd(), 'datasets')
+<pre class='code-terminal python-terminal'><code class='python'>data_path = Path(Path.cwd(), 'datasets')
 dataset_path = utils.data.download_dataset('ARKOMA',
                                    dest_path=data_path,
                                    extract=True)
 
-dataset_path = dataset_path / 'Dataset on NAO Robot Arms' / 'Left Arm Dataset' / 'LTrain_x.csv'
-```
+dataset_path = dataset_path / 'Dataset on NAO Robot Arms' / 'Left Arm Dataset' / 'LTrain_x.csv'</code></pre>
 
 ## 6.1 Loading data with pandas
 ***
 DataFrames in pandas are similar to tables in SQL or Excel. They are two-dimensional data structures that can hold different types of data. DataFrames have rows and columns, where each column can have a different data type. We can use the `pandas` library to load data from CSV files and convert it to DataFrames.
 
 
-```python
-# Read the dataset
+<pre class='code-terminal python-terminal'><code class='python'># Read the dataset
 df = pd.read_csv(dataset_path)
 
 # Display the statistics of the dataset
-df.describe().T
-```
+df.describe().T</code></pre>
 
-```python
-# Get the data as a numpy array
-type(df.Px.values)
-```
+<pre class='code-terminal python-terminal'><code class='python'># Get the data as a numpy array
+type(df.Px.values)</code></pre>
 
 To pass the data to PyTorch, we need to convert the DataFrame to a NumPy array and then to a tensor. We can do this using the `values` attribute of the DataFrame and the `torch.tensor()` function.
 ***
@@ -624,8 +592,7 @@ col_val = df['column_name'].values  # Get column values as NumPy array
 tensor = torch.tensor(col_val)  # Convert to tensor
 ```
 
-```python
-# Exercise 9: Pandas to Tensors 🎯
+<pre class='code-terminal python-terminal'><code class='python'># Exercise 9: Pandas to Tensors 🎯
 # Given the DataFrame df with NAO robot arm data
 # Perform the following:
 # 1. Convert the 'Px' column to a tensor
@@ -652,8 +619,7 @@ answer = {
     'pos_tensor': pos_tensor,
     'all_data': all_data
 }
-checker.check_exercise(9, answer)
-```
+checker.check_exercise(9, answer)</code></pre>
 
 # 7. Using the GPU
 ***
@@ -672,16 +638,14 @@ else:
     device = torch.device('cpu')  # Use CPU
 ```
 
-```python
-# Check GPU availability
+<pre class='code-terminal python-terminal'><code class='python'># Check GPU availability
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 print(f"Device: {device}")
 
 # Move the tensor to the GPU
 px_tensor = px_tensor.to(device)
-print(f'Tensor moved to device: {px_tensor.device}')
-```
+print(f'Tensor moved to device: {px_tensor.device}')</code></pre>
 
 > <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/reminder.svg" width="20"/> **Tip**: More than one GPU? No problem! PyTorch allows us to use multiple GPUs by specifying the device ID. We can do this by passing the device ID as an argument to the `torch.device()` function. The device ID is a number that identifies the GPU. For example, if we have two GPUs, we can use the first GPU by specifying `cuda:0` and the second GPU by specifying `cuda:1`. We can also use the `torch.cuda.device_count()` function to get the number of available GPUs.
 

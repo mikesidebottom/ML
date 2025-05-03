@@ -105,12 +105,19 @@ permalink: /notebooks/session{session_num}/
                     content
                 )
                 
+                # Fix math equations for MathJax
+                # Preserve double dollar signs (display math)
+                content = re.sub(r'\$\$(.*?)\$\$', r'$$\1$$', content)
+                
+                # Preserve single dollar signs (inline math)
+                content = re.sub(r'(?<!\$)\$(?!\$)(.*?)(?<!\$)\$(?!\$)', r'$\1$', content)
+                
                 md_content.append(content)
                 
             elif cell.cell_type == 'code':
-                # Format code cells with syntax highlighting
+                # Format code cells with syntax highlighting and terminal styling
                 if cell.source.strip():  # Only add non-empty code cells
-                    md_content.append(f"```python\n{cell.source.strip()}\n```")
+                    md_content.append(f"<pre class='code-terminal python-terminal'><code class='python'>{cell.source.strip()}</code></pre>")
                 
                 # Add cell outputs if any
                 if cell.outputs:
@@ -129,11 +136,23 @@ permalink: /notebooks/session{session_num}/
                                 html = output.data['text/html']
                                 if isinstance(html, list):
                                     html = ''.join(html)
+                                # Fix MathJax in HTML output
+                                html = re.sub(r'\\\\', r'\\', html)
                                 output_content.append(f"\n{html}\n")
                                 
                         elif output.output_type == 'display_data':
+                            # Handle LaTeX/MathJax output
+                            if 'text/latex' in output.data:
+                                latex = output.data['text/latex']
+                                if isinstance(latex, list):
+                                    latex = ''.join(latex)
+                                # Ensure proper MathJax display
+                                if not latex.startswith('$$') and not latex.endswith('$$'):
+                                    latex = f"$$\n{latex}\n$$"
+                                output_content.append(f"\n{latex}\n")
+                            
                             # Handle images in output
-                            if 'image/png' in output.data:
+                            elif 'image/png' in output.data:
                                 img_data = output.data['image/png']
                                 img_filename = f"output_{notebook_name}_{image_counter}.png"
                                 image_counter += 1

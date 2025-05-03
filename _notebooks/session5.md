@@ -6,14 +6,11 @@ permalink: /notebooks/session5/
 banner_image: https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/se05.png
 ---
 
-```python
-# Download utils from GitHub
+<pre class='code-terminal python-terminal'><code class='python'># Download utils from GitHub
 !wget -q --show-progress https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/colab_utils.txt -O colab_utils.txt
-!wget -q --show-progress -x -nH --cut-dirs=3 -i colab_utils.txt
-```
+!wget -q --show-progress -x -nH --cut-dirs=3 -i colab_utils.txt</code></pre>
 
-```python
-from pathlib import Path
+<pre class='code-terminal python-terminal'><code class='python'>from pathlib import Path
 import sys
 
 repo_path = Path.cwd()
@@ -42,8 +39,7 @@ else:
     print("No GPU available. Please ensure you've enabled GPU in Runtime > Change runtime type")
 
 checker = utils.core.ExerciseChecker("SE05")
-quizzer = utils.core.QuizManager("SE05")
-```
+quizzer = utils.core.QuizManager("SE05")</code></pre>
 
 # 1. Introduction to Transfer Learning
 ***
@@ -95,11 +91,9 @@ Transfer learning is particularly useful in the following scenarios:
 > <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/reminder.svg" width="20"/> **Key Insight**: The effectiveness of transfer learning depends on the similarity between the source and target domains. The more similar they are, the more beneficial transfer learning becomes.
 
 
-```python
-# Quiz on Transfer Learning Concepts
+<pre class='code-terminal python-terminal'><code class='python'># Quiz on Transfer Learning Concepts
 print("\n🧠 Quiz 1: Transfer Learning Applications")
-quizzer.run_quiz(1)
-```
+quizzer.run_quiz(1)</code></pre>
 
 # 2. Case Study: Image Segmentation for Medical Imaging
 ***
@@ -107,8 +101,7 @@ quizzer.run_quiz(1)
 
 For this session, we are going to be using the [**ISIC 2016 Skin Lesion Segmentation Challenge**](https://challenge.isic-archive.com/landing/2016/) dataset. This dataset contains dermoscopic images of skin lesions, along with their corresponding segmentation masks. The goal is to train a model to accurately segment the lesions from the background.
 
-```python
-data_path = Path(Path.cwd(), 'datasets')
+<pre class='code-terminal python-terminal'><code class='python'>data_path = Path(Path.cwd(), 'datasets')
 dataset_path = utils.data.download_dataset('skin lesions',
                                            dest_path=data_path,
                                            extract=True,
@@ -127,8 +120,7 @@ test_path = utils.data.download_dataset('skin lesions test',
 test_mask_path = utils.data.download_dataset('skin lesions test masks',
                                    dest_path=data_path,
                                    extract=True,
-                                   remove_compressed=False)
-```
+                                   remove_compressed=False)</code></pre>
 
 ## 2.1 Challenges in Medical Image Segmentation
 ***
@@ -186,8 +178,7 @@ class CustomDataset(Dataset):
         
 ```
 
-```python
-# Exercise 1: Creating a Custom Dataset 🎯
+<pre class='code-terminal python-terminal'><code class='python'># Exercise 1: Creating a Custom Dataset 🎯
 # Implement: 
 # 1. Create a custom dataset class for the ISIC dataset.
 # 2. Implement the __len__ and __getitem__ methods.
@@ -243,11 +234,9 @@ ds = ISICDataset(
     mask_dir=mask_path,
     img_transform=resize_transform,
     mask_transform=resize_transform
-)
-```
+)</code></pre>
 
-```python
-# ✅ Check Exercise 1: Custom Dataset Implementation
+<pre class='code-terminal python-terminal'><code class='python'># ✅ Check Exercise 1: Custom Dataset Implementation
 answer = {
     'has_getitem': hasattr(ISICDataset, '__getitem__'),
     'has_len': hasattr(ISICDataset, '__len__'),
@@ -255,8 +244,7 @@ answer = {
     'img_transform_used': hasattr(ds, 'img_transform') and ds.img_transform is not None,
     'mask_transform_used': hasattr(ds, 'mask_transform') and ds.mask_transform is not None
 }
-checker.check_exercise(1, answer)
-```
+checker.check_exercise(1, answer)</code></pre>
 
 ## 3.2 Compute the Mean and Standard Deviation of the Dataset
 ***
@@ -274,8 +262,7 @@ Where:
 
 First, we need to load the dataset and then compute the mean and standard deviation across all images.
 
-```python
-# Exercise 2: Calculating Mean and Std of Images 🎯
+<pre class='code-terminal python-terminal'><code class='python'># Exercise 2: Calculating Mean and Std of Images 🎯
 # Implement:
 # 1. Create a DataLoader for the dataset.
 # 2. Iterate through the DataLoader to calculate the mean and standard deviation of the images.
@@ -310,11 +297,9 @@ mean = # Your code here
 std = # Your code here
 
 print("Mean:", mean)
-print("Std:", std)
-```
+print("Std:", std)</code></pre>
 
-```python
-# ✅ Check Exercise 2: Mean and Standard Deviation Calculation
+<pre class='code-terminal python-terminal'><code class='python'># ✅ Check Exercise 2: Mean and Standard Deviation Calculation
 answer = {
     'dataloader': dl,
     'mean_shape': mean.shape,
@@ -322,8 +307,7 @@ answer = {
     'mean_range': torch.all((mean >= 0) & (mean <= 1)).item(),
     'std_range': torch.all((std > 0) & (std < 1)).item()
 }
-checker.check_exercise(2, answer)
-```
+checker.check_exercise(2, answer)</code></pre>
 
 ## 3.3 Data Augmentation
 ***
@@ -370,8 +354,7 @@ transform = A.Compose([
 ])
 ```
 
-```python
-# Exercise 3: Data Augmentation with Albumentations 🎯
+<pre class='code-terminal python-terminal'><code class='python'># Exercise 3: Data Augmentation with Albumentations 🎯
 # Implement:
 # 1. Use the Albumentations library to apply data augmentation techniques.
 # 2. Create a transformation pipeline for training and validation datasets.
@@ -405,11 +388,9 @@ valid_img_ts = A.Compose([
     # Your code here: Resize to 64x64
     # Your code here: Normalize with mean and std
     # Your code here: Convert to PyTorch tensor
-])
-```
+])</code></pre>
 
-```python
-# ✅ Check Exercise 3: Data Augmentation with Albumentations
+<pre class='code-terminal python-terminal'><code class='python'># ✅ Check Exercise 3: Data Augmentation with Albumentations
 answer = {
     'train_transforms': train_img_ts,
     'valid_transforms': valid_img_ts,
@@ -421,8 +402,7 @@ answer = {
     'has_normalize': any(isinstance(t, A.Normalize) for t in train_img_ts.transforms),
     'has_to_tensor': any(isinstance(t, ToTensorV2) for t in train_img_ts.transforms)
 }
-checker.check_exercise(3, answer)
-```
+checker.check_exercise(3, answer)</code></pre>
 
 ### 3.3.4 Modifying the Dataset Class to use Albumentations
 ***
@@ -430,8 +410,7 @@ Since normal PyTorch transforms do not support the synchronized augmentation, we
 
 We are going to create a new class called that inherits from our `ISICDataset` class. This will allow us to override the `__getitem__` method and apply the albumentations transformations.
 
-```python
-# Exercise 4: Implementing the Albumentations Dataset Class 🎯
+<pre class='code-terminal python-terminal'><code class='python'># Exercise 4: Implementing the Albumentations Dataset Class 🎯
 # Implement:
 # 1. Inherit from the ISICDataset class.
 # 2. Override the __getitem__ method to apply Albumentations transformations.
@@ -474,11 +453,9 @@ class ISICDatasetAlbumentations(ISICDataset):
             if isinstance(mask, torch.Tensor):
                 # Your code here
 
-        return image, mask
-```
+        return image, mask</code></pre>
 
-```python
-# ✅ Check Exercise 4: Albumentations Dataset Implementation
+<pre class='code-terminal python-terminal'><code class='python'># ✅ Check Exercise 4: Albumentations Dataset Implementation
 answer = {
     'inherits_from_isic': issubclass(ISICDatasetAlbumentations, ISICDataset),
     'has_getitem_override': ISICDatasetAlbumentations.__getitem__ != ISICDataset.__getitem__,
@@ -486,8 +463,7 @@ answer = {
     'normalizes_mask': 'mask /' in str(inspect.getsource(ISICDatasetAlbumentations.__getitem__)),
     'ensures_binary': '> 0.5' in str(inspect.getsource(ISICDatasetAlbumentations.__getitem__))
 }
-checker.check_exercise(4, answer)
-```
+checker.check_exercise(4, answer)</code></pre>
 
 # 3.4 Splitting the Dataset into Train, and Validation Sets
 ***
@@ -503,8 +479,7 @@ from torch.utils.data import random_split
 train_ds, val_ds = random_split(dataset, [train_size, val_size])
 ```
 
-```python
-# Exercise 5: Splitting the Dataset into Train and Validation Sets 🎯
+<pre class='code-terminal python-terminal'><code class='python'># Exercise 5: Splitting the Dataset into Train and Validation Sets 🎯
 # Implement:
 # 1. Split the dataset into training and validation sets (80% train, 20% valid).
 # 2. Create DataLoader objects for both sets with a batch size of 16.
@@ -522,11 +497,9 @@ train_ds, valid_ds = # Your code here
 # Your code here: Create DataLoader for training set (with shuffling)
 train_dl = # Your code here
 # Your code here: Create DataLoader for validation set (no shuffling)
-valid_dl = # Your code here
-```
+valid_dl = # Your code here</code></pre>
 
-```python
-# ✅ Check Exercise 5: Dataset Splitting
+<pre class='code-terminal python-terminal'><code class='python'># ✅ Check Exercise 5: Dataset Splitting
 answer = {
     'train_dataset': train_ds,
     'valid_dataset': valid_ds,
@@ -535,16 +508,13 @@ answer = {
     'train_split_ratio': train_size / len(full_ds),
     'batch_size_correct': train_dl.batch_size == 16
 }
-checker.check_exercise(5, answer)
-```
+checker.check_exercise(5, answer)</code></pre>
 
-```python
-# Show a batch of images and masks
+<pre class='code-terminal python-terminal'><code class='python'># Show a batch of images and masks
 utils.plotting.show_binary_segmentation_batch(train_dl,
                                               n_images=10,
                                               mean=mean,
-                                              std=std)
-```
+                                              std=std)</code></pre>
 
 # 4. Baseline Model: U-Net Architecture
 ***
@@ -593,8 +563,7 @@ We are going to implement the U-Net architecture using PyTorch. The implementati
 | `Up` | A block that consists of a transposed convolutional layer followed by a `DoubleConv` block. |
 | `UNet` | The main U-Net architecture that consists of the encoder and decoder blocks. |
 
-```python
-# Exercise 6: Implementing the DoubleConv Block 🎯
+<pre class='code-terminal python-terminal'><code class='python'># Exercise 6: Implementing the DoubleConv Block 🎯
 # Implement:
 # 1. Create a class called DoubleConv that inherits from nn.Module.
 # 2. The constructor should take in the number of input channels and output channels.
@@ -616,11 +585,9 @@ class DoubleConv(torch.nn.Module):
 
     def forward(self, x):
         # Your code here: Apply the sequential module to the input
-        return # Your code here
-```
+        return # Your code here</code></pre>
 
-```python
-# ✅ Check Exercise 6: DoubleConv Block Implementation
+<pre class='code-terminal python-terminal'><code class='python'># ✅ Check Exercise 6: DoubleConv Block Implementation
 answer = {
     'has_forward': hasattr(DoubleConv, 'forward'),
     'has_two_conv_layers': str(DoubleConv(3, 64)).count('Conv2d') == 2,
@@ -628,11 +595,9 @@ answer = {
     'has_relu': str(DoubleConv(3, 64)).count('ReLU') == 2,
     'uses_sequential': hasattr(DoubleConv(3, 64), 'conv') and isinstance(DoubleConv(3, 64).conv, torch.nn.Sequential)
 }
-checker.check_exercise(6, answer)
-```
+checker.check_exercise(6, answer)</code></pre>
 
-```python
-# Exercise 7: Implementing the Down Block 🎯
+<pre class='code-terminal python-terminal'><code class='python'># Exercise 7: Implementing the Down Block 🎯
 # Implement:
 # 1. Create a class called Down that inherits from nn.Module.
 # 2. The constructor should take in the number of input channels and output channels.
@@ -650,22 +615,18 @@ class Down(torch.nn.Module):
 
     def forward(self, x):
         # Your code here: Apply the sequential module to the input
-        return # Your code here
-```
+        return # Your code here</code></pre>
 
-```python
-# ✅ Check Exercise 7: Down Block Implementation
+<pre class='code-terminal python-terminal'><code class='python'># ✅ Check Exercise 7: Down Block Implementation
 answer = {
     'has_forward': hasattr(Down, 'forward'),
     'has_maxpool': str(Down(3, 64)).count('MaxPool2d') == 1,
     'uses_doubleconv': str(Down(3, 64)).count('DoubleConv') == 1,
     'uses_sequential': hasattr(Down(3, 64), 'maxpool_conv') and isinstance(Down(3, 64).maxpool_conv, torch.nn.Sequential)
 }
-checker.check_exercise(7, answer)
-```
+checker.check_exercise(7, answer)</code></pre>
 
-```python
-# Exercise 8: Implementing the Up Block 🎯
+<pre class='code-terminal python-terminal'><code class='python'># Exercise 8: Implementing the Up Block 🎯
 # Implement:
 # 1. Create a class called Up that inherits from nn.Module.
 # 2. The constructor should take in the number of input channels and output channels.
@@ -698,11 +659,9 @@ class Up(torch.nn.Module):
         # Your code here: Concatenate x1 and x2 along the channel dimension
         x = # Your code here
         # Your code here: Apply the DoubleConv to the concatenated tensor
-        return # Your code here
-```
+        return # Your code here</code></pre>
 
-```python
-# ✅ Check Exercise 8: Up Block Implementation
+<pre class='code-terminal python-terminal'><code class='python'># ✅ Check Exercise 8: Up Block Implementation
 answer = {
     'has_forward': hasattr(Up, 'forward'),
     'has_transpose_conv': hasattr(Up(64, 32), 'up') and isinstance(Up(64, 32).up, torch.nn.ConvTranspose2d),
@@ -710,11 +669,9 @@ answer = {
     'handles_size_mismatch': 'diffY' in str(inspect.getsource(Up.forward)),
     'uses_concat': 'torch.cat' in str(inspect.getsource(Up.forward))
 }
-checker.check_exercise(8, answer)
-```
+checker.check_exercise(8, answer)</code></pre>
 
-```python
-# Exercise 9: Implementing the UNet Model 🎯
+<pre class='code-terminal python-terminal'><code class='python'># Exercise 9: Implementing the UNet Model 🎯
 # Implement:
 # 1. Create a class called UNet that inherits from nn.Module.
 # 2. The constructor should take in the number of input channels and output channels.
@@ -779,11 +736,9 @@ class UNet(torch.nn.Module):
         # Your code here: Apply outc to x
         output = # Your code here
         # Your code here: Apply sigmoid activation
-        return # Your code here
-```
+        return # Your code here</code></pre>
 
-```python
-# ✅ Check Exercise 9: UNet Model Implementation
+<pre class='code-terminal python-terminal'><code class='python'># ✅ Check Exercise 9: UNet Model Implementation
 answer = {
     'has_forward': hasattr(UNet, 'forward'),
     'has_encoder_path': hasattr(UNet(3, 1), 'inc') and hasattr(UNet(3, 1), 'down1'),
@@ -791,8 +746,7 @@ answer = {
     'has_final_conv': hasattr(UNet(3, 1), 'outc') and isinstance(UNet(3, 1).outc, torch.nn.Conv2d),
     'uses_sigmoid': 'sigmoid' in str(inspect.getsource(UNet.forward))
 }
-checker.check_exercise(9, answer)
-```
+checker.check_exercise(9, answer)</code></pre>
 
 ## 4.3 Segmentation Loss Functions
 ***
@@ -864,8 +818,7 @@ $$
 
 This loss function is particularly useful for imbalanced datasets, where the number of pixels in the foreground class is much smaller than the number of pixels in the background class. The Dice Loss penalizes the model more for misclassifying foreground pixels than background pixels, leading to better performance on the segmentation task.
 
-```python
-# Exercise 10: Implementing the Dice Loss Function 🎯
+<pre class='code-terminal python-terminal'><code class='python'># Exercise 10: Implementing the Dice Loss Function 🎯
 # Implement:
 # 1. Create a class called DiceLoss that inherits from nn.Module.
 # 2. The constructor should take in a smoothing factor (default: 1.0).
@@ -894,11 +847,9 @@ class DiceLoss(torch.nn.Module):
         dice = # Your code here: (2*intersection + smooth)/(union + smooth)
         
         # Your code here: Return loss (1 - dice), clamped between 0 and 1
-        return # Your code here
-```
+        return # Your code here</code></pre>
 
-```python
-# ✅ Check Exercise 10: Dice Loss Implementation
+<pre class='code-terminal python-terminal'><code class='python'># ✅ Check Exercise 10: Dice Loss Implementation
 answer = {
     'has_forward': hasattr(DiceLoss, 'forward'),
     'handles_flattening': 'view(-1)' in str(inspect.getsource(DiceLoss.forward)),
@@ -906,11 +857,9 @@ answer = {
     'uses_smoothing': hasattr(DiceLoss(), 'smooth') and 'self.smooth' in str(inspect.getsource(DiceLoss.forward)),
     'returns_1_minus_dice': '1 -' in str(inspect.getsource(DiceLoss.forward))
 }
-checker.check_exercise(10, answer)
-```
+checker.check_exercise(10, answer)</code></pre>
 
-```python
-# Initialize the model, criterion, and optimizer
+<pre class='code-terminal python-terminal'><code class='python'># Initialize the model, criterion, and optimizer
 
 model = UNet(in_channels=3, out_channels=1).to(device)
 criterion = DiceLoss()
@@ -929,11 +878,9 @@ model_v1 = utils.ml.train_model(
     patience=3,
     save_path= Path.cwd() / "my_models" / "se05_model_v1.pt",
     plot_loss=True,
-)
-```
+)</code></pre>
 
-```python
-# Show a batch of images and masks
+<pre class='code-terminal python-terminal'><code class='python'># Show a batch of images and masks
 test_ds = ISICDatasetAlbumentations(
     image_dir=test_path,
     mask_dir=test_mask_path,
@@ -941,8 +888,7 @@ test_ds = ISICDatasetAlbumentations(
 )
 test_dl = DataLoader(test_ds, batch_size=16, shuffle=True)
 
-utils.plotting.show_binary_segmentation_predictions(model_v1, test_dl, n_images=10, mean=mean, std=std)
-```
+utils.plotting.show_binary_segmentation_predictions(model_v1, test_dl, n_images=10, mean=mean, std=std)</code></pre>
 
 # 5. Transfer Learning with Pre-trained Models
 ***
@@ -1035,8 +981,7 @@ for param in efficientnet.parameters():
     param.requires_grad = False  # Freeze all layers
 ```
 
-```python
-# Exercise 11: Implementing U-Net with EfficientNet Encoder 🎯
+<pre class='code-terminal python-terminal'><code class='python'># Exercise 11: Implementing U-Net with EfficientNet Encoder 🎯
 # Implement:
 # 1. Create a new Up class called SmartUp that inherits from nn.Module.
 # 2. The constructor should take in the number of input channels, skip channels, and output channels.
@@ -1148,11 +1093,9 @@ class UNetEfficient(torch.nn.Module):
             output = # Your code here
         
         # Your code here: Apply sigmoid activation and return
-        return # Your code here
-```
+        return # Your code here</code></pre>
 
-```python
-# Initialize the EfficientNet UNet model
+<pre class='code-terminal python-terminal'><code class='python'># Initialize the EfficientNet UNet model
 model_efficient = UNetEfficient(in_channels=3, out_channels=1).to(device)
 criterion_efficient = DiceLoss()
 optimizer_efficient = torch.optim.Adam(filter(lambda p: p.requires_grad, model_efficient.parameters()), lr=1e-3)
@@ -1170,14 +1113,11 @@ model_efficient = utils.ml.train_model(
     patience=3,
     save_path= Path.cwd() / "my_models" / "se05_model_v2.pt",
     plot_loss=True,
-)
-```
+)</code></pre>
 
-```python
-# Visualize predictions with EfficientNet UNet
+<pre class='code-terminal python-terminal'><code class='python'># Visualize predictions with EfficientNet UNet
 utils.plotting.compare_binary_segmentation_models(
-    model_v1, model_efficient, test_dl, n_images=10, mean=mean, std=std)
-```
+    model_v1, model_efficient, test_dl, n_images=10, mean=mean, std=std)</code></pre>
 
 ## 5.5 Advantages of Transfer Learning
 ***
@@ -1194,8 +1134,7 @@ Transfer learning is particularly effective in computer vision and natural langu
 | **Knowledge Retention** | Preserves useful features learned from large datasets | Captures generalizable representations across domains |
 
 
-```python
-# Quiz on Transfer Learning Concepts
+<pre class='code-terminal python-terminal'><code class='python'># Quiz on Transfer Learning Concepts
 print("\n🧠 Quiz 2: Feature extraction vs. Fine Tuning")
 quizzer.run_quiz(2)
 
@@ -1206,5 +1145,4 @@ print("\n🧠 Quiz 4: Transfer Learning Techniques")
 quizzer.run_quiz(4)
 
 print("\n🧠 Quiz 5: Transfer Learning Learning Rate Selection")
-quizzer.run_quiz(5)
-```
+quizzer.run_quiz(5)</code></pre>

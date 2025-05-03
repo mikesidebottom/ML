@@ -6,14 +6,11 @@ permalink: /notebooks/session4/
 banner_image: https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/se04.png
 ---
 
-```python
-# Download utils from GitHub
+<pre class='code-terminal python-terminal'><code class='python'># Download utils from GitHub
 !wget -q --show-progress https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/colab_utils.txt -O colab_utils.txt
-!wget -q --show-progress -x -nH --cut-dirs=3 -i colab_utils.txt
-```
+!wget -q --show-progress -x -nH --cut-dirs=3 -i colab_utils.txt</code></pre>
 
-```python
-from pathlib import Path
+<pre class='code-terminal python-terminal'><code class='python'>from pathlib import Path
 import sys
 
 repo_path = Path.cwd()
@@ -46,8 +43,7 @@ else:
 ascent_url = 'https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/ascent.jpg'
 response = requests.get(ascent_url)
 response.raise_for_status() 
-checker = utils.core.ExerciseChecker("SE04")
-```
+checker = utils.core.ExerciseChecker("SE04")</code></pre>
 
 # 1. Convolutional Neural Networks (CNNs)
 ***
@@ -104,10 +100,8 @@ This process creates what's called a feature map, which highlights specific patt
 
 Let's first load an example image to work with:
 
-```python
-asc_image = Image.open(BytesIO(response.content)).resize((256, 256))
-asc_image
-```
+<pre class='code-terminal python-terminal'><code class='python'>asc_image = Image.open(BytesIO(response.content)).resize((256, 256))
+asc_image</code></pre>
 
 ## 2.2 Key Parameters in Convolution
 ***
@@ -130,8 +124,7 @@ where $\lfloor \cdot \rfloor$ represents the floor operation (rounding down to t
 
 Let's implement a function to calculate the output size of a convolutional layer for various parameter combinations.
 
-```python
-# Exercise 1: Calculating Convolutional Output Dimensions 🎯
+<pre class='code-terminal python-terminal'><code class='python'># Exercise 1: Calculating Convolutional Output Dimensions 🎯
 # Implement a function to calculate the output dimensions after applying convolution
 # with different kernel sizes, strides, and padding values.
 
@@ -184,8 +177,7 @@ answer = {
     'output3': output3[0],
     'output4': output4[0]
 }
-checker.check_exercise(1, answer)
-```
+checker.check_exercise(1, answer)</code></pre>
 
 ## 2.3 What is a Filter?
 ***
@@ -201,8 +193,7 @@ We are going to try the following filters:
 | **Sharpening** | $$\begin{bmatrix} 0 & -1 & 0 \\ -1 & 5 & -1 \\ 0 & -1 & 0 \end{bmatrix}$$ | Enhances edges and details |
 | **Embossing** | $$\begin{bmatrix} -2 & -1 & 0 \\ -1 & 1 & 1 \\ 0 & 1 & 2 \end{bmatrix}$$ | Creates a 3D effect |
 
-```python
-# Exercise 2: Designing Convolutional Filters with PyTorch 🎯
+<pre class='code-terminal python-terminal'><code class='python'># Exercise 2: Designing Convolutional Filters with PyTorch 🎯
 # In this exercise, you will implement common filters used in image processing using PyTorch
 
 def apply_filter_pytorch(image, kernel):
@@ -309,15 +300,13 @@ answer = {
     'sharpen_kernel': sharpen_kernel, 
     'emboss_kernel': emboss_kernel
 }
-checker.check_exercise(2, answer)
-```
+checker.check_exercise(2, answer)</code></pre>
 
 Above we used predefined filters, but in practice, the filters are learned during training. The network learns to adjust the filter weights to detect relevant features for the specific task at hand.
 
 Let's see how the output of a simple convolution operation looks like. 
 
-```python
-conv2d = torch.nn.Conv2d(
+<pre class='code-terminal python-terminal'><code class='python'>conv2d = torch.nn.Conv2d(
     in_channels=3, 
     out_channels=3, 
     kernel_size=3, 
@@ -340,8 +329,7 @@ filtered_asc = filtered_asc.squeeze(0).detach().numpy().transpose(1, 2, 0)
 # and convert to uint8 for PIL
 filtered_asc = np.clip(filtered_asc, 0, 255).astype(np.uint8) 
 filtered_asc_img = Image.fromarray(filtered_asc)
-filtered_asc_img
-```
+filtered_asc_img</code></pre>
 
 # 3. Preparing image data
 ***
@@ -385,8 +373,7 @@ ts = transforms.Compose([
 ```
 
 
-```python
-# Exercise 3: Implementing Image Transformations 🎯
+<pre class='code-terminal python-terminal'><code class='python'># Exercise 3: Implementing Image Transformations 🎯
 # In this exercise, you will implement and visualize various image transformations
 # commonly used in computer vision tasks
 
@@ -510,8 +497,7 @@ answer = {
     'color_transform': ts_list['Color Jitter'],
     'norm_transform': ts_list['Normalized'],
 }
-checker.check_exercise(3, answer)
-```
+checker.check_exercise(3, answer)</code></pre>
 
 ## 3.2 Historical Crack Dataset
 ***
@@ -526,16 +512,13 @@ The dataset contains:
 
 As we can see, the dataset is highly imbalanced, with a significant number of images without cracks. This imbalance can affect the performance of the model, as it may learn to predict the majority class (no crack) more often than the minority class (crack). In a first instance, we are going to take a subset of the dataset to balance the classes. 
 
-```python
-data_path = Path.cwd() / "datasets"
+<pre class='code-terminal python-terminal'><code class='python'>data_path = Path.cwd() / "datasets"
 dataset_path = utils.data.download_dataset("historical cracks",
                                    dest_path=data_path,
                                    extract=True,
-                                   remove_compressed=True)
-```
+                                   remove_compressed=True)</code></pre>
 
-```python
-img_crack = dataset_path / "crack"
+<pre class='code-terminal python-terminal'><code class='python'>img_crack = dataset_path / "crack"
 img_no_crack = dataset_path / "non-crack"
 
 # Create a new folder for the balanced dataset
@@ -586,11 +569,9 @@ for img in val_no_crack_images:
 for img in test_crack_images:
     shutil.copy(img, test_folder / "crack")
 for img in test_no_crack_images:
-    shutil.copy(img, test_folder / "no_crack")
-```
+    shutil.copy(img, test_folder / "no_crack")</code></pre>
 
-```python
-# Randomly select 5 images
+<pre class='code-terminal python-terminal'><code class='python'># Randomly select 5 images
 random_images = random.sample(crack_images, 5)
 
 # Display the images
@@ -602,8 +583,7 @@ for ax, img_path in zip(axes, random_images):
     ax.set_title(img_path.stem)
 plt.tight_layout()
 
-print (f"Images size: {img.size}")
-```
+print (f"Images size: {img.size}")</code></pre>
 
 ## 3.3 PyTorch ImageFolder
 ***
@@ -648,8 +628,7 @@ image, label = dataset[0]
 print(f"Image shape: {image.shape}, Label: {label}")
 ```
 
-```python
-# Exercise 4: Data Augmentation and Loading with PyTorch 🎯
+<pre class='code-terminal python-terminal'><code class='python'># Exercise 4: Data Augmentation and Loading with PyTorch 🎯
 # Implement:
 # 1. Data augmentation techniques
 # 2. Data loading with ImageFolder
@@ -685,8 +664,7 @@ answer = {
     'test_data': test_data,
     'val_data': val_data
 }
-checker.check_exercise(4, answer)
-```
+checker.check_exercise(4, answer)</code></pre>
 
 ## 3.4 PyTorch DataLoaders
 ***
@@ -724,8 +702,7 @@ for images, labels in train_loader:
     break  # Just to show the first batch
 ```
 
-```python
-# Exercise 5: DataLoader 🎯
+<pre class='code-terminal python-terminal'><code class='python'># Exercise 5: DataLoader 🎯
 # Create DataLoaders for train, test, and validation data
 
 # Your code here: create train_dl with batch_size=32 and shuffle=True
@@ -742,8 +719,7 @@ answer = {
     'val_dataloader': val_dl,
     'batch_size': train_dl.batch_size
 }
-checker.check_exercise(5, answer)
-```
+checker.check_exercise(5, answer)</code></pre>
 
 # 4. Implementing CNNs
 ***
@@ -766,8 +742,7 @@ We are going to implement a simple CNN architecture for the crack detection task
 | Fully Connected | `Linear` | `16` | `2` | None |
 
 
-```python
-# Exercise 6: Implementing a Simple CNN Model 🎯
+<pre class='code-terminal python-terminal'><code class='python'># Exercise 6: Implementing a Simple CNN Model 🎯
 class simpleCNN(torch.nn.Module):
     def __init__(self, n_classes):
         super(simpleCNN, self).__init__()
@@ -802,18 +777,15 @@ answer = {
     'linear_layers': {'count': 2, 'output_features': model_v1.fc2.out_features},
     'activation': {'function': 'ReLU', 'count': 2},
 }
-checker.check_exercise(6, answer)
-```
+checker.check_exercise(6, answer)</code></pre>
 
-```python
-model_v1 = utils.ml.train_model(model_v1,
+<pre class='code-terminal python-terminal'><code class='python'>model_v1 = utils.ml.train_model(model_v1,
                                 criterion,
                                 optimiser,
                                 train_loader=train_dl,
                                 val_loader=val_dl,
                                 num_epochs=num_epochs,
-                                plot_loss=True)
-```
+                                plot_loss=True)</code></pre>
 
 ## 4.1 Getting predictions
 ***
@@ -837,8 +809,7 @@ with torch.no_grad():
         break
 ```
 
-```python
-# Exercise 7: Evaluating the Model 🎯
+<pre class='code-terminal python-terminal'><code class='python'># Exercise 7: Evaluating the Model 🎯
 # Compute accuracy and classification report
 
 # Your code here: Use the utils.ml.compute_accuracy function to compute accuracy on the test set
@@ -855,13 +826,10 @@ answer = {
     'test_accuracy': acc,
     'classification_report': cls_report
 }
-checker.check_exercise(7, answer)
-```
+checker.check_exercise(7, answer)</code></pre>
 
-```python
-# Visualize the model predictions
-utils.plotting.show_model_predictions(model_v1, test_dl, class_names=train_data.classes)
-```
+<pre class='code-terminal python-terminal'><code class='python'># Visualize the model predictions
+utils.plotting.show_model_predictions(model_v1, test_dl, class_names=train_data.classes)</code></pre>
 
 ## 4.2 Recreating CNN architectures
 ***
@@ -925,8 +893,7 @@ Our tiny VGG architecture will look like this:
   <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/tiny_vgg.png" width="90%">
 </div>
 
-```python
-# Exercise 8: Implementing a More Complex CNN Model 🎯
+<pre class='code-terminal python-terminal'><code class='python'># Exercise 8: Implementing a More Complex CNN Model 🎯
 class tinyVGG(torch.nn.Module):
     def __init__(self, n_classes):
         super().__init__()
@@ -993,11 +960,9 @@ answer = {
     'dropout_layers': [model_v2.dropout1, model_v2.dropout2],
     'flatten_operation': model_v2.flat
 }
-checker.check_exercise(8, answer)
-```
+checker.check_exercise(8, answer)</code></pre>
 
-```python
-model_v2 = tinyVGG(len(train_data.classes))
+<pre class='code-terminal python-terminal'><code class='python'>model_v2 = tinyVGG(len(train_data.classes))
 criterion_reg = torch.nn.CrossEntropyLoss()
 optimiser_reg = torch.optim.Adam(model_v2.parameters(),
                                  lr=1e-3,
@@ -1010,11 +975,9 @@ scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
     mode='min',
     factor=0.1,
     patience=2,
-)
-```
+)</code></pre>
 
-```python
-model_v2 = utils.ml.train_model(model_v2,
+<pre class='code-terminal python-terminal'><code class='python'>model_v2 = utils.ml.train_model(model_v2,
                   criterion_reg,
                   optimiser_reg,
                   train_loader=train_dl,
@@ -1024,16 +987,12 @@ model_v2 = utils.ml.train_model(model_v2,
                   patience=5,
                   tolerance=1e-2,
                   save_path= Path.cwd() / "my_models" / "se04_model_v2.pt",
-                  plot_loss=True)
-```
+                  plot_loss=True)</code></pre>
 
-```python
-# Load the best model
-model_v2.load_state_dict(torch.load(Path.cwd() / "my_models" / "se04_model_v2.pt"))
-```
+<pre class='code-terminal python-terminal'><code class='python'># Load the best model
+model_v2.load_state_dict(torch.load(Path.cwd() / "my_models" / "se04_model_v2.pt"))</code></pre>
 
-```python
-# Exercise 9: Evaluating the tiny VGG🎯
+<pre class='code-terminal python-terminal'><code class='python'># Exercise 9: Evaluating the tiny VGG🎯
 # Your code here: Use the utils.ml.compute_accuracy function to compute accuracy on the test set
 acc = # Your code here
 print(f"Test accuracy: {acc*100:.2f}%")
@@ -1048,9 +1007,6 @@ answer = {
     'test_accuracy': acc,
     'classification_report': cls_report
 }
-checker.check_exercise(9, answer)
-```
+checker.check_exercise(9, answer)</code></pre>
 
-```python
-utils.plotting.show_model_predictions(model_v2, test_dl, class_names=train_data.classes, num_images=12)
-```
+<pre class='code-terminal python-terminal'><code class='python'>utils.plotting.show_model_predictions(model_v2, test_dl, class_names=train_data.classes, num_images=12)</code></pre>

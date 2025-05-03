@@ -6,14 +6,11 @@ permalink: /notebooks/session2/
 banner_image: https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/se_02.png
 ---
 
-```python
-# Download utils from GitHub
+<pre class='code-terminal python-terminal'><code class='python'># Download utils from GitHub
 !wget -q --show-progress https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/colab_utils.txt -O colab_utils.txt
-!wget -q --show-progress -x -nH --cut-dirs=3 -i colab_utils.txt
-```
+!wget -q --show-progress -x -nH --cut-dirs=3 -i colab_utils.txt</code></pre>
 
-```python
-from pathlib import Path
+<pre class='code-terminal python-terminal'><code class='python'>from pathlib import Path
 import sys
 
 repo_path = Path.cwd()
@@ -36,8 +33,7 @@ else:
 
 
 challenger_temp = 0.56
-checker = utils.core.ExerciseChecker("SE02")
-```
+checker = utils.core.ExerciseChecker("SE02")</code></pre>
 
 # 1. Artificial Neural Networks
 ***
@@ -103,8 +99,7 @@ bias = torch.nn.Parameter(torch.randn(1))
 ```
 
 
-```python
-# Exercise 1: Implementing a Neuron 🎯
+<pre class='code-terminal python-terminal'><code class='python'># Exercise 1: Implementing a Neuron 🎯
 # Implement:
 # 1. The sigmoid function
 # 2. A neuron using torch.nn.Module but with manual parameter handling
@@ -168,11 +163,9 @@ answer = {
     'has_bias': hasattr(neuron, 'bias'),
     'is_parameterized': isinstance(neuron.weights, torch.nn.Parameter)
 }
-checker.check_exercise(1, answer)
-```
+checker.check_exercise(1, answer)</code></pre>
 
-```python
-fig, ax, G, pos = utils.plotting.visualize_network_nx(neuron, figsize=(16, 4))
+<pre class='code-terminal python-terminal'><code class='python'>fig, ax, G, pos = utils.plotting.visualize_network_nx(neuron, figsize=(16, 4))
 
 # Display information about the perceptron
 print(f"Perceptron Architecture:")
@@ -181,8 +174,7 @@ print(f"  - Activation function: {neuron.activation.__name__ if hasattr(neuron.a
 print(f"  - Output: 1 (probability between 0 and 1)")
 print(f"\nGraph Properties:")
 print(f"  - Number of nodes: {G.number_of_nodes()}")
-print(f"  - Number of edges: {G.number_of_edges()}")
-```
+print(f"  - Number of edges: {G.number_of_edges()}")</code></pre>
 
 # 2. Using Neurons to Solve Problems
 ***
@@ -206,21 +198,17 @@ We'll analyze data from the Challenger disaster, examining the relationship betw
 | `leak_psi` | Pressure at which the O-rings leak |
 | `temporal_order` | Temporal order of the launch |
 
-```python
-data_path = Path(Path.cwd(), 'datasets')
+<pre class='code-terminal python-terminal'><code class='python'>data_path = Path(Path.cwd(), 'datasets')
 dataset_path = utils.data.download_dataset('challenger',
                                            dest_path=data_path,
                                            extract=True,
                                            remove_compressed=True)
-dataset_path = dataset_path / 'o-ring-erosion-only.data'
-```
+dataset_path = dataset_path / 'o-ring-erosion-only.data'</code></pre>
 
-```python
-cols = ['n_risky', 'n_distressed', 'temp', 'leak_psi', 'temporal_order']
+<pre class='code-terminal python-terminal'><code class='python'>cols = ['n_risky', 'n_distressed', 'temp', 'leak_psi', 'temporal_order']
 
 df = pd.read_csv(dataset_path, sep="\\s+", header=None, names=cols)
-df.describe().T
-```
+df.describe().T</code></pre>
 
 ## 2.1 Preparing the Data
 ***
@@ -247,8 +235,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 
 
 
-```python
-# Exercise 2: Data Preparation 🎯
+<pre class='code-terminal python-terminal'><code class='python'># Exercise 2: Data Preparation 🎯
 # Implement:
 # 1. Convert temperature from Fahrenheit to Celsius
 # 2. Cap n_distressed values at 1.0 (binary outcome)
@@ -307,8 +294,7 @@ fig, ax = plt.subplots(figsize=(12, 4))
 ax.scatter(X.numpy(), y.numpy(), alpha=0.5, edgecolors='k')
 
 utils.plotting.make_fig_pretty(ax, title="O-Ring Distress vs Temperature",
-                             xlabel="Temperature (°C)", ylabel="Distress")
-```
+                             xlabel="Temperature (°C)", ylabel="Distress")</code></pre>
 
 ## 2.2 The Forward Pass
 ***
@@ -373,8 +359,7 @@ Where:
 > <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/reminder.svg" width="20"/> **Note**: For binary classification problems, Binary Cross-Entropy (BCE) loss is typically more suitable than MSE, but we're using MSE here for simplicity.
 
 
-```python
-# Exercise 3: Implementing a Loss Function 🎯
+<pre class='code-terminal python-terminal'><code class='python'># Exercise 3: Implementing a Loss Function 🎯
 # In this exercise, you will:
 # 1. Implement a Mean Squared Error (MSE) loss function
 # 2. Create a modified neuron for the O-ring data
@@ -423,8 +408,7 @@ print(f"Our MSE implementation matches PyTorch: {loss_function_correct}")
 answer = {
     'mse_loss': mse_loss,
 }
-checker.check_exercise(3, answer)
-```
+checker.check_exercise(3, answer)</code></pre>
 
 ## 2.4 The Backward Pass (Backpropagation)
 ***
@@ -476,8 +460,7 @@ This cycle repeats for multiple epochs until the model converges to a solution.
 
 Now let's implement the backward pass and parameter updates for our O-ring prediction model.
 
-```python
-# Exercise 4: Implementing the Backward Pass and Parameter Updates 🎯
+<pre class='code-terminal python-terminal'><code class='python'># Exercise 4: Implementing the Backward Pass and Parameter Updates 🎯
 # In this exercise, you will:
 # 1. Implement a training loop with forward and backward passes
 # 2. Use PyTorch's autograd to compute gradients
@@ -536,11 +519,9 @@ answer = {
     'final_loss': train_losses[-1],
     'negative_weight': model.weights.item() < 0
 }
-checker.check_exercise(4, answer)
-```
+checker.check_exercise(4, answer)</code></pre>
 
-```python
-# Create a figure with two subplots side by side
+<pre class='code-terminal python-terminal'><code class='python'># Create a figure with two subplots side by side
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(20, 6))
 
 # Plot training loss
@@ -568,11 +549,9 @@ utils.plotting.plot_model_predictions_SE02(
 )
 
 plt.tight_layout()
-plt.show()
-```
+plt.show()</code></pre>
 
-```python
-# Interactive visualization of the O-ring failure model
+<pre class='code-terminal python-terminal'><code class='python'># Interactive visualization of the O-ring failure model
 # This uses our external interactive visualization function
 
 # Create the interactive visualization widget
@@ -591,8 +570,7 @@ main_ui, out = utils.plotting.create_interactive_neuron_visualizer(
 )
 
 # Display the interactive widget
-display(main_ui, out)
-```
+display(main_ui, out)</code></pre>
 
 # 2.5 Using the model to predict O-ring distress
 ***
@@ -604,8 +582,7 @@ Having trained out model, we now want to use it to predict the potential for O-r
 
 Let's implement the inference process for our O-ring prediction model. 
 
-```python
-# Exercise 5: Making Predictions for the Challenger Launch 🎯
+<pre class='code-terminal python-terminal'><code class='python'># Exercise 5: Making Predictions for the Challenger Launch 🎯
 # In this exercise, you will make predictions about the O-ring failure at the Challenger launch temperature
 # and calculate the relative risk compared to normal temperatures
 
@@ -653,8 +630,7 @@ answer = {
     'recommendation': launch_recommendation == "DO NOT LAUNCH",
     'relative_risk_factor': relative_risk > 3,  # Is risk at least 3 times higher?
 }
-checker.check_exercise(5, answer)
-```
+checker.check_exercise(5, answer)</code></pre>
 
 ## 2.6 Key Insights from Our Analysis
 ***

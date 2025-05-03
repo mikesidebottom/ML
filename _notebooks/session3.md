@@ -6,14 +6,11 @@ permalink: /notebooks/session3/
 banner_image: https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/se_03.png
 ---
 
-```python
-# Download utils from GitHub
+<pre class='code-terminal python-terminal'><code class='python'># Download utils from GitHub
 !wget -q --show-progress https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/colab_utils.txt -O colab_utils.txt
-!wget -q --show-progress -x -nH --cut-dirs=3 -i colab_utils.txt
-```
+!wget -q --show-progress -x -nH --cut-dirs=3 -i colab_utils.txt</code></pre>
 
-```python
-from pathlib import Path
+<pre class='code-terminal python-terminal'><code class='python'>from pathlib import Path
 import sys
 
 repo_path = Path.cwd()
@@ -34,8 +31,7 @@ else:
     print("No GPU available. Please ensure you've enabled GPU in Runtime > Change runtime type")
 
 checker = utils.core.ExerciseChecker("SE03")
-quizzer = utils.core.QuizManager("SE03")
-```
+quizzer = utils.core.QuizManager("SE03")</code></pre>
 
 # 1. PyTorch workflow
 ***
@@ -90,16 +86,13 @@ The output parameters are:
 
 In this notebook, we are going to focus on the right arm. The data is stored in CSV format. To load the data, we will use the `pandas` library. 
 
-```python
-data_path = Path(Path.cwd(), 'datasets')
+<pre class='code-terminal python-terminal'><code class='python'>data_path = Path(Path.cwd(), 'datasets')
 dataset_path = utils.data.download_dataset('ARKOMA',
                                    dest_path=data_path,
                                    extract=True,
-                                   remove_compressed=True)
-```
+                                   remove_compressed=True)</code></pre>
 
-```python
-# Set the path to the datasets (already provided above)
+<pre class='code-terminal python-terminal'><code class='python'># Set the path to the datasets (already provided above)
 right_arm_path = dataset_path / 'Right Arm Dataset'
 
 # Create file paths using a dictionary comprehension and format strings
@@ -117,8 +110,7 @@ targets_train = dataset_files['Train']['targets']
 feats_val = dataset_files['Val']['features']
 targets_val = dataset_files['Val']['targets']
 feats_test = dataset_files['Test']['features']
-targets_test = dataset_files['Test']['targets']
-```
+targets_test = dataset_files['Test']['targets']</code></pre>
 
 ## Step 2 and 3: Prepare and Pre-process Data
 ***
@@ -138,8 +130,7 @@ The ARKOMA dataset has already been split into these three sets for us, which si
 
 > <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/reminder.svg" width="20"/>  **Note**: The test set is our generalisation benchmark. It is important to keep the test set separate from the training and validation sets to ensure that the model's performance is evaluated on unseen data. This helps us understand how well the model will perform in real-world scenarios. 
 
-```python
-# Load the datasets
+<pre class='code-terminal python-terminal'><code class='python'># Load the datasets
 # Training set
 X_train = pd.read_csv(feats_train)
 y_train = pd.read_csv(targets_train)
@@ -152,16 +143,11 @@ y_val = pd.read_csv(targets_val)
 
 print(f"X_train shape: {X_train.shape} | y_train shape: {y_train.shape}")
 print(f"X_test shape: {X_test.shape} | y_test shape: {y_test.shape}")
-print(f"X_val shape: {X_val.shape} | y_val shape: {y_val.shape}")
-```
+print(f"X_val shape: {X_val.shape} | y_val shape: {y_val.shape}")</code></pre>
 
-```python
-X_train.head()
-```
+<pre class='code-terminal python-terminal'><code class='python'>X_train.head()</code></pre>
 
-```python
-y_train.head()
-```
+<pre class='code-terminal python-terminal'><code class='python'>y_train.head()</code></pre>
 
 ### Normalisation
 ***
@@ -201,8 +187,7 @@ X_train_scaled = scaler.transform(X_train)
 X_train_original = scaler.inverse_transform(X_train_scaled)
 ```
 
-```python
-# Exercise 1: Data Loading and Preprocessing 🎯
+<pre class='code-terminal python-terminal'><code class='python'># Exercise 1: Data Loading and Preprocessing 🎯
 
 # Create PyTorch tensors from the training, validation, and test data
 X_train_tensor = torch.tensor(X_train.values, dtype=torch.float32)
@@ -244,8 +229,7 @@ answer = {
     'scale_range_min': X_train_scaled.min().item(),
     'scale_range_max': X_train_scaled.max().item(),
 }
-checker.check_exercise(1, answer)
-```
+checker.check_exercise(1, answer)</code></pre>
 
 ## Step 4: Activation Function
 ***
@@ -271,13 +255,11 @@ The choice of activation function depends on the specific problem and the archit
 > - Forgetting to apply the activation function to the output layer can lead to incorrect predictions (e.g., not using softmax for multi-class classification).
 > - Not considering the range of the output when choosing the activation function (e.g., using sigmoid for regression tasks).
 
-```python
-print("\n🧠 Quiz 1: Choosing the right activation function")
+<pre class='code-terminal python-terminal'><code class='python'>print("\n🧠 Quiz 1: Choosing the right activation function")
 quizzer.run_quiz(1)
 
 print("\n🧠 Quiz 2: Combining activation functions")
-quizzer.run_quiz(2)
-```
+quizzer.run_quiz(2)</code></pre>
 
 
 ## Step 5: Model
@@ -327,8 +309,7 @@ The number of layers and neurons in each layer is a hyperparameter that needs to
 
 
 
-```python
-# Quiz 3: Network Width
+<pre class='code-terminal python-terminal'><code class='python'># Quiz 3: Network Width
 print("\n🧠 Quiz 3: Understanding Network Width for Inverse Kinematics")
 quizzer.run_quiz(3)
 
@@ -338,8 +319,7 @@ quizzer.run_quiz(4)
 
 # Quiz 5: Regularization Techniques
 print("\n🧠 Quiz 5: Regularization Techniques for Kinematics Models")
-quizzer.run_quiz(5)
-```
+quizzer.run_quiz(5)</code></pre>
 
 ### Initialising Weights and Biases
 ***
@@ -364,8 +344,7 @@ The importance of initialising weights and biases lies in the fact that they can
 > - Experiment with different initialisation methods to see their impact on training speed and model performance.
 
 
-```python
-# Exercise 2: Model Creation with Weight Initialization 🎯
+<pre class='code-terminal python-terminal'><code class='python'># Exercise 2: Model Creation with Weight Initialization 🎯
 # In this exercise, you will:
 # 1. Create a simple neural network model using PyTorch
 # 2. Initialize weights and biases properly
@@ -444,8 +423,7 @@ answer = {
         'std': model.fc2.bias.std().item()
     }
 }
-checker.check_exercise(2, answer)
-```
+checker.check_exercise(2, answer)</code></pre>
 
 ## Step 6: Choose Optimiser
 ***
@@ -501,8 +479,7 @@ The loss works in conjunction with the optimiser. While there are loss functions
 
 
 
-```python
-# Exercise 3: Optimizer and Loss Function Selection 🎯
+<pre class='code-terminal python-terminal'><code class='python'># Exercise 3: Optimizer and Loss Function Selection 🎯
 # In this exercise, you will:
 # 1. Select an appropriate optimizer for your model
 # 2. Choose a suitable loss function
@@ -529,8 +506,7 @@ answer = {
     'learning_rate': optimizer.param_groups[0]['lr'],
     'loss_function_type': type(loss_function)
 }
-checker.check_exercise(3, answer)
-```
+checker.check_exercise(3, answer)</code></pre>
 
 ## Step 8 and 9: Create Training Loop and Fit Model
 ***
@@ -571,8 +547,7 @@ for epoch in range(num_epochs):
 
 
 
-```python
-# Exercise 4: Creating a Training Loop 🎯
+<pre class='code-terminal python-terminal'><code class='python'># Exercise 4: Creating a Training Loop 🎯
 # In this exercise, you will:
 # 1. Create a training loop for your neural network
 # 2. Implement forward and backward passes
@@ -662,8 +637,7 @@ answer = {
     'loss_trend': train_losses[0] > train_losses[-1],
     'overfit_check': val_losses[-1] <= val_losses[0] * 1.5  # Should not have increased much
 }
-checker.check_exercise(4, answer)
-```
+checker.check_exercise(4, answer)</code></pre>
 
 ### Overfitting, Underfitting, and Early Stopping
 ***
@@ -701,8 +675,7 @@ with torch.no_grad():
     loss = criterion(predictions, targets)
 ```
 
-```python
-# Exercise 5: Model Evaluation 🎯
+<pre class='code-terminal python-terminal'><code class='python'># Exercise 5: Model Evaluation 🎯
 # In this exercise, you will:
 # 1. Evaluate your trained model on the test set
 # 2. Calculate R-squared score to measure model performance
@@ -752,5 +725,4 @@ answer = {
     'predictions_shape': test_predictions_original.shape,
     'values_match': test_predictions_original.shape == test_targets_original.shape
 }
-checker.check_exercise(5, answer)
-```
+checker.check_exercise(5, answer)</code></pre>
