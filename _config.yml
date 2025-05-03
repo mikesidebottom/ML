@@ -4,8 +4,17 @@ description: A comprehensive workshop on deep learning using PyTorch
 show_downloads: true
 google_analytics: # your analytics ID if needed
 
+# Site settings
+url: "https://CLDiego.github.io/uom_fse_dl_workshop"
+baseurl: "/uom_fse_dl_workshop"
+permalink: pretty
+
 # Navigation
 header_pages:
   - index.md
-  - about.md
-  - sessions.md
+  - pages/workshop-sessions.md
+  - pages/setup-guide.md
+  - pages/resources.md
+
+# Theme settings
+dark_mode: true
