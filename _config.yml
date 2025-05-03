@@ -1,0 +1,11 @@
+theme: jekyll-theme-minimal
+title: Deep Learning with PyTorch Workshop
+description: A comprehensive workshop on deep learning using PyTorch
+show_downloads: true
+google_analytics: # your analytics ID if needed
+
+# Navigation
+header_pages:
+  - index.md
+  - about.md
+  - sessions.md
