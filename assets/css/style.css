@@ -536,3 +536,15 @@ footer {
   .notebook-container > p:first-of-type a img {
     vertical-align: middle;
   }
+
+  .notebook-banner {
+    margin-bottom: 2rem;
+    max-width: 100%;
+  }
+  
+  .notebook-banner img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px;
+    box-shadow: var(--shadow-1);
+  }

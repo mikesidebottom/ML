@@ -1,7 +1,5 @@
 import os
-import json
 import re
-import shutil
 import nbformat
 from pathlib import Path
 import base64
@@ -24,7 +22,7 @@ def convert_notebooks_to_md(source_dir, target_dir, repo_owner='CLDiego', repo_n
     os.makedirs(img_dir, exist_ok=True)
     
     # Find all .ipynb files in the source directory
-    notebook_files = list(Path(source_dir).glob("*.ipynb"))
+    notebook_files = list(Path(source_dir).glob("SE*.ipynb"))
     
     notebook_map = {
         "SE01_CA_Intro_to_pytorch.ipynb": "session1.md",
@@ -57,6 +55,14 @@ def convert_notebooks_to_md(source_dir, target_dir, repo_owner='CLDiego', repo_n
         # Create markdown file path
         md_path = os.path.join(target_dir, md_filename)
         
+        # Extract banner image from first cell if present
+        banner_image = None
+        if notebook.cells and notebook.cells[0].cell_type == "markdown":
+            # Look for image markdown in first cell
+            match = re.search(r'!\[.*?\]\((.*?)\)', notebook.cells[0].source)
+            if match:
+                banner_image = match.group(1)
+        
         # Generate front matter for Jekyll
         session_num = re.search(r'session(\d+)', notebook_name).group(1)
         front_matter = f"""---
@@ -64,9 +70,13 @@ layout: notebook
 title: "{title_map.get(notebook_filename, 'Workshop Notebook')}"
 notebook_file: {notebook_filename}
 permalink: /notebooks/session{session_num}/
----
-
 """
+        
+        # Add banner image to front matter if found
+        if banner_image:
+            front_matter += f"banner_image: {banner_image}\n"
+            
+        front_matter += "---\n\n"
         
         # Process notebook cells
         md_content = []

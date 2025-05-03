@@ -3,10 +3,8 @@ layout: notebook
 title: "SESSION 4: CONVOLUTIONAL NEURAL NETWORKS"
 notebook_file: SE04_CA_Convolutional_Neural_Networks.ipynb
 permalink: /notebooks/session4/
+banner_image: https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/se04.png
 ---
-
-![](https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/se04.png)
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/CLDiego/uom_fse_dl_workshop/blob/main/SE04_CA_Convolutional_Neural_Networks.ipynb)
 
 ```python
 # Download utils from GitHub

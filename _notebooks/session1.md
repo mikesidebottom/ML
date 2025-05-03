@@ -3,10 +3,8 @@ layout: notebook
 title: "SESSION 1: INTRODUCTION TO PYTORCH"
 notebook_file: SE01_CA_Intro_to_pytorch.ipynb
 permalink: /notebooks/session1/
+banner_image: https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/se_01.png
 ---
-
-![Workshop Banner](https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/se_01.png)
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/CLDiego/uom_fse_dl_workshop/blob/main/SE01_CA_Intro_to_pytorch.ipynb)
 
 ```python
 # Download utils from GitHub

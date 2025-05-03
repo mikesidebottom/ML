@@ -3,10 +3,8 @@ layout: notebook
 title: "SESSION 3: MODEL TRAINING & OPTIMIZATION"
 notebook_file: SE03_CA_Training_neural_networks.ipynb
 permalink: /notebooks/session3/
+banner_image: https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/se_03.png
 ---
-
-![](https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/se_03.png)
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/CLDiego/uom_fse_dl_workshop/blob/main/SE03_CA_Training_neural_networks.ipynb)
 
 ```python
 # Download utils from GitHub

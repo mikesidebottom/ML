@@ -3,10 +3,8 @@ layout: notebook
 title: "SESSION 5: TRANSFER LEARNING & U-NET"
 notebook_file: SE05_CA_Transfer_Learning.ipynb
 permalink: /notebooks/session5/
+banner_image: https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/se05.png
 ---
-
-![](https://github.com/CLDiego/uom_fse_dl_workshop/raw/main/figs/se05.png)
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/CLDiego/uom_fse_dl_workshop/blob/main/SE05_CA_Transfer_Learning.ipynb)
 
 ```python
 # Download utils from GitHub
