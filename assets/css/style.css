@@ -856,7 +856,7 @@ p code, li code, td code {
   font-style: italic;
 }
 
-//* Table of Contents styles */
+/* Table of Contents styles */
 .toc-container {
   position: fixed;
   top: 100px; /* Adjust based on your header height */
