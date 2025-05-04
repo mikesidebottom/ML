@@ -710,10 +710,14 @@ pre.code-terminal:after {
 
 /* Python terminal header */
 pre.python-terminal:after {
-  content: "● ● ●   python";
+  content: "● ● ●   Executable python";
   position: absolute;
   color: #ff5f56;
   font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.8rem;
+  top: 0.6rem;
+  left: 1rem;
+  border-left: 3px solid #b5cea8
 }
 
 /* Adjust code block top padding when using terminal styling */
