@@ -1,100 +1,88 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Only create TOC on notebook and markdown pages
-    if (!document.querySelector('.notebook-content') && !document.querySelector('main.container')) {
-      return;
+  // Get the content container - could be any page type
+  const contentContainer = document.querySelector('.notebook-content') || document.querySelector('main.container');
+  if (!contentContainer) return;
+
+  // Find all headings in the content
+  const headings = Array.from(contentContainer.querySelectorAll('h1, h2, h3, h4'))
+    .filter(heading => heading.id || heading.textContent.trim());
+  
+  // Only create TOC if there are headings
+  if (headings.length === 0) return;
+  
+  // Create TOC container
+  const tocContainer = document.createElement('div');
+  tocContainer.className = 'toc-container';
+  tocContainer.innerHTML = '<h3>Table of Contents</h3>';
+  
+  // Create the TOC list
+  const tocList = document.createElement('ul');
+  tocList.className = 'toc-list';
+  
+  // Track heading levels to create nested lists
+  let currentLevel = 1;
+  let currentList = tocList;
+  let listStack = [tocList];
+  
+  headings.forEach(heading => {
+    // Get or create an id for the heading
+    const headingId = heading.id || heading.textContent.trim().toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '');
+    heading.id = headingId;
+    
+    const headingLevel = parseInt(heading.tagName.charAt(1));
+    
+    // Create a list item for this heading
+    const listItem = document.createElement('li');
+    const link = document.createElement('a');
+    link.href = `#${headingId}`;
+    link.textContent = heading.textContent;
+    listItem.appendChild(link);
+    
+    // Handle nesting of lists
+    if (headingLevel > currentLevel) {
+      // Create a new nested list
+      const nestedList = document.createElement('ul');
+      listStack[listStack.length - 1].lastChild.appendChild(nestedList);
+      listStack.push(nestedList);
+      currentList = nestedList;
+      currentLevel = headingLevel;
+    } else if (headingLevel < currentLevel) {
+      // Go back up the nesting level
+      while (headingLevel < currentLevel && listStack.length > 1) {
+        listStack.pop();
+        currentLevel--;
+      }
+      currentList = listStack[listStack.length - 1];
     }
     
-    // Get the container where to look for headings
-    const contentContainer = document.querySelector('.notebook-content') || document.querySelector('main.container');
-    if (!contentContainer) return;
+    // Add the list item to the current list
+    currentList.appendChild(listItem);
+  });
   
-    // Find all headings (h1, h2, h3) in the content
-    const headings = Array.from(contentContainer.querySelectorAll('h1, h2, h3, h4'))
-      .filter(heading => heading.id || heading.textContent.trim());
+  // Add the TOC to the page
+  tocContainer.appendChild(tocList);
+  document.body.appendChild(tocContainer);
+  
+  // Add scroll highlighting for active section
+  window.addEventListener('scroll', function() {
+    const scrollPosition = window.scrollY;
     
-    // If there are less than 2 headings, don't create a TOC
-    if (headings.length < 2) return;
-    
-    // Create TOC container
-    const tocContainer = document.createElement('div');
-    tocContainer.className = 'toc-container';
-    tocContainer.innerHTML = '<h3>Table of Contents</h3>';
-    
-    // Create the TOC list
-    const tocList = document.createElement('ul');
-    tocList.className = 'toc-list';
-    
-    // Track heading levels to create nested lists
-    let currentLevel = 1;
-    let currentList = tocList;
-    let listStack = [tocList];
+    // Find the current active heading
+    let current = '';
     
     headings.forEach(heading => {
-      // Get or create an id for the heading
-      const headingId = heading.id || heading.textContent.trim().toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '');
-      heading.id = headingId;
-      
-      const headingLevel = parseInt(heading.tagName.charAt(1));
-      
-      // Create a list item for this heading
-      const listItem = document.createElement('li');
-      const link = document.createElement('a');
-      link.href = `#${headingId}`;
-      link.textContent = heading.textContent;
-      listItem.appendChild(link);
-      
-      // Handle nesting of lists
-      if (headingLevel > currentLevel) {
-        // Create a new nested list
-        const nestedList = document.createElement('ul');
-        listStack[listStack.length - 1].lastChild.appendChild(nestedList);
-        listStack.push(nestedList);
-        currentList = nestedList;
-        currentLevel = headingLevel;
-      } else if (headingLevel < currentLevel) {
-        // Go back up the nesting level
-        while (headingLevel < currentLevel && listStack.length > 1) {
-          listStack.pop();
-          currentLevel--;
-        }
-        currentList = listStack[listStack.length - 1];
+      const sectionTop = heading.offsetTop - 100;
+      if (scrollPosition >= sectionTop) {
+        current = heading.id;
       }
-      
-      // Add the list item to the current list
-      currentList.appendChild(listItem);
     });
     
-    // Add the TOC to the page
-    tocContainer.appendChild(tocList);
-    
-    // Insert the TOC at the beginning of the content
-    const firstParagraph = contentContainer.querySelector('p, h1, h2');
-    if (firstParagraph) {
-      contentContainer.insertBefore(tocContainer, firstParagraph);
-    } else {
-      contentContainer.prepend(tocContainer);
-    }
-    
-    // Add scroll highlighting for active section
-    window.addEventListener('scroll', function() {
-      const scrollPosition = window.scrollY;
-      
-      // Find the current active heading
-      let current = '';
-      
-      headings.forEach(heading => {
-        const sectionTop = heading.offsetTop - 100;
-        if (scrollPosition >= sectionTop) {
-          current = heading.id;
-        }
-      });
-      
-      // Highlight the current section in the TOC
-      document.querySelectorAll('.toc-list a').forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === `#${current}`) {
-          link.classList.add('active');
-        }
-      });
+    // Highlight the current section in the TOC
+    document.querySelectorAll('.toc-list a').forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === `#${current}`) {
+        link.classList.add('active');
+      }
     });
   });
+});
