@@ -872,7 +872,7 @@ p code, li code, td code {
   z-index: 100;
 }
 
-* Adjust main content width to be more generous */
+/* Adjust main content width to be more generous */
 @media (min-width: 1200px) {
   .container {
     width: auto;
