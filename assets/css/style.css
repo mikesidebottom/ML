@@ -938,7 +938,7 @@ td code {
 }
 
 /* Adjust main content width to be more generous */
-@media (min-width: 1200px) {
+@media (min-width: 1500px) {
   .container {
     width: auto;
     max-width: calc(100% - 300px);
