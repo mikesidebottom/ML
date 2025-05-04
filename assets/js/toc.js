@@ -1,48 +1,52 @@
 document.addEventListener('DOMContentLoaded', function() {
-  // Always create a TOC container first
+  // Create TOC container
   const tocContainer = document.createElement('div');
   tocContainer.className = 'toc-container';
   tocContainer.innerHTML = '<h3>Table of Contents</h3>';
   
-  // Find appropriate content container
-  // Check all possible content containers on the page
-  const contentContainers = [
-    document.querySelector('.notebook-content'),
-    document.querySelector('main.container'), 
-    document.querySelector('.notebook-container')
-  ];
-  
+  // Find any content container with headers
   let contentContainer = null;
   let headings = [];
   
-  // Try to find headings in any of the containers
-  for (const container of contentContainers) {
-    if (container) {
-      const containerHeadings = Array.from(container.querySelectorAll('h1, h2, h3, h4'))
+  // Try main content area first
+  const mainContent = document.querySelector('main');
+  if (mainContent) {
+    // Find all headings in the main content
+    headings = Array.from(mainContent.querySelectorAll('h1, h2, h3, h4'))
+      .filter(heading => heading.textContent.trim());
+    
+    if (headings.length > 0) {
+      contentContainer = mainContent;
+    }
+  }
+  
+  // If no headings found, try notebook content
+  if (headings.length === 0) {
+    const notebookContent = document.querySelector('.notebook-content');
+    if (notebookContent) {
+      headings = Array.from(notebookContent.querySelectorAll('h1, h2, h3, h4'))
         .filter(heading => heading.textContent.trim());
       
-      if (containerHeadings.length > 0) {
-        contentContainer = container;
-        headings = containerHeadings;
-        break;
+      if (headings.length > 0) {
+        contentContainer = notebookContent;
       }
     }
   }
   
   // Exit if no headings found
-  if (!contentContainer || headings.length === 0) return;
+  if (headings.length === 0) return;
   
   // Create the TOC list
   const tocList = document.createElement('ul');
   tocList.className = 'toc-list';
   
-  // Process all headings and assign IDs if they don't have one
+  // Process all headings and assign IDs
   headings.forEach(heading => {
     if (!heading.id) {
       heading.id = heading.textContent.trim().toLowerCase()
-        .replace(/[^\w\s-]/g, '')    // Remove special chars
-        .replace(/\s+/g, '-')        // Replace spaces with hyphens
-        .replace(/-+/g, '-');        // Remove consecutive hyphens
+        .replace(/[^\w\s-]/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/-+/g, '-');
     }
   });
   
@@ -110,43 +114,4 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   });
-  
-  // Style the toc list for better readability
-  const styleElement = document.createElement('style');
-  styleElement.textContent = `
-    .toc-list {
-      list-style-type: none;
-      padding-left: 0;
-      margin: 0;
-      font-size: 0.85rem;
-    }
-    .toc-list ul {
-      list-style-type: none;
-      padding-left: 1rem;
-      margin-top: 0.3rem;
-      margin-bottom: 0.5rem;
-    }
-    .toc-list li {
-      margin-bottom: 0.5rem;
-      line-height: 1.3;
-    }
-    .toc-list a {
-      color: var(--text-primary);
-      text-decoration: none;
-      display: inline-block;
-      border-left: 2px solid transparent;
-      padding-left: 0.5rem;
-      transition: all 0.2s ease;
-    }
-    .toc-list a:hover {
-      color: var(--primary-color);
-      border-left-color: var(--primary-color);
-    }
-    .toc-list a.active {
-      color: var(--primary-color);
-      font-weight: 500;
-      border-left-color: var(--primary-color);
-    }
-  `;
-  document.head.appendChild(styleElement);
 });
