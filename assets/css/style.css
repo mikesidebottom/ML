@@ -713,12 +713,11 @@ pre.python-terminal:after {
   content: "● ● ●   Executable python";
   position: absolute;
   color: #ff5f56;
-  font-family: 'IBM Plex Sans', sans-serif;
-  font-style: italic;
+  font-family: 'IBM Plex Mono', monospace;
   font-size: 0.8rem;
   top: 0.6rem;
   left: 1rem;
-  border-left: 3px solid #b5cea8
+  letter-spacing: 0.25rem;
 }
 
 /* Adjust code block top padding when using terminal styling */
