@@ -13,18 +13,22 @@
         rel="stylesheet">
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/python.min.js"></script>
+    
     <script>
         document.addEventListener('DOMContentLoaded', (event) => {
             // For executable code cells
             document.querySelectorAll('pre.code-terminal code').forEach((block) => {
                 hljs.highlightBlock(block);
             });
-
+    
             // For code snippets from markdown
             document.querySelectorAll('pre.snippet-code code').forEach((block) => {
                 hljs.highlightBlock(block);
             });
-
+    
             // For any other code blocks
             document.querySelectorAll('pre:not(.code-terminal):not(.snippet-code) code').forEach((block) => {
                 hljs.highlightBlock(block);
