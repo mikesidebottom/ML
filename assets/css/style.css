@@ -773,8 +773,6 @@ pre.code-terminal code {
   padding-bottom: 5px;
 }
 
-/* Add these styles to the end of your CSS file */
-
 /* Style for code snippets in markdown */
 .snippet-code {
   background-color: #282c34; /* Different background from executable code */
@@ -873,11 +871,22 @@ p code, li code, td code {
   z-index: 100;
 }
 
-/* Make space for TOC on desktop */
+/* Adjust main content width to be more generous */
 @media (min-width: 1200px) {
-  .container, .notebook-container {
+  .container {
     max-width: calc(100% - 300px);
-    margin-right: 300px; /* Leave space for TOC */
+    margin-right: 280px; /* Leave space for TOC */
+  }
+  
+  /* Specific notebook content adjustments */
+  .notebook-container {
+    max-width: calc(100% - 300px);
+    margin-right: 280px;
+  }
+  
+  .notebook-content {
+    width: 100%;
+    max-width: 100%;
   }
 }
 
@@ -888,45 +897,6 @@ p code, li code, td code {
   border-bottom: 1px solid var(--border-color);
   padding-bottom: 0.5rem;
   margin-bottom: 0.8rem;
-}
-
-.toc-list {
-  list-style-type: none;
-  padding-left: 0;
-  margin: 0;
-  font-size: 0.85rem;
-}
-
-.toc-list ul {
-  list-style-type: none;
-  padding-left: 1rem;
-  margin-top: 0.3rem;
-  margin-bottom: 0.5rem;
-}
-
-.toc-list li {
-  margin-bottom: 0.5rem;
-  line-height: 1.3;
-}
-
-.toc-list a {
-  color: var(--text-primary);
-  text-decoration: none;
-  display: inline-block;
-  border-left: 2px solid transparent;
-  padding-left: 0.5rem;
-  transition: all 0.2s ease;
-}
-
-.toc-list a:hover {
-  color: var(--primary-color);
-  border-left-color: var(--primary-color);
-}
-
-.toc-list a.active {
-  color: var(--primary-color);
-  font-weight: 500;
-  border-left-color: var(--primary-color);
 }
 
 /* Hide TOC on smaller screens */

@@ -1,23 +1,42 @@
 document.addEventListener('DOMContentLoaded', function() {
-  // Get the content container - could be any page type
-  const contentContainer = document.querySelector('.notebook-content') || document.querySelector('main.container');
-  if (!contentContainer) return;
-
-  // Find all headings in the content
-  const headings = Array.from(contentContainer.querySelectorAll('h1, h2, h3, h4'))
-    .filter(heading => heading.id || heading.textContent.trim());
-  
-  // Only create TOC if there are headings
-  if (headings.length === 0) return;
-  
-  // Create TOC container
+  // Always create a TOC container first
   const tocContainer = document.createElement('div');
   tocContainer.className = 'toc-container';
   tocContainer.innerHTML = '<h3>Table of Contents</h3>';
   
+  // Find appropriate content container
+  let contentContainer;
+  
+  if (document.querySelector('.notebook-content')) {
+    // For notebook pages
+    contentContainer = document.querySelector('.notebook-content');
+  } else if (document.querySelector('main.container')) {
+    // For regular pages
+    contentContainer = document.querySelector('main.container');
+  } else {
+    return; // Exit if no suitable container found
+  }
+
+  // Find all headings in the content
+  const headings = Array.from(contentContainer.querySelectorAll('h1, h2, h3, h4'))
+    .filter(heading => heading.textContent.trim());
+  
+  // Only create TOC if there are headings
+  if (headings.length === 0) return;
+  
   // Create the TOC list
   const tocList = document.createElement('ul');
   tocList.className = 'toc-list';
+  
+  // Process all headings and assign IDs if they don't have one
+  headings.forEach(heading => {
+    if (!heading.id) {
+      heading.id = heading.textContent.trim().toLowerCase()
+        .replace(/[^\w\s-]/g, '')    // Remove special chars
+        .replace(/\s+/g, '-')        // Replace spaces with hyphens
+        .replace(/-+/g, '-');        // Remove consecutive hyphens
+    }
+  });
   
   // Track heading levels to create nested lists
   let currentLevel = 1;
@@ -25,16 +44,12 @@ document.addEventListener('DOMContentLoaded', function() {
   let listStack = [tocList];
   
   headings.forEach(heading => {
-    // Get or create an id for the heading
-    const headingId = heading.id || heading.textContent.trim().toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '');
-    heading.id = headingId;
-    
     const headingLevel = parseInt(heading.tagName.charAt(1));
     
     // Create a list item for this heading
     const listItem = document.createElement('li');
     const link = document.createElement('a');
-    link.href = `#${headingId}`;
+    link.href = `#${heading.id}`;
     link.textContent = heading.textContent;
     listItem.appendChild(link);
     
@@ -42,10 +57,12 @@ document.addEventListener('DOMContentLoaded', function() {
     if (headingLevel > currentLevel) {
       // Create a new nested list
       const nestedList = document.createElement('ul');
-      listStack[listStack.length - 1].lastChild.appendChild(nestedList);
-      listStack.push(nestedList);
-      currentList = nestedList;
-      currentLevel = headingLevel;
+      if (listStack[listStack.length - 1].lastChild) {
+        listStack[listStack.length - 1].lastChild.appendChild(nestedList);
+        listStack.push(nestedList);
+        currentList = nestedList;
+        currentLevel = headingLevel;
+      }
     } else if (headingLevel < currentLevel) {
       // Go back up the nesting level
       while (headingLevel < currentLevel && listStack.length > 1) {
