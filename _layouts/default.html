@@ -5,38 +5,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
-    <!-- Add IBM Plex Fonts -->
+    
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+    
+    <!-- External Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/python.min.js"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
+    <!-- Configuration Scripts -->
     <script>
-        document.addEventListener('DOMContentLoaded', (event) => {
-            // For executable code cells
-            document.querySelectorAll('pre.code-terminal code').forEach((block) => {
-                hljs.highlightBlock(block);
-            });
-    
-            // For code snippets from markdown
-            document.querySelectorAll('pre.snippet-code code').forEach((block) => {
-                hljs.highlightBlock(block);
-            });
-    
-            // For any other code blocks
-            document.querySelectorAll('pre:not(.code-terminal):not(.snippet-code) code').forEach((block) => {
-                hljs.highlightBlock(block);
-            });
-        });
-    </script>
-
-    <script>
+        // MathJax configuration
         MathJax = {
             tex: {
                 inlineMath: [['$', '$'], ['\\(', '\\)']],
@@ -48,10 +34,18 @@
                 skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
             }
         };
+        
+        // Syntax highlighting initialization
+        document.addEventListener('DOMContentLoaded', (event) => {
+            // Apply highlighting to all code blocks
+            document.querySelectorAll('pre.code-terminal code, pre.snippet-code code, pre:not(.code-terminal):not(.snippet-code) code')
+                .forEach(block => hljs.highlightBlock(block));
+        });
     </script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <!-- Local Scripts -->
     <script src="{{ '/assets/js/toc.js' | relative_url }}"></script>
-
+    <script src="{{ '/assets/js/script.js' | relative_url }}"></script>
 </head>
 
 <body>
@@ -63,12 +57,9 @@
             <nav>
                 <ul>
                     <li><a href="{{ site.baseurl }}/" {% if page.url=="/" %}class="active" {% endif %}>Home</a></li>
-                    <li><a href="{{ site.baseurl }}/pages/workshop-sessions" {% if page.url
-                            contains "/workshop-sessions" %}class="active" {% endif %}>Workshop Sessions</a></li>
-                    <li><a href="{{ site.baseurl }}/pages/setup-guide" {% if page.url contains "/setup-guide"
-                            %}class="active" {% endif %}>Setup Guide</a></li>
-                    <li><a href="{{ site.baseurl }}/pages/resources" {% if page.url contains "/resources"
-                            %}class="active" {% endif %}>Resources</a></li>
+                    <li><a href="{{ site.baseurl }}/pages/workshop-sessions" {% if page.url contains "/workshop-sessions" %}class="active" {% endif %}>Workshop Sessions</a></li>
+                    <li><a href="{{ site.baseurl }}/pages/setup-guide" {% if page.url contains "/setup-guide" %}class="active" {% endif %}>Setup Guide</a></li>
+                    <li><a href="{{ site.baseurl }}/pages/resources" {% if page.url contains "/resources" %}class="active" {% endif %}>Resources</a></li>
                 </ul>
             </nav>
         </div>

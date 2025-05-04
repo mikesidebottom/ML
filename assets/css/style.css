@@ -1,11 +1,27 @@
+/* ===========================================
+ * TABLE OF CONTENTS
+ * ===========================================
+ * 1. Variables & Base Styles
+ * 2. Layout & Container Styles
+ * 3. Header & Navigation
+ * 4. Typography
+ * 5. Components (Cards, Buttons)
+ * 6. Code & Syntax Highlighting
+ * 7. Notebook Styles
+ * 8. Table of Contents
+ * 9. Media Queries
+ * =========================================== */
+
+/* 1. Variables & Base Styles
+   ========================================= */
 :root {
-  /* Updated Dark Theme Colors based on #22201c background */
+  /* Theme Colors */
   --bg-color: #22201c;
   --surface-color: #2a2825;
   --card-bg-color: #312e2a;
   --header-color: #1a1815;
 
-  /* Accent colors that work well with #22201c */
+  /* Brand Colors */
   --primary-color: #a78bfa; /* Soft purple */
   --secondary-color: #38b2ac; /* Teal */
   --accent-color: #f9d417; /* Bright yellow for highlights */
@@ -38,34 +54,44 @@ body {
   background-color: var(--bg-color);
   color: var(--text-primary);
   line-height: 1.6;
-  transition: all var(--transition-speed) ease;
   font-size: 16px;
 }
 
-/* Left alignment for main container */
+/* Dark scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-color);
+}
+
+/* 2. Layout & Container Styles
+   ========================================= */
 .container {
   max-width: 1100px;
-  margin: 0 auto 0 0; /* Changed from "0 auto" to "0 auto 0 0" */
+  margin: 0 auto 0 0;
   padding: 0 24px;
+  box-sizing: border-box;
 }
 
-/* Material Design Elements */
-.card {
-  background-color: var(--card-bg-color);
-  border-radius: 8px;
-  padding: 24px;
-  margin: 24px 0;
-  box-shadow: var(--shadow-1);
-  transition: all var(--transition-speed);
-  border-left: 3px solid var(--primary-color);
-  text-align: left;
+main {
+  padding: 40px 0;
+  min-height: calc(100vh - 160px); /* account for header and footer */
 }
 
-.card:hover {
-  box-shadow: var(--shadow-2);
-}
-
-/* Header styles */
+/* 3. Header & Navigation
+   ========================================= */
 header {
   background-color: var(--header-color);
   padding: 16px 0;
@@ -133,14 +159,12 @@ nav a:after {
 }
 
 nav a:hover {
-  color: var(--accent-color); /* Changed from primary to accent color */
+  color: var(--accent-color);
 }
 
 nav a:hover:after {
   width: 100%;
-  background-color: var(
-    --accent-color
-  ); /* Changed this to match hover text color */
+  background-color: var(--accent-color);
 }
 
 nav a.active {
@@ -151,25 +175,25 @@ nav a.active:after {
   width: 100%;
 }
 
-/* Main content styles */
-main {
-  padding: 40px 0;
-  min-height: calc(100vh - 160px); /* account for header and footer */
+/* Footer styles */
+footer {
+  background-color: var(--header-color);
+  color: var(--text-muted);
+  padding: 24px 0;
+  text-align: left;
+  border-top: 1px solid var(--border-color);
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+/* 4. Typography
+   ========================================= */
+h1, h2, h3, h4, h5, h6 {
   font-family: "IBM Plex Mono", monospace;
   color: var(--text-primary);
   margin-top: 1.5em;
   margin-bottom: 0.8em;
   font-weight: 600;
   letter-spacing: 0.3px;
-  text-transform: uppercase; /* Make headings uppercase */
+  text-transform: uppercase;
 }
 
 h1 {
@@ -192,7 +216,11 @@ h4 {
   font-size: 1.2rem;
 }
 
-/* Improve link highlighting in general */
+p {
+  margin: 0 0 16px;
+  line-height: 1.7;
+}
+
 a {
   color: var(--primary-color);
   text-decoration: none;
@@ -200,51 +228,8 @@ a {
 }
 
 a:hover {
-  color: var(
-    --accent-color
-  ); /* Changed from secondary to accent color for more contrast */
-  text-decoration: underline; /* Added underline for better visibility */
-}
-
-p {
-  margin: 0 0 16px;
-  line-height: 1.7;
-}
-
-/* Update chip style for better visibility with the new background */
-.chip {
-  display: inline-block;
-  padding: 4px 12px;
-  background-color: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--border-color);
-  border-radius: 16px;
-  margin-right: 8px;
-  margin-bottom: 8px;
-  font-size: 0.85rem;
   color: var(--accent-color);
-  font-family: "IBM Plex Mono", monospace;
-}
-
-/* Enhance code blocks for better readability on the darker background */
-code,
-pre {
-  font-family: "IBM Plex Mono", monospace;
-  background-color: rgba(0, 0, 0, 0.2);
-  border-radius: 4px;
-}
-
-pre {
-  padding: 16px;
-  overflow: auto;
-  line-height: 1.45;
-  box-shadow: var(--shadow-1);
-  margin: 16px 0;
-  border: 1px solid var(--border-color);
-}
-
-code {
-  padding: 0.2em 0.4em;
-  font-size: 0.9em;
+  text-decoration: underline;
 }
 
 blockquote {
@@ -263,6 +248,38 @@ img {
   display: block;
 }
 
+/* 5. Components (Cards, Buttons, Tables)
+   ========================================= */
+/* Card styling */
+.card {
+  background-color: var(--card-bg-color);
+  border-radius: 8px;
+  padding: 24px;
+  margin: 24px 0;
+  box-shadow: var(--shadow-1);
+  transition: all var(--transition-speed);
+  border-left: 3px solid var(--primary-color);
+  text-align: left;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-2);
+}
+
+/* Chip component */
+.chip {
+  display: inline-block;
+  padding: 4px 12px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  margin-right: 8px;
+  margin-bottom: 8px;
+  font-size: 0.85rem;
+  color: var(--accent-color);
+  font-family: "IBM Plex Mono", monospace;
+}
+
 /* Table styles */
 table {
   border-collapse: collapse;
@@ -274,8 +291,7 @@ table {
   text-align: left;
 }
 
-th,
-td {
+th, td {
   padding: 12px 16px;
   border: none;
   text-align: left;
@@ -302,7 +318,7 @@ tr:last-child {
   border-bottom: none;
 }
 
-/* Improved Colab button styling */
+/* Button styling */
 .colab-button {
   display: inline-block;
   padding: 8px 16px;
@@ -324,12 +340,10 @@ tr:last-child {
 
 .colab-button:hover {
   box-shadow: var(--shadow-2);
-  background-color: var(
-    --accent-color
-  ); /* Changed from opacity to a color change */
+  background-color: var(--accent-color);
   text-decoration: none;
   transform: translateY(-2px);
-  color: var(--button-text); /* Ensure good text contrast on hover */
+  color: var(--button-text);
 }
 
 .colab-button:active {
@@ -344,21 +358,10 @@ tr:last-child {
   display: inline;
 }
 
-/* Footer styles - left aligned */
-footer {
-  background-color: var(--header-color);
-  color: var(--text-muted);
-  padding: 24px 0;
-  text-align: left; /* Changed from "center" to "left" */
-  border-top: 1px solid var(--border-color);
-}
-
-/* Additional Material Design Components */
-
-/* Notification or info box */
+/* Info and warning boxes */
 .info-box {
   padding: 16px;
-  background-color: rgba(167, 139, 250, 0.1); /* Based on primary color */
+  background-color: rgba(167, 139, 250, 0.1);
   border-left: 4px solid var(--primary-color);
   margin: 16px 0;
   border-radius: 0 4px 4px 0;
@@ -367,7 +370,7 @@ footer {
 
 .warning-box {
   padding: 16px;
-  background-color: rgba(249, 115, 22, 0.1); /* Based on accent color */
+  background-color: rgba(249, 115, 22, 0.1);
   border-left: 4px solid var(--accent-color);
   margin: 16px 0;
   border-radius: 0 4px 4px 0;
@@ -391,181 +394,23 @@ footer {
   transition: width 0.6s ease;
 }
 
-/* Notebook browser styling */
-.notebook-browser {
-  margin: 24px 0;
+/* 6. Code & Syntax Highlighting
+   ========================================= */
+/* Base code styling */
+code, pre {
+  font-family: "IBM Plex Mono", monospace;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
 }
 
-.notebook-card {
-  background-color: var(--card-bg-color);
-  border-radius: 8px;
-  margin-bottom: 20px;
-  box-shadow: var(--shadow-1);
-  transition: all var(--transition-speed);
-  overflow: hidden;
-  text-align: left;
-}
-
-.notebook-card:hover {
-  box-shadow: var(--shadow-2);
-  transform: translateY(-3px);
-}
-
-.notebook-header {
-  padding: 16px;
-  background-color: var(--header-color);
-  border-bottom: 1px solid var(--border-color);
-}
-
-.notebook-header h3 {
-  margin: 0;
-  font-size: 1.2rem;
-}
-
-.notebook-content {
-  padding: 16px;
-}
-
-.notebook-footer {
-  padding: 12px 16px;
-  background-color: var(--surface-color);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-top: 1px solid var(--border-color);
-}
-
-/* Responsive design */
-@media (max-width: 768px) {
-  header .container {
-    flex-direction: column;
-  }
-
-  nav ul {
-    margin-top: 16px;
-    justify-content: flex-start;
-  }
-
-  nav li {
-    margin: 0 16px 0 0;
-  }
-
-  h1 {
-    font-size: 1.8rem;
-  }
-
-  h2 {
-    font-size: 1.5rem;
-  }
-
-  .notebook-footer {
-    flex-direction: column;
-    gap: 10px;
-    align-items: flex-start;
-  }
-}
-
-/* Dark scrollbar */
-::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--bg-color);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--border-color);
-  border-radius: 5px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--primary-color);
-}
-
-/* Notebook specific styles */
-.notebook-container {
-  max-width: 900px;
-  margin: 0;
-}
-
-.notebook-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  margin-bottom: 2rem;
-}
-
-.notebook-content {
-  margin-bottom: 2rem;
-}
-
-.notebook-content img {
-  max-width: 100%;
-  margin: 1rem 0;
-}
-
-.notebook-content h1,
-.notebook-content h2,
-.notebook-content h3,
-.notebook-content h4,
-.notebook-content h5,
-.notebook-content h6 {
-  margin-top: 1.5rem;
-}
-
-.notebook-content pre {
-  margin: 1rem 0;
-}
-
-.cell-output {
-  background-color: var(--surface-color);
-  border-left: 3px solid var(--secondary-color);
-  padding: 0.5rem 1rem;
-  margin: 0.5rem 0 1.5rem 0;
-  overflow-x: auto;
-}
-
-.cell-output pre {
-  margin: 0.5rem 0;
-}
-
-.notebook-footer {
-  margin-top: 3rem;
-  padding-top: 1rem;
-  border-top: 1px solid var(--border-color);
-}
-
-/* Colab badge styling at the top of notebooks */
-.notebook-container > p:first-of-type {
-  margin-bottom: 2rem;
-}
-
-.notebook-container > p:first-of-type a {
-  display: inline-block;
-}
-
-.notebook-container > p:first-of-type a img {
-  vertical-align: middle;
-}
-
-.notebook-banner {
-  margin-bottom: 2rem;
-  max-width: 100%;
-}
-
-.notebook-banner img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 6px;
-  box-shadow: var(--shadow-1);
-}
-
-/* VS Code-like code styling */
 pre {
-  background-color: #1e1e1e; /* VS Code-like dark background */
+  padding: 16px;
+  overflow: auto;
+  line-height: 1.45;
+  box-shadow: var(--shadow-1);
+  margin: 16px 0;
+  border: 1px solid var(--border-color);
+  background-color: #1e1e1e;
   border-radius: 6px;
   margin: 1.2rem 0;
   padding: 1rem;
@@ -575,92 +420,84 @@ pre {
 }
 
 code {
-  font-family: "IBM Plex Mono", Consolas, Monaco, "Andale Mono", "Ubuntu Mono",
-    monospace;
-  font-size: 0.9rem;
+  padding: 0.2em 0.4em;
+  font-size: 0.9em;
+  font-family: "IBM Plex Mono", Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
   line-height: 1.6;
 }
 
-/* Syntax highlighting colors - VS Code dark+ theme inspired */
-.hljs-keyword,
-.hljs-selector-tag,
-.hljs-built_in,
-.hljs-name,
-.hljs-tag {
-  color: #569cd6; /* blue */
+/* Inline code styling */
+p code,
+li code,
+td code {
+  background-color: #2b2d3a;
+  color: #b0b7c3;
+  padding: 2px 5px;
+  border-radius: 3px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.85em;
+  border: 1px solid #444;
 }
 
-.hljs-string,
-.hljs-title,
-.hljs-section,
-.hljs-attribute,
-.hljs-literal,
-.hljs-template-tag,
-.hljs-template-variable,
-.hljs-type,
-.hljs-addition {
-  color: #ce9178; /* orange/string */
+/* Code terminal styling */
+pre.code-terminal {
+  position: relative;
+  padding-top: 2.5rem;
+  margin-top: 2rem;
 }
 
-.hljs-comment,
-.hljs-quote,
-.hljs-deletion,
-.hljs-meta {
-  color: #6a9955; /* green */
+pre.code-terminal:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2rem;
+  background-color: #333333;
+  border-radius: 6px 6px 0 0;
+  border-bottom: 1px solid #444;
 }
 
-.hljs-keyword,
-.hljs-selector-tag,
-.hljs-literal,
-.hljs-doctag,
-.hljs-title,
-.hljs-section,
-.hljs-type,
-.hljs-selector-id,
-.hljs-selector-class,
-.hljs-selector-attr,
-.hljs-selector-pseudo,
-.hljs-number {
-  color: #b5cea8; /* light green/numbers */
+pre.code-terminal:after {
+  content: "● ● ●";
+  position: absolute;
+  top: 0.6rem;
+  left: 1rem;
+  font-size: 0.7rem;
+  color: #ff5f56;
+  letter-spacing: 0.5rem;
 }
 
-.hljs-symbol,
-.hljs-bullet,
-.hljs-link,
-.hljs-regexp {
-  color: #d16969; /* red */
+pre.code-terminal code {
+  padding-top: 0.5rem;
 }
 
-.hljs-variable,
-.hljs-template-variable {
-  color: #9cdcfe; /* light blue */
+/* Python terminal specific */
+pre.python-terminal:after {
+  content: "● ● ●   Executable python";
+  position: absolute;
+  color: #ff5f56;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.8rem;
+  top: 0.6rem;
+  left: 1rem;
+  letter-spacing: 0.25rem;
 }
 
-.hljs-function {
-  color: #dcdcaa; /* yellow */
+/* Executable code label */
+.code-terminal:before {
+  content: "Executable Code";
+  display: block;
+  position: absolute;
+  top: 0.6rem;
+  right: 1rem;
+  font-size: 0.7rem;
+  color: #569cd6;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-style: italic;
 }
 
-/* Make cell outputs distinct from code */
-.cell-output {
-  background-color: #2d2d2d;
-  border-left: 3px solid var(--secondary-color);
-  border-radius: 0 6px 6px 0;
-  margin: 0.5rem 0 1.5rem 0;
-  padding: 1rem;
-}
-
-/* Improve notebook container styling */
-.notebook-container {
-  width: auto;
-  max-width: 1000px; /* Increase from previous value */
-  margin: 0 auto 0 0;
-  padding: 2rem;
-  background-color: var(--card-bg-color);
-  border-radius: 8px;
-  box-shadow: var(--shadow-1);
-}
-
-/* Add a cool line number effect to code blocks */
+/* Line numbers effect */
 pre.line-numbers {
   position: relative;
   padding-left: 3.8em;
@@ -696,52 +533,35 @@ pre.line-numbers > code {
   text-align: right;
 }
 
-pre.code-terminal {
-  position: relative;
-  padding-top: 2.5rem;
-  margin-top: 2rem;
+/* Code snippets in markdown */
+.snippet-code {
+  background-color: #282c34;
+  border-left: 3px solid #61afef;
+  border-radius: 4px;
+  padding: 12px;
+  margin: 1rem 0;
+  overflow-x: auto;
 }
 
-pre.code-terminal:before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2rem;
-  background-color: #333333;
-  border-radius: 6px 6px 0 0;
-  border-bottom: 1px solid #444;
-}
-
-pre.code-terminal:after {
-  content: "● ● ●";
-  position: absolute;
-  top: 0.6rem;
-  left: 1rem;
-  font-size: 0.7rem;
-  color: #ff5f56;
-  letter-spacing: 0.5rem;
-}
-
-/* Python terminal header */
-pre.python-terminal:after {
-  content: "● ● ●   Executable python";
-  position: absolute;
-  color: #ff5f56;
+.snippet-code code {
   font-family: "IBM Plex Mono", monospace;
-  font-size: 0.8rem;
-  top: 0.6rem;
-  left: 1rem;
-  letter-spacing: 0.25rem;
+  font-size: 0.9em;
+  line-height: 1.5;
 }
 
-/* Adjust code block top padding when using terminal styling */
-pre.code-terminal code {
-  padding-top: 0.5rem;
+.snippet-code:before {
+  content: "Code Snippet";
+  display: block;
+  font-size: 0.8em;
+  color: #61afef;
+  margin-bottom: 8px;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-style: italic;
+  border-bottom: 1px solid #444;
+  padding-bottom: 5px;
 }
 
-/* Markdown code snippets styling - different from executable code */
+/* Markdown code styling */
 .notebook-content p code,
 .notebook-content li code,
 .notebook-content blockquote code,
@@ -759,7 +579,6 @@ pre.code-terminal code {
   box-shadow: none;
 }
 
-/* Style code blocks in markdown differently */
 .notebook-content pre:not(.code-terminal) {
   background-color: #2b2b2b;
   border-left: 3px solid var(--primary-color);
@@ -776,7 +595,6 @@ pre.code-terminal code {
   color: #e6e6e6;
 }
 
-/* Add a subtle indicator to markdown code blocks */
 .notebook-content pre:not(.code-terminal):before {
   content: "Example / Snippet";
   display: block;
@@ -789,104 +607,246 @@ pre.code-terminal code {
   padding-bottom: 5px;
 }
 
-/* Style for code snippets in markdown */
-.snippet-code {
-  background-color: #282c34; /* Different background from executable code */
-  border-left: 3px solid #61afef; /* Blue border for snippets */
-  border-radius: 4px;
-  padding: 12px;
-  margin: 1rem 0;
-  overflow-x: auto;
+/* Syntax highlighting */
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-built_in,
+.hljs-name,
+.hljs-tag {
+  color: #569cd6;
 }
 
-.snippet-code code {
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 0.9em;
-  line-height: 1.5;
+.hljs-string,
+.hljs-title,
+.hljs-section,
+.hljs-attribute,
+.hljs-literal,
+.hljs-template-tag,
+.hljs-template-variable,
+.hljs-type,
+.hljs-addition {
+  color: #ce9178;
 }
 
-/* Add a label to distinguish snippets */
-.snippet-code:before {
-  content: "Code Snippet";
-  display: block;
-  font-size: 0.8em;
-  color: #61afef; /* Blue text for snippet label */
-  margin-bottom: 8px;
-  font-family: "IBM Plex Sans", sans-serif;
-  font-style: italic;
-  border-bottom: 1px solid #444;
-  padding-bottom: 5px;
+.hljs-comment,
+.hljs-quote,
+.hljs-deletion,
+.hljs-meta {
+  color: #6a9955;
 }
 
-/* Different highlighting colors for snippets */
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-literal,
+.hljs-doctag,
+.hljs-title,
+.hljs-section,
+.hljs-type,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-selector-attr,
+.hljs-selector-pseudo,
+.hljs-number {
+  color: #b5cea8;
+}
+
+.hljs-symbol,
+.hljs-bullet,
+.hljs-link,
+.hljs-regexp {
+  color: #d16969;
+}
+
+.hljs-variable,
+.hljs-template-variable {
+  color: #9cdcfe;
+}
+
+.hljs-function {
+  color: #dcdcaa;
+}
+
+/* Different highlighting for snippets */
 .snippet-code .hljs-keyword,
 .snippet-code .hljs-built_in {
-  color: #c678dd; /* Purple for keywords in snippets */
+  color: #c678dd;
 }
 
 .snippet-code .hljs-string {
-  color: #98c379; /* Green for strings in snippets */
+  color: #98c379;
 }
 
 .snippet-code .hljs-comment {
-  color: #7f848e; /* Grey for comments in snippets */
+  color: #7f848e;
 }
 
 .snippet-code .hljs-number {
-  color: #d19a66; /* Orange for numbers in snippets */
+  color: #d19a66;
 }
 
-/* Keep terminal styling for executable code cells */
+/* Terminal code highlighting */
 .code-terminal .hljs-keyword,
 .code-terminal .hljs-built_in {
-  color: #569cd6; /* Original blue for keywords in executable code */
+  color: #569cd6;
 }
 
 .code-terminal .hljs-string {
-  color: #ce9178; /* Original orange for strings in executable code */
+  color: #ce9178;
 }
 
-/* Inline code styling */
-p code,
-li code,
-td code {
-  background-color: #2b2d3a;
-  color: #b0b7c3;
-  padding: 2px 5px;
-  border-radius: 3px;
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 0.85em;
-  border: 1px solid #444;
+/* 7. Notebook Styles
+   ========================================= */
+.notebook-container {
+  width: auto;
+  max-width: 1000px;
+  margin: 0 auto 0 0;
+  padding: 2rem;
+  background-color: var(--card-bg-color);
+  border-radius: 8px;
+  box-shadow: var(--shadow-1);
+  box-sizing: border-box;
 }
 
-/* Label for executable code to make distinction clearer */
-.code-terminal:before {
-  content: "Executable Code";
-  display: block;
-  position: absolute;
-  top: 0.6rem;
-  right: 1rem;
-  font-size: 0.7rem;
-  color: #569cd6; /* Blue text */
-  font-family: "IBM Plex Sans", sans-serif;
-  font-style: italic;
+.notebook-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+  padding: 16px;
+  background-color: var(--header-color);
+  border-bottom: 1px solid var(--border-color);
 }
 
-/* Table of Contents styles */
+.notebook-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.notebook-content {
+  padding: 16px;
+  margin-bottom: 2rem;
+}
+
+.notebook-content img {
+  max-width: 100%;
+  margin: 1rem 0;
+}
+
+.notebook-footer {
+  padding: 12px 16px;
+  background-color: var(--surface-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--border-color);
+  margin-top: 3rem;
+  padding-top: 1rem;
+}
+
+/* Notebook typography */
+.notebook-content h1,
+.notebook-content h2,
+.notebook-content h3,
+.notebook-content h4,
+.notebook-content h5,
+.notebook-content h6 {
+  margin-top: 1.5rem;
+}
+
+.notebook-content p,
+.notebook-content li,
+.notebook-content blockquote {
+  max-width: 100%;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.notebook-content pre {
+  margin: 1rem 0;
+}
+
+/* Cell output styling */
+.cell-output {
+  background-color: var(--surface-color);
+  border-left: 3px solid var(--secondary-color);
+  padding: 0.5rem 1rem;
+  margin: 0.5rem 0 1.5rem 0;
+  overflow-x: auto;
+  background-color: #2d2d2d;
+  border-radius: 0 6px 6px 0;
+}
+
+.cell-output pre {
+  margin: 0.5rem 0;
+}
+
+/* Colab badge and banner */
+.notebook-container > p:first-of-type {
+  margin-bottom: 2rem;
+}
+
+.notebook-container > p:first-of-type a {
+  display: inline-block;
+}
+
+.notebook-container > p:first-of-type a img {
+  vertical-align: middle;
+}
+
+.notebook-banner {
+  margin-bottom: 2rem;
+  max-width: 100%;
+}
+
+.notebook-banner img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+  box-shadow: var(--shadow-1);
+}
+
+/* Notebook card in browser */
+.notebook-browser {
+  margin: 24px 0;
+}
+
+.notebook-card {
+  background-color: var(--card-bg-color);
+  border-radius: 8px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow-1);
+  transition: all var(--transition-speed);
+  overflow: hidden;
+  text-align: left;
+}
+
+.notebook-card:hover {
+  box-shadow: var(--shadow-2);
+  transform: translateY(-3px);
+}
+
+.notebook-browser .notebook-card {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* 8. Table of Contents
+   ========================================= */
 .toc-container {
   position: fixed;
   top: 100px;
-  right: 2rem;
+  right: 20px;
   width: 250px;
   padding: 1rem;
-  background-color: var(--surface-color);
+  background-color: var(--card-bg-color);
   border-radius: 6px;
-  border-left: 3px solid var(--primary-color);
-  box-shadow: var(--shadow-1);
-  font-family: "IBM Plex Sans", sans-serif;
+  border-left: 3px solid var(--accent-color);
+  box-shadow: var(--shadow-2);
+  font-family: 'IBM Plex Sans', sans-serif;
   max-height: calc(100vh - 150px);
   overflow-y: auto;
-  z-index: 100;
+  z-index: 1000;
 }
 
 .toc-container h3 {
@@ -937,61 +897,39 @@ td code {
   border-left-color: var(--primary-color);
 }
 
-/* Adjust main content width to be more generous */
-@media (min-width: 1200px) {
-  .container {
-    width: auto;
-    max-width: calc(100% - 300px);
-    margin-right: 300px; /* Increase space for TOC */
-    padding-right: 30px; /* Add padding to maintain readability */
+/* 9. Media Queries
+   ========================================= */
+/* Medium screens */
+@media (max-width: 768px) {
+  header .container {
+    flex-direction: column;
   }
 
-  /* Wider notebook container */
-  .notebook-container {
-    width: auto;
-    max-width: calc(100% - 300px);
-    margin-right: 300px;
-    padding-right: 30px;
+  nav ul {
+    margin-top: 16px;
+    justify-content: flex-start;
   }
 
-  /* Ensure notebook content takes full width */
-  .notebook-content {
-    width: 100%;
-    max-width: 100%;
+  nav li {
+    margin: 0 16px 0 0;
   }
 
-  /* Fix title header size */
   h1 {
     font-size: 1.8rem;
-    padding-bottom: 8px;
-    margin-top: 1rem;
-    margin-bottom: 1.2rem;
   }
 
-  /* Adjust notebook headers */
-  .notebook-content h1 {
-    font-size: 1.8rem;
-  }
-
-  .notebook-content h2 {
+  h2 {
     font-size: 1.5rem;
   }
 
-  .notebook-content h3 {
-    font-size: 1.3rem;
+  .notebook-footer {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
   }
 }
 
-/* Make the notebook content more readable */
-.notebook-content p,
-.notebook-content li,
-.notebook-content blockquote {
-  max-width: 100%;
-  font-size: 1rem;
-  line-height: 1.7;
-}
-
-/* Hide TOC on smaller screens */
+/* Small screens - hide TOC */
 @media (max-width: 1199px) {
   .toc-container {
     display: none;
@@ -1005,72 +943,52 @@ td code {
     margin-right: auto;
   }
 
-  /* Still fix title header size */
   h1 {
     font-size: 1.8rem;
     padding-bottom: 8px;
   }
 }
 
-/* Ensure notebook browser cards don't get affected by TOC space adjustment */
-.notebook-browser .notebook-card {
-  width: 100%;
-  max-width: 100%;
-}
-
-/* Override original notebook styles */
-.notebook-container {
-  width: auto !important; /* Use important to override conflicting styles */
-  max-width: 1200px !important;
-  margin: 0 auto !important;
-  padding: 2rem;
-  box-sizing: border-box;
-}
-
+/* Large screens - accommodate TOC */
 @media (min-width: 1200px) {
-  /* Make sure the container takes enough space */
   .container {
-    width: calc(100% - 280px) !important;
-    max-width: calc(100% - 280px) !important;
-    margin-right: 280px !important; /* Leave space for TOC */
+    width: calc(100% - 280px);
+    max-width: calc(100% - 280px);
+    margin-right: 280px;
+    padding-right: 30px;
     box-sizing: border-box;
   }
-  
-  /* Adjust notebook container */
+
   .notebook-container {
-    width: calc(100% - 280px) !important;
-    max-width: calc(100% - 280px) !important;
-    margin-right: 280px !important;
-    margin-left: 0 !important;
-  }
-  
-  /* Make content full width of its container */
-  .notebook-content {
-    width: 100% !important;
-    max-width: 100% !important;
+    width: calc(100% - 280px);
+    max-width: calc(100% - 280px);
+    margin-right: 280px;
+    margin-left: 0;
     box-sizing: border-box;
   }
-}
 
-/* Make the TOC more visible against the dark background */
-.toc-container {
-  position: fixed !important;
-  top: 100px !important;
-  right: 20px !important;
-  width: 250px !important;
-  padding: 1rem !important;
-  background-color: var(--card-bg-color) !important;
-  border-radius: 6px !important;
-  border-left: 3px solid var(--accent-color) !important; /* Change to accent color for visibility */
-  box-shadow: var(--shadow-2) !important; /* Stronger shadow for better visibility */
-  font-family: 'IBM Plex Sans', sans-serif !important;
-  max-height: calc(100vh - 150px) !important;
-  overflow-y: auto !important;
-  z-index: 1000 !important; /* Higher z-index to ensure visibility */
-}
+  .notebook-content {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
 
-/* Adjust title header size */
-h1 {
-  font-size: 1.8rem !important;
-  padding-bottom: 8px !important;
+  h1 {
+    font-size: 1.8rem;
+    padding-bottom: 8px;
+    margin-top: 1rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .notebook-content h1 {
+    font-size: 1.8rem;
+  }
+
+  .notebook-content h2 {
+    font-size: 1.5rem;
+  }
+
+  .notebook-content h3 {
+    font-size: 1.3rem;
+  }
 }

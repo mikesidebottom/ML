@@ -1,5 +1,17 @@
+/**
+ * Main JavaScript functionality for the workshop site
+ */
 document.addEventListener('DOMContentLoaded', function() {
-    // Add active class to current nav item
+    // Initialize all UI functionality
+    initNavigation();
+    initCardEffects();
+    initSmoothScrolling();
+});
+
+/**
+ * Handles active navigation item highlighting
+ */
+function initNavigation() {
     const currentPath = window.location.pathname;
     const navLinks = document.querySelectorAll('nav a');
     
@@ -10,43 +22,77 @@ document.addEventListener('DOMContentLoaded', function() {
             link.classList.add('active');
         }
     });
+}
+
+/**
+ * Sets up hover effects for cards
+ */
+function initCardEffects() {
+    // Regular cards hover effect
+    applyHoverEffect(
+        document.querySelectorAll('.card'),
+        {
+            enter: {
+                transform: 'translateY(-5px)',
+                transition: 'all 0.3s ease'
+            },
+            leave: {
+                transform: 'translateY(0)'
+            }
+        }
+    );
     
-    // Add subtle hover effect to cards
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-5px)';
-            this.style.transition = 'all 0.3s ease';
+    // Notebook cards hover effect
+    applyHoverEffect(
+        document.querySelectorAll('.notebook-card'),
+        {
+            enter: {
+                transform: 'translateY(-3px)',
+                transition: 'all 0.3s ease',
+                borderLeft: '3px solid var(--accent-color)'
+            },
+            leave: {
+                transform: 'translateY(0)',
+                borderLeft: ''
+            }
+        }
+    );
+}
+
+/**
+ * Helper function to apply hover effects to elements
+ * @param {NodeList} elements - Elements to apply hover effects to
+ * @param {Object} styles - Styles to apply on enter and leave
+ */
+function applyHoverEffect(elements, styles) {
+    elements.forEach(element => {
+        element.addEventListener('mouseenter', function() {
+            Object.entries(styles.enter).forEach(([property, value]) => {
+                this.style[property] = value;
+            });
         });
         
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0)';
-        });
-    });
-    
-    // Updated hover effect for notebook cards
-    const notebookCards = document.querySelectorAll('.notebook-card');
-    notebookCards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-3px)';
-            this.style.transition = 'all 0.3s ease';
-            this.style.borderLeft = '3px solid var(--accent-color)';
-        });
-        
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0)';
-            this.style.borderLeft = '';
-        });
-    });
-    
-    // Add smooth scrolling to internal links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
+        element.addEventListener('mouseleave', function() {
+            Object.entries(styles.leave).forEach(([property, value]) => {
+                this.style[property] = value;
             });
         });
     });
-});
+}
+
+/**
+ * Sets up smooth scrolling behavior for in-page links
+ */
+function initSmoothScrolling() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const targetElement = document.querySelector(this.getAttribute('href'));
+            if (targetElement) {
+                e.preventDefault();
+                targetElement.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+}
