@@ -79,9 +79,21 @@ body {
 /* 2. Layout & Container Styles
    ========================================= */
 .container {
-  max-width: 1300px; /* Increased from 1100px */
+  max-width: 1400px; /* Increased from 1300px for non-notebook pages */
   margin: 0 auto;
   padding: 0 24px;
+  box-sizing: border-box;
+}
+
+/* Content container for regular pages - to match notebook style */
+.content-container {
+  width: auto;
+  max-width: 1400px; /* Slightly wider than notebook container */
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: var(--card-bg-color);
+  border-radius: 8px;
+  box-shadow: var(--shadow-1);
   box-sizing: border-box;
 }
 
@@ -698,7 +710,7 @@ pre.line-numbers > code {
    ========================================= */
 .notebook-container {
   width: auto;
-  max-width: 1300px; /* Increased from 1000px */
+  max-width: 1300px; /* Keeping notebooks at this width */
   margin: 0 auto;
   padding: 2rem;
   background-color: var(--card-bg-color);
@@ -936,7 +948,8 @@ pre.line-numbers > code {
   }
 
   .container,
-  .notebook-container {
+  .notebook-container,
+  .content-container {
     width: auto;
     max-width: 98%; /* Increased from 95% */
     margin-left: auto;
@@ -966,10 +979,12 @@ pre.line-numbers > code {
     margin-left: 0;
     box-sizing: border-box;
   }
-
-  .notebook-content {
-    width: 100%;
-    max-width: 100%;
+  
+  .content-container {
+    width: calc(100% - 250px); /* Reduced TOC space from 280px */
+    max-width: calc(100% - 250px);
+    margin-right: 250px;
+    margin-left: 0;
     box-sizing: border-box;
   }
 
