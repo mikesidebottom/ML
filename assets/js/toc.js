@@ -1,46 +1,21 @@
 document.addEventListener('DOMContentLoaded', function() {
-  // Create TOC container
+  // Force create TOC for all pages
   const tocContainer = document.createElement('div');
   tocContainer.className = 'toc-container';
   tocContainer.innerHTML = '<h3>Table of Contents</h3>';
   
-  // Find any content container with headers
-  let contentContainer = null;
-  let headings = [];
+  // Find all headings in the document body
+  const headings = Array.from(document.querySelectorAll('main h1, main h2, main h3, main h4, .notebook-content h1, .notebook-content h2, .notebook-content h3, .notebook-content h4'))
+    .filter(heading => heading.textContent.trim());
   
-  // Try main content area first
-  const mainContent = document.querySelector('main');
-  if (mainContent) {
-    // Find all headings in the main content
-    headings = Array.from(mainContent.querySelectorAll('h1, h2, h3, h4'))
-      .filter(heading => heading.textContent.trim());
-    
-    if (headings.length > 0) {
-      contentContainer = mainContent;
-    }
-  }
-  
-  // If no headings found, try notebook content
-  if (headings.length === 0) {
-    const notebookContent = document.querySelector('.notebook-content');
-    if (notebookContent) {
-      headings = Array.from(notebookContent.querySelectorAll('h1, h2, h3, h4'))
-        .filter(heading => heading.textContent.trim());
-      
-      if (headings.length > 0) {
-        contentContainer = notebookContent;
-      }
-    }
-  }
-  
-  // Exit if no headings found
+  // Only continue if we found headings
   if (headings.length === 0) return;
   
   // Create the TOC list
   const tocList = document.createElement('ul');
   tocList.className = 'toc-list';
   
-  // Process all headings and assign IDs
+  // Assign IDs to headings if they don't have them
   headings.forEach(heading => {
     if (!heading.id) {
       heading.id = heading.textContent.trim().toLowerCase()
@@ -67,7 +42,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Handle nesting of lists
     if (headingLevel > currentLevel) {
-      // Create a new nested list
       const nestedList = document.createElement('ul');
       if (listStack[listStack.length - 1].lastChild) {
         listStack[listStack.length - 1].lastChild.appendChild(nestedList);
@@ -76,7 +50,6 @@ document.addEventListener('DOMContentLoaded', function() {
         currentLevel = headingLevel;
       }
     } else if (headingLevel < currentLevel) {
-      // Go back up the nesting level
       while (headingLevel < currentLevel && listStack.length > 1) {
         listStack.pop();
         currentLevel--;
@@ -92,19 +65,20 @@ document.addEventListener('DOMContentLoaded', function() {
   tocContainer.appendChild(tocList);
   document.body.appendChild(tocContainer);
   
-  // Add scroll highlighting for active section
+  // Add scroll highlighting
   window.addEventListener('scroll', function() {
-    const scrollPosition = window.scrollY;
+    const scrollPosition = window.scrollY + 100;  // Offset to make active state more accurate
     
     // Find the current active heading
     let current = '';
     
-    headings.forEach(heading => {
-      const sectionTop = heading.offsetTop - 100;
-      if (scrollPosition >= sectionTop) {
-        current = heading.id;
+    // Search in reverse order (last heading that's above viewport top)
+    for (let i = headings.length - 1; i >= 0; i--) {
+      if (headings[i].offsetTop <= scrollPosition) {
+        current = headings[i].id;
+        break;
       }
-    });
+    }
     
     // Highlight the current section in the TOC
     document.querySelectorAll('.toc-list a').forEach(link => {
@@ -114,4 +88,9 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   });
+  
+  // Initial scroll event to highlight current section
+  setTimeout(function() {
+    window.dispatchEvent(new Event('scroll'));
+  }, 100);
 });
