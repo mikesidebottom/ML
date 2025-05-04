@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
   document.body.appendChild(tocContainer);
   
   setupScrollHighlighting(processedHeadings);
+  setupScrollPadding();
   
   // Initial scroll event to highlight current section
   setTimeout(function() {
@@ -134,6 +135,37 @@ function setupScrollHighlighting(headings) {
       link.classList.remove('active');
       if (link.getAttribute('href') === `#${current}`) {
         link.classList.add('active');
+      }
+    });
+  });
+}
+
+/**
+ * Set up scroll padding to account for the fixed header
+ */
+function setupScrollPadding() {
+  // Add scroll-padding to the HTML element to account for the fixed header
+  const headerHeight = document.querySelector('header').offsetHeight;
+  document.documentElement.style.scrollPaddingTop = (headerHeight + 20) + 'px';
+  
+  // Add custom click handler for TOC links
+  document.querySelectorAll('.toc-list a').forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      const targetId = this.getAttribute('href').substring(1);
+      const targetElement = document.getElementById(targetId);
+      
+      if (targetElement) {
+        // Get the current position of the target element
+        const headerHeight = document.querySelector('header').offsetHeight;
+        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+        
+        // Scroll to the target with offset for header
+        window.scrollTo({
+          top: targetPosition - headerHeight - 20, // Extra padding for visual comfort
+          behavior: 'smooth'
+        });
       }
     });
   });
