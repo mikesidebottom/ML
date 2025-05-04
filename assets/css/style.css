@@ -636,10 +636,11 @@ code {
 
 /* Improve notebook container styling */
 .notebook-container {
-  max-width: 900px;
-  margin: 0;
-  background-color: var(--card-bg-color);
+  width: auto;
+  max-width: 1000px; /* Increase from previous value */
+  margin: 0 auto 0 0;
   padding: 2rem;
+  background-color: var(--card-bg-color);
   border-radius: 8px;
   box-shadow: var(--shadow-1);
 }
@@ -871,15 +872,17 @@ p code, li code, td code {
   z-index: 100;
 }
 
-/* Adjust main content width to be more generous */
+* Adjust main content width to be more generous */
 @media (min-width: 1200px) {
   .container {
+    width: auto;
     max-width: calc(100% - 300px);
     margin-right: 280px; /* Leave space for TOC */
   }
   
   /* Specific notebook content adjustments */
   .notebook-container {
+    width: auto;
     max-width: calc(100% - 300px);
     margin-right: 280px;
   }
@@ -890,13 +893,13 @@ p code, li code, td code {
   }
 }
 
-.toc-container h3 {
-  margin-top: 0;
+/* Make the notebook content more readable */
+.notebook-content p, 
+.notebook-content li, 
+.notebook-content blockquote {
+  max-width: 100%;
   font-size: 1rem;
-  color: var(--primary-color);
-  border-bottom: 1px solid var(--border-color);
-  padding-bottom: 0.5rem;
-  margin-bottom: 0.8rem;
+  line-height: 1.7;
 }
 
 /* Hide TOC on smaller screens */
@@ -906,8 +909,15 @@ p code, li code, td code {
   }
   
   .container, .notebook-container {
+    width: auto;
     max-width: 95%;
     margin-left: auto;
     margin-right: auto;
   }
+}
+
+/* Ensure notebook browser cards don't get affected by TOC space adjustment */
+.notebook-browser .notebook-card {
+  width: 100%;
+  max-width: 100%;
 }

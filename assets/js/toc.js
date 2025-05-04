@@ -5,24 +5,32 @@ document.addEventListener('DOMContentLoaded', function() {
   tocContainer.innerHTML = '<h3>Table of Contents</h3>';
   
   // Find appropriate content container
-  let contentContainer;
+  // Check all possible content containers on the page
+  const contentContainers = [
+    document.querySelector('.notebook-content'),
+    document.querySelector('main.container'), 
+    document.querySelector('.notebook-container')
+  ];
   
-  if (document.querySelector('.notebook-content')) {
-    // For notebook pages
-    contentContainer = document.querySelector('.notebook-content');
-  } else if (document.querySelector('main.container')) {
-    // For regular pages
-    contentContainer = document.querySelector('main.container');
-  } else {
-    return; // Exit if no suitable container found
+  let contentContainer = null;
+  let headings = [];
+  
+  // Try to find headings in any of the containers
+  for (const container of contentContainers) {
+    if (container) {
+      const containerHeadings = Array.from(container.querySelectorAll('h1, h2, h3, h4'))
+        .filter(heading => heading.textContent.trim());
+      
+      if (containerHeadings.length > 0) {
+        contentContainer = container;
+        headings = containerHeadings;
+        break;
+      }
+    }
   }
-
-  // Find all headings in the content
-  const headings = Array.from(contentContainer.querySelectorAll('h1, h2, h3, h4'))
-    .filter(heading => heading.textContent.trim());
   
-  // Only create TOC if there are headings
-  if (headings.length === 0) return;
+  // Exit if no headings found
+  if (!contentContainer || headings.length === 0) return;
   
   // Create the TOC list
   const tocList = document.createElement('ul');
@@ -39,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   
   // Track heading levels to create nested lists
-  let currentLevel = 1;
+  let currentLevel = parseInt(headings[0].tagName.charAt(1));
   let currentList = tocList;
   let listStack = [tocList];
   
@@ -102,4 +110,43 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   });
+  
+  // Style the toc list for better readability
+  const styleElement = document.createElement('style');
+  styleElement.textContent = `
+    .toc-list {
+      list-style-type: none;
+      padding-left: 0;
+      margin: 0;
+      font-size: 0.85rem;
+    }
+    .toc-list ul {
+      list-style-type: none;
+      padding-left: 1rem;
+      margin-top: 0.3rem;
+      margin-bottom: 0.5rem;
+    }
+    .toc-list li {
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+    .toc-list a {
+      color: var(--text-primary);
+      text-decoration: none;
+      display: inline-block;
+      border-left: 2px solid transparent;
+      padding-left: 0.5rem;
+      transition: all 0.2s ease;
+    }
+    .toc-list a:hover {
+      color: var(--primary-color);
+      border-left-color: var(--primary-color);
+    }
+    .toc-list a.active {
+      color: var(--primary-color);
+      font-weight: 500;
+      border-left-color: var(--primary-color);
+    }
+  `;
+  document.head.appendChild(styleElement);
 });
