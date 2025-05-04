@@ -10,6 +10,7 @@
  * 7. Notebook Styles
  * 8. Table of Contents
  * 9. Media Queries
+ * 10. Interactive Effects
  * =========================================== */
 
 /* 1. Variables & Base Styles
@@ -1006,4 +1007,166 @@ pre.line-numbers > code {
   .notebook-content h3 {
     font-size: 1.3rem;
   }
+}
+
+/* 10. Interactive Effects
+   ========================================= */
+/* Navigation pulse effect */
+.nav-pulse {
+  animation: nav-pulse 0.6s cubic-bezier(0.66, 0, 0, 1);
+  color: var(--accent-color) !important;
+}
+
+@keyframes nav-pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* Heading indicator for link copying */
+.heading-indicator {
+  opacity: 0;
+  margin-left: 8px;
+  font-size: 0.8em;
+  color: var(--accent-color);
+  transition: opacity 0.2s ease;
+}
+
+h1:hover .heading-indicator,
+h2:hover .heading-indicator,
+h3:hover .heading-indicator,
+h4:hover .heading-indicator {
+  opacity: 1;
+}
+
+/* Copy feedback popup */
+.copy-feedback {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100%);
+  background-color: var(--accent-color);
+  color: var(--button-text);
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-weight: 500;
+  box-shadow: var(--shadow-2);
+  z-index: 1000;
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.copy-feedback.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+/* Image zoom effect */
+.notebook-content img {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.notebook-content img.zoomed {
+  transform: scale(1.5);
+  box-shadow: var(--shadow-3);
+  z-index: 100;
+  position: relative;
+}
+
+/* Code block highlight animation */
+.pulse-highlight {
+  animation: pulse-highlight 1s ease;
+}
+
+@keyframes pulse-highlight {
+  0% { box-shadow: 0 0 0 0 rgba(249, 212, 23, 0.4); }
+  50% { box-shadow: 0 0 0 10px rgba(249, 212, 23, 0.2); }
+  100% { box-shadow: 0 0 0 0 rgba(249, 212, 23, 0); }
+}
+
+/* Button active state */
+.button-active {
+  transform: scale(0.95) !important;
+  transition: transform 0.1s ease !important;
+}
+
+/* Code copy button */
+.code-block-container {
+  position: relative;
+}
+
+.copy-code-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background-color: var(--secondary-color);
+  color: var(--button-text);
+  border: none;
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s ease, background-color 0.2s ease;
+  font-family: "IBM Plex Sans", sans-serif;
+}
+
+.code-block-container:hover .copy-code-button {
+  opacity: 1;
+}
+
+.copy-code-button.copied {
+  background-color: var(--accent-color);
+}
+
+/* Enhanced card effects */
+.card, .notebook-card {
+  will-change: transform, box-shadow;
+}
+
+/* Add subtle pop effect to colab buttons */
+.colab-button:hover {
+  animation: button-pop 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+}
+
+@keyframes button-pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+  100% { transform: translateY(-2px); }
+}
+
+/* Enhanced notebook container effect */
+.notebook-container {
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.notebook-container:hover {
+  box-shadow: var(--shadow-3);
+}
+
+/* Code block on hover effect */
+pre.code-terminal, pre.snippet-code {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+pre.code-terminal:hover, pre.snippet-code:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-3);
+}
+
+/* Create ripple effect for table cells */
+table td {
+  position: relative;
+  overflow: hidden;
+  transition: background-color 0.3s ease;
+}
+
+table td:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Enhanced TOC highlight */
+.toc-list a:hover {
+  transform: translateX(3px);
+  transition: transform 0.2s ease;
 }
