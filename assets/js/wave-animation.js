@@ -28,19 +28,33 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Constants for animation - increased for more impact
   const bgColor = '#1F1F1F';
-  const waveCount = 45; // Increased for more layers and complexity
+  const waveCount = 50; // Increased for more layers
   const dotSpacing = 3; // Smaller spacing for more detail
-  const amplitude = 80; // Increased amplitude for larger waves
-  const waveFreq = 0.012; // Adjusted frequency
-  const speed = 0.015; // Slightly reduced for smoother animation
+  const amplitude = 120; // Significantly increased for larger waves
+  const baseWaveFreq = 0.008; // Base frequency for waves
+  const speed = 0.012; // Slightly reduced for smoother animation
   
-  // Simple noise function (replacement for p5.noise)
-  function noise(x, y) {
+  // Random offset for each wave to increase diversity
+  const randomOffsets = Array.from({length: waveCount}, () => ({
+    freq: (Math.random() * 0.01) + 0.005,  // Random frequency modifier
+    phase: Math.random() * Math.PI * 2,    // Random phase offset
+    amp: (Math.random() * 0.4) + 0.8,      // Random amplitude modifier (0.8-1.2)
+    speed: (Math.random() * 0.5) + 0.75    // Random speed modifier (0.75-1.25)
+  }));
+  
+  // Enhanced noise function with more randomization
+  function noise(x, y, i) {
+    // Get wave-specific randomizations
+    const offset = randomOffsets[i % randomOffsets.length];
+    const waveFreq = baseWaveFreq * offset.freq;
+    const wavePhase = offset.phase;
+    const waveTime = time * offset.speed;
+    
     // Using multiple sine waves at different frequencies creates more natural patterns
     return (
-      Math.sin(x * waveFreq + time) * 0.5 + 
-      Math.sin(x * waveFreq * 0.5 + time * 1.3) * 0.3 +
-      Math.sin(x * waveFreq * 0.2 + time * 0.7 + y) * 0.2
+      Math.sin(x * waveFreq + waveTime + wavePhase) * 0.5 + 
+      Math.sin(x * waveFreq * 0.3 + waveTime * 1.3 + wavePhase) * 0.3 +
+      Math.sin(x * waveFreq * 0.15 + waveTime * 0.7 + wavePhase + y) * 0.2
     ) * 0.5 + 0.5; // Normalize to 0..1
   }
   
@@ -57,35 +71,38 @@ document.addEventListener('DOMContentLoaded', function() {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     
     // Position for waves higher up on the screen (0.5 is middle, lower values = higher position)
-    const baseY = canvas.height * 0.4; // Moved up from 0.75
+    const baseY = canvas.height * 0.38; // Moved slightly higher
     
     // Draw multiple wave layers from back to front
     for (let i = 0; i < waveCount; i++) {
       // Calculate layer parameters
       const layerDepth = i / waveCount; // 0 = back, 1 = front
-      const layerAmplitude = amplitude * (0.3 + layerDepth * 0.7); // Larger amplitude in front
+      const offset = randomOffsets[i % randomOffsets.length];
+      
+      // Larger and more varied amplitude between layers
+      const layerAmplitude = amplitude * (0.3 + layerDepth * 0.7) * offset.amp;
       
       // Calculate color based on layer position (brighter in front)
-      const brightness = Math.floor(120 + layerDepth * 135); // Brightened slightly
-      const opacity = 0.15 + layerDepth * 0.85; // More visible in back
+      const brightness = Math.floor(110 + layerDepth * 145); // Brightened slightly
+      const opacity = 0.1 + layerDepth * 0.9; // More contrast between layers
       ctx.fillStyle = `rgba(${brightness}, ${brightness}, ${brightness}, ${opacity})`;
       
-      // Draw dots with varying sizes
-      const dotSize = 1.5 + layerDepth * 3; // Larger dots overall
-      const xOffset = i * 9; // Increased offset for more horizontal variation
+      // Draw dots with varying sizes - bigger dots now
+      const dotSize = 1.8 + layerDepth * 3.5; // Larger dots overall
+      const xOffset = i * 12; // Larger offset for more horizontal variation
       
       // Draw wave as series of dots
       for (let x = -xOffset % dotSpacing; x < canvas.width; x += dotSpacing) {
         // Multiple overlapping sine waves for complex patterns
-        const phase = time * (1 + layerDepth * 0.5); // Different speeds for each layer
-        const noiseVal = noise(x, i * 5);
+        const phase = time * (1 + layerDepth * 0.7) * offset.speed;
+        const noiseVal = noise(x, i * 7, i); // Passing i to have wave-specific noise
         
         // Calculate y position with combination of effects - more variation
         const y = baseY - 
                  layerAmplitude * noiseVal + // Main wave pattern 
-                 Math.sin(x * 0.03 + phase) * layerAmplitude * 0.3 + // Secondary wave
-                 Math.sin(x * 0.007 + phase * 0.5) * layerAmplitude * 0.15 + // Tertiary wave (new)
-                 (1 - layerDepth) * 60; // Make back waves higher (increased)
+                 Math.sin(x * 0.03 * offset.freq + phase) * layerAmplitude * 0.4 + // Secondary wave
+                 Math.sin(x * 0.007 * offset.freq + phase * 0.5 + offset.phase) * layerAmplitude * 0.25 + // Tertiary wave
+                 (1 - layerDepth) * 90; // Make back waves higher (increased)
         
         // Draw dot
         ctx.beginPath();
