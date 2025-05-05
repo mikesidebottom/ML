@@ -21,3 +21,7 @@ include:
 
 # Theme settings
 dark_mode: true
+
+permissions:
+  id-token: write
+  contents: read
