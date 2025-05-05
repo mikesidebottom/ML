@@ -1,10 +1,17 @@
 /**
  * Wave animation using vanilla JavaScript
  * Creates a dots-based wave animation like the one in 0001.png
+ * Disabled on notebook pages to prevent performance issues
  */
 
 // Wait for DOM to load before initializing
 document.addEventListener('DOMContentLoaded', function() {
+  // Check if we're on a notebook page - if so, don't initialize the animation
+  if (document.querySelector('.notebook-container')) {
+    console.log('Notebook page detected - wave animation disabled');
+    return;
+  }
+
   // Get reference to the canvas element
   const container = document.querySelector('.wave-animation-container');
   if (!container) return;
