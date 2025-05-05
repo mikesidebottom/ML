@@ -256,7 +256,10 @@ function initWaveAnimation() {
     try {
         const ctx = canvas.getContext('2d');
         let time = 0.0;
-        const backgroundColor = '#1F1F1F';
+        
+        // Get the site's background color from CSS variable
+        const bgColor = getComputedStyle(document.documentElement).getPropertyValue('--bg-color').trim();
+        const backgroundColor = bgColor || '#22201c'; // Use the CSS variable or fallback
         
         // Function to resize canvas to match container size
         function resizeCanvas() {
@@ -283,7 +286,7 @@ function initWaveAnimation() {
         
         // Animation loop
         function animate() {
-            // Clear canvas with slightly transparent background for trail effect
+            // Clear canvas with background color
             ctx.fillStyle = backgroundColor;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             

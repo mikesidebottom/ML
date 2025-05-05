@@ -1290,11 +1290,11 @@ table td:hover {
 .wave-animation-container {
   position: relative;
   width: 100%;
-  height: 150px;
-  margin-top: 40px;
-  background-color: #1F1F1F; /* Match the canvas background color */
-  overflow: hidden; /* Ensure content stays within bounds */
-  z-index: 1; /* Ensure it's above other elements */
+  height: 180px;
+  margin-bottom: -40px; /* Negative margin to overlap with footer */
+  background-color: var(--bg-color); /* Match the site background color */
+  overflow: hidden;
+  z-index: 0; /* Place it below other elements */
 }
 
 #waveCanvas {
@@ -1303,5 +1303,5 @@ table td:hover {
   left: 0;
   width: 100%;
   height: 100%;
-  display: block; /* Ensure canvas is displayed */
+  display: block;
 }
