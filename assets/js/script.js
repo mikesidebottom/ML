@@ -295,37 +295,34 @@ function initWaveAnimation() {
             const bottomOffset = canvas.height * 0.6; // Position waves in bottom 40% of the canvas
             ctx.translate(0, bottomOffset);
             
-            // Draw multiple wave layers
-            for(let i = 0; i < 15; i++) {
+            // Draw multiple wave layers with points instead of lines
+            for(let i = 0; i < 40; i++) {
                 let xWave = 0;
                 
-                // Calculate color based on noise and time - more subtle color changes
-                const brightness = 150 + noise(noise(i) * time * 3) * 60;
-                ctx.strokeStyle = `rgb(${brightness}, ${brightness}, ${brightness})`;
-                ctx.lineWidth = 1 + noise(i * 0.2) * 1; // Thinner, more subtle lines
+                // Calculate color based on noise and time
+                const brightness = 120 + noise(noise(i) * time * 3) * 100;
+                ctx.fillStyle = `rgb(${brightness}, ${brightness}, ${brightness})`;
                 
-                // Draw each wave
-                ctx.beginPath();
+                // Draw each wave with points for a more complex effect
                 while(xWave < canvas.width) {
-                    // Calculate y position using noise - more subtle movement
-                    const yPos = 0.3 * canvas.height * noise(xWave/250, time + i*0.03);
+                    // Calculate y position using noise
+                    const yPos = 0.3 * canvas.height * noise(xWave/205, time + i*0.05);
                     
-                    if (xWave === 0) {
-                        ctx.moveTo(xWave, yPos);
-                    } else {
-                        ctx.lineTo(xWave, yPos);
-                    }
+                    // Draw points instead of lines
+                    ctx.beginPath();
+                    const pointSize = 1 + noise(i * 0.2) * 1.5;
+                    ctx.arc(xWave, yPos, pointSize, 0, Math.PI * 2);
+                    ctx.fill();
                     
-                    xWave += 4; // Balanced step size for performance and detail
+                    xWave += 2.5; // Smaller step size for more detail
                 }
-                ctx.stroke();
             }
             
             // Reset transform
             ctx.restore();
             
             // Update time - slower for more subtle animation
-            time += 0.006;
+            time += 0.0075;
             
             // Continue animation loop
             requestAnimationFrame(animate);

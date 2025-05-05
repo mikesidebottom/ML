@@ -109,6 +109,8 @@ main {
 .main-container {
   position: relative;
   min-height: calc(100vh - 160px); /* Account for header and footer */
+  overflow: hidden; /* Ensure wave animation doesn't extend beyond container */
+  z-index: 0; /* Ensure proper stacking context */
 }
 
 /* 3. Header & Navigation
@@ -1300,7 +1302,7 @@ table td:hover {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 0; /* Ensure it stays behind content */
+  z-index: -1; /* Place behind content */
   pointer-events: none; /* Allow clicks to pass through */
   background-color: var(--bg-color);
 }
