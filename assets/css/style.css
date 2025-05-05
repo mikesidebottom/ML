@@ -98,7 +98,7 @@ body {
   box-shadow: var(--shadow-1);
   box-sizing: border-box;
   position: relative;
-  z-index: 2;
+  z-index: 1; /* Ensure content is above animation */
 }
 
 main {
@@ -1311,7 +1311,7 @@ table td:hover {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1; /* Place behind content */
+  z-index: 0; /* Changed from -1 to 0 to ensure visibility */
   pointer-events: none; /* Allow clicks to pass through */
 }
 
