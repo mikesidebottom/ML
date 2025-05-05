@@ -30,20 +30,20 @@ document.addEventListener('DOMContentLoaded', function() {
   const bgColor = '#1F1F1F';
   const waveCount = 60; // Increased for more layers
   const dotSpacing = 4; // More spacing between dots to make lines thinner
-  const amplitude = 150; // Significantly increased amplitude for larger waves
-  const baseWaveFreq = 0.01; // Higher base frequency for waves
-  const speed = 0.018; // Increased for faster animation
+  const amplitude = 220; // INCREASED amplitude for more dramatic waves
+  const baseWaveFreq = 0.018; // INCREASED base frequency for more dramatic waves
+  const speed = 0.02; // INCREASED for even faster animation
   
   // More varied random offset for each wave to increase diversity
   const randomOffsets = Array.from({length: waveCount}, () => ({
-    freq: (Math.random() * 0.02) + 0.005,  // More varied frequency modifier
-    phase: Math.random() * Math.PI * 4,    // Larger phase offset range
-    amp: (Math.random() * 0.6) + 0.7,      // Wider amplitude variation (0.7-1.3)
-    speed: (Math.random() * 0.8) + 0.7,    // Wider speed variation (0.7-1.5)
+    freq: (Math.random() * 0.03) + 0.008,  // INCREASED frequency variation
+    phase: Math.random() * Math.PI * 6,    // INCREASED phase offset range
+    amp: (Math.random() * 0.7) + 0.7,      // INCREASED amplitude variation (0.7-1.4)
+    speed: (Math.random() * 0.9) + 0.7,    // INCREASED speed variation (0.7-1.6)
     // Add initial chaos factors to make it interesting from the start
     initialX: Math.random() * 1000,
     initialY: Math.random() * 1000,
-    turbulence: (Math.random() * 0.5) + 0.5 // Turbulence factor
+    turbulence: (Math.random() * 0.7) + 0.5 // INCREASED turbulence factor
   }));
   
   // Enhanced noise function with more initial randomization
@@ -62,11 +62,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Using multiple sine waves with different frequencies and more chaos
     return (
       Math.sin(turbX * waveFreq + waveTime + wavePhase) * 0.4 + 
-      Math.cos(turbX * waveFreq * 0.5 + waveTime * 1.3 + wavePhase) * 0.3 +
-      Math.sin(turbX * waveFreq * 0.2 + turbY * 0.05 + waveTime * 0.7) * 0.2 +
+      Math.cos(turbX * waveFreq * 0.6 + waveTime * 1.5 + wavePhase) * 0.3 + // INCREASED frequency multiplier
+      Math.sin(turbX * waveFreq * 0.3 + turbY * 0.08 + waveTime * 0.9) * 0.25 + // INCREASED values
       // Add perlin-like noise approximation for more organic feel
-      Math.sin(turbX * 0.01 * turbulenceFactor + turbY * 0.01) * 
-      Math.cos(turbY * 0.01 * turbulenceFactor + waveTime) * 0.1
+      Math.sin(turbX * 0.015 * turbulenceFactor + turbY * 0.015) * 
+      Math.cos(turbY * 0.015 * turbulenceFactor + waveTime) * 0.15 // INCREASED influence
     ) * 0.5 + 0.5; // Normalize to 0..1
   }
   
@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function() {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     
     // Position for waves higher up on the screen (0.5 is middle, lower values = higher position)
-    const baseY = canvas.height * 0.35; // Moved even higher
+    const baseY = canvas.height * 0.33; // Moved even higher
     
     // Draw multiple wave layers from back to front
     for (let i = 0; i < waveCount; i++) {
@@ -96,25 +96,25 @@ document.addEventListener('DOMContentLoaded', function() {
       
       // Calculate color based on layer position (brighter in front)
       const brightness = Math.floor(120 + layerDepth * 135); // Adjusted brightness
-      const opacity = 0.08 + layerDepth * 0.92; // More transparency in the back layers
+      const opacity = 0.06 + layerDepth * 0.94; // More transparency in the back layers
       ctx.fillStyle = `rgba(${brightness}, ${brightness}, ${brightness}, ${opacity})`;
       
       // Draw smaller dots with varying sizes for thinner lines
       const dotSize = 1.2 + layerDepth * 2.8; // Smaller dots overall
-      const xOffset = i * 15; // Larger horizontal offset for more variation
+      const xOffset = i * 18; // INCREASED horizontal offset for more variation
       
       // Draw wave as series of dots
       for (let x = -xOffset % dotSpacing; x < canvas.width; x += dotSpacing) {
         // Multiple overlapping waves for complex patterns
-        const phase = time * (1 + layerDepth * 0.8) * offset.speed;
-        const noiseVal = noise(x, i * 9, i); // Passing i to have wave-specific noise
+        const phase = time * (1 + layerDepth * 0.9) * offset.speed;
+        const noiseVal = noise(x, i * 11, i); // INCREASED y factor for more vertical variation
         
         // Calculate y position with more chaotic effects
         const y = baseY - 
                  layerAmplitude * noiseVal + // Main wave pattern 
-                 Math.sin(x * 0.04 * offset.freq + phase) * layerAmplitude * 0.5 + // Secondary wave - increased effect
-                 Math.sin(x * 0.009 * offset.freq + phase * 0.7 + offset.phase) * layerAmplitude * 0.35 + // Tertiary wave - increased effect
-                 (1 - layerDepth) * 110; // Make back waves higher (increased)
+                 Math.sin(x * 0.06 * offset.freq + phase) * layerAmplitude * 0.6 + // INCREASED frequency and effect
+                 Math.sin(x * 0.014 * offset.freq + phase * 0.8 + offset.phase) * layerAmplitude * 0.4 + // INCREASED effect
+                 (1 - layerDepth) * 130; // INCREASED vertical spread between layers
         
         // Draw dot
         ctx.beginPath();
