@@ -94,6 +94,7 @@ body {
   background-color: var(--card-bg-color);
   border-radius: 8px;
   box-shadow: var(--shadow-1);
+  margin-bottom: 2rem;
   width: auto;
   max-width: 1400px; /* Slightly wider than notebook container */
   margin: 0 auto;
@@ -117,9 +118,8 @@ main.container {
 .main-container {
   position: relative;
   min-height: calc(100vh - 160px); /* Account for header and footer */
-  overflow: hidden; /* Ensure wave animation doesn't extend beyond container */
   z-index: 0; /* Ensure proper stacking context */
-  background-color: var(--bg-color);
+  background-color: transparent; /* Changed from bg-color to transparent */
 }
 
 /* 3. Header & Navigation
@@ -1306,11 +1306,11 @@ table td:hover {
 /* Wave Animation
    ========================================= */
 .wave-animation-container {
-  position: absolute;
+  position: fixed; /* Changed from absolute to fixed */
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh; /* Use viewport height instead of 100% */
   z-index: 0;
   pointer-events: none;
   overflow: hidden;

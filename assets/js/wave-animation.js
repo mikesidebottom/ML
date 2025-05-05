@@ -26,13 +26,13 @@ document.addEventListener('DOMContentLoaded', function() {
   const ctx = canvas.getContext('2d');
   let time = 0;
   
-  // Constants for animation
+  // Constants for animation - increased for more impact
   const bgColor = '#1F1F1F';
-  const waveCount = 35; // Increased for more complexity
-  const dotSpacing = 4; // Smaller spacing for more detail
-  const amplitude = 40; // Maximum height of waves
-  const waveFreq = 0.015; // Wave frequency
-  const speed = 0.02; // Animation speed
+  const waveCount = 45; // Increased for more layers and complexity
+  const dotSpacing = 3; // Smaller spacing for more detail
+  const amplitude = 80; // Increased amplitude for larger waves
+  const waveFreq = 0.012; // Adjusted frequency
+  const speed = 0.015; // Slightly reduced for smoother animation
   
   // Simple noise function (replacement for p5.noise)
   function noise(x, y) {
@@ -56,8 +56,8 @@ document.addEventListener('DOMContentLoaded', function() {
     ctx.fillStyle = bgColor;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     
-    // Position for waves at the bottom of the screen
-    const baseY = canvas.height * 0.75; // Lower position for better visibility
+    // Position for waves higher up on the screen (0.5 is middle, lower values = higher position)
+    const baseY = canvas.height * 0.4; // Moved up from 0.75
     
     // Draw multiple wave layers from back to front
     for (let i = 0; i < waveCount; i++) {
@@ -66,13 +66,13 @@ document.addEventListener('DOMContentLoaded', function() {
       const layerAmplitude = amplitude * (0.3 + layerDepth * 0.7); // Larger amplitude in front
       
       // Calculate color based on layer position (brighter in front)
-      const brightness = Math.floor(100 + layerDepth * 155); // 100-255
-      const opacity = 0.1 + layerDepth * 0.9; // More opaque in front
+      const brightness = Math.floor(120 + layerDepth * 135); // Brightened slightly
+      const opacity = 0.15 + layerDepth * 0.85; // More visible in back
       ctx.fillStyle = `rgba(${brightness}, ${brightness}, ${brightness}, ${opacity})`;
       
       // Draw dots with varying sizes
-      const dotSize = 1 + layerDepth * 2; // Larger dots in front
-      const xOffset = i * 7; // Offset each wave horizontally
+      const dotSize = 1.5 + layerDepth * 3; // Larger dots overall
+      const xOffset = i * 9; // Increased offset for more horizontal variation
       
       // Draw wave as series of dots
       for (let x = -xOffset % dotSpacing; x < canvas.width; x += dotSpacing) {
@@ -80,11 +80,12 @@ document.addEventListener('DOMContentLoaded', function() {
         const phase = time * (1 + layerDepth * 0.5); // Different speeds for each layer
         const noiseVal = noise(x, i * 5);
         
-        // Calculate y position with combination of effects
+        // Calculate y position with combination of effects - more variation
         const y = baseY - 
-                 layerAmplitude * noiseVal + // Main wave pattern
+                 layerAmplitude * noiseVal + // Main wave pattern 
                  Math.sin(x * 0.03 + phase) * layerAmplitude * 0.3 + // Secondary wave
-                 (1 - layerDepth) * 30; // Make back waves higher
+                 Math.sin(x * 0.007 + phase * 0.5) * layerAmplitude * 0.15 + // Tertiary wave (new)
+                 (1 - layerDepth) * 60; // Make back waves higher (increased)
         
         // Draw dot
         ctx.beginPath();
