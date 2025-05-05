@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initSmoothScrolling();
     initButtonEffects();
     initCodeBlockInteractions();
+    initWaveAnimation(); // Initialize the wave animation
 });
 
 /**
@@ -239,4 +240,80 @@ function initSmoothScrolling() {
             }
         });
     });
+}
+
+/**
+ * Initializes the wave animation at the bottom of the page
+ */
+function initWaveAnimation() {
+    const canvas = document.getElementById('waveCanvas');
+    
+    if (!canvas) return;
+    
+    const ctx = canvas.getContext('2d');
+    let time = 0.0;
+    const backgroundColor = '#1F1F1F';
+    
+    // Function to resize canvas to match container size
+    function resizeCanvas() {
+        const container = canvas.parentElement;
+        canvas.width = container.offsetWidth;
+        canvas.height = container.offsetHeight;
+    }
+    
+    // Initial resize
+    resizeCanvas();
+    
+    // Resize canvas when window size changes
+    window.addEventListener('resize', resizeCanvas);
+    
+    // Create noise function (simplified Perlin noise)
+    function noise(x, y = 0) {
+        // Create a simple noise effect using sine waves
+        const value = Math.sin(x * 0.1) * Math.sin(y * 0.1) * 
+                     Math.sin((x + y) * 0.05) * 
+                     Math.sin(Math.sqrt(x*x + y*y) * 0.05);
+        return (value + 1) * 0.5; // Normalize to 0..1
+    }
+    
+    // Animation loop
+    function animate() {
+        // Clear canvas
+        ctx.fillStyle = backgroundColor;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        // Draw the waves
+        ctx.translate(0, canvas.height / 3);
+        
+        for (let i = 0; i < 15 * 3.5; i++) {
+            let xWave = 0;
+            
+            const brightness = 150 + noise(noise(i) * time * 5) * 105;
+            ctx.strokeStyle = `rgb(${brightness}, ${brightness}, ${brightness})`;
+            
+            while (xWave < canvas.width) {
+                const yPos = 0.5 * canvas.height * noise(xWave / 205, time + i * 0.05);
+                
+                // Draw point (as tiny line for better visibility)
+                ctx.beginPath();
+                ctx.moveTo(xWave, yPos);
+                ctx.lineTo(xWave + 1, yPos);
+                ctx.stroke();
+                
+                xWave += 2.5;
+            }
+        }
+        
+        // Reset transform
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        
+        // Update time
+        time += 0.0075;
+        
+        // Continue animation loop
+        requestAnimationFrame(animate);
+    }
+    
+    // Start animation
+    animate();
 }
