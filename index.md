@@ -39,6 +39,7 @@ This hands-on workshop introduces the fundamentals of deep learning using PyTorc
             <th>Session</th>
             <th>Topic</th>
             <th>Duration</th>
+            <th>Materials</th>
           </tr>
         </thead>
         <tbody>
@@ -46,26 +47,46 @@ This hands-on workshop introduces the fundamentals of deep learning using PyTorc
             <td><strong>1</strong></td>
             <td>PyTorch Basics & Tensors</td>
             <td>~1 hr</td>
+            <td>
+              <a href="{{ site.baseurl }}/notebooks/session1">Notebook</a> | 
+              <a href="{{ site.baseurl }}/slides/SE01_FSE_DL_WORKSHOP.pdf" target="_blank"><i class="fas fa-file-pdf"></i> Slides</a>
+            </td>
           </tr>
           <tr>
             <td><strong>2</strong></td>
             <td>Artificial Neural Networks (ANNs)</td>
             <td>~1.5 hr</td>
+            <td>
+              <a href="{{ site.baseurl }}/notebooks/session2">Notebook</a> | 
+              <a href="{{ site.baseurl }}/slides/SE02_FSE_DL_WORKSHOP.pdf" target="_blank"><i class="fas fa-file-pdf"></i> Slides</a>
+            </td>
           </tr>
           <tr>
             <td><strong>3</strong></td>
             <td>Model Training & Optimization & PINNS </td>
             <td>~1.5 hr</td>
+            <td>
+              <a href="{{ site.baseurl }}/notebooks/session3">Notebook</a> | 
+              <a href="{{ site.baseurl }}/slides/SE03_FSE_DL_WORKSHOP.pdf" target="_blank"><i class="fas fa-file-pdf"></i> Slides</a>
+            </td>
           </tr>
           <tr>
             <td><strong>4</strong></td>
             <td>Convolutional Neural Networks (CNNs)</td>
             <td>~2 hr</td>
+            <td>
+              <a href="{{ site.baseurl }}/notebooks/session4">Notebook</a> | 
+              <a href="{{ site.baseurl }}/slides/SE04_FSE_DL_WORKSHOP.pdf" target="_blank"><i class="fas fa-file-pdf"></i> Slides</a>
+            </td>
           </tr>
           <tr>
             <td><strong>5</strong></td>
             <td>Transfer Learning & U-Net</td>
             <td>~2 hr</td>
+            <td>
+              <a href="{{ site.baseurl }}/notebooks/session5">Notebook</a> | 
+              <a href="{{ site.baseurl }}/slides/SE05_FSE_DL_WORKSHOP.pdf" target="_blank"><i class="fas fa-file-pdf"></i> Slides</a>
+            </td>
           </tr>
         </tbody>
       </table>

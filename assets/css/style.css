@@ -26,6 +26,7 @@
   --primary-color: #a78bfa; /* Soft purple */
   --secondary-color: #38b2ac; /* Teal */
   --accent-color: #f9d417; /* Bright yellow for highlights */
+  --pdf-color: #ef4444; /* Red color for PDF presentation button */
 
   /* Text colors */
   --text-primary: #f3f4f6;
@@ -369,6 +370,43 @@ tr:last-child {
   margin-right: 8px;
   height: 20px;
   display: inline;
+}
+
+/* Presentation button styling */
+.presentation-button {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: var(--pdf-color);
+  color: var(--text-primary);
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: 500;
+  margin: 0;
+  transition: all var(--transition-speed);
+  box-shadow: var(--shadow-1);
+  border: none;
+  cursor: pointer;
+  font-family: "IBM Plex Sans", sans-serif;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+.presentation-button:hover {
+  box-shadow: var(--shadow-2);
+  background-color: var(--accent-color);
+  text-decoration: none;
+  transform: translateY(-2px);
+  color: var(--button-text);
+}
+
+.presentation-button:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-1);
+}
+
+.presentation-button i {
+  margin-right: 6px;
 }
 
 /* Info and warning boxes */

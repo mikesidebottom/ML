@@ -7,7 +7,7 @@ permalink: /pages/workshop-sessions/
 # WORKSHOP SESSIONS 🧠
 
 <div class="info-box">
-  These notebooks are designed to be browsed directly on this site. You can also work with them interactively using the "Code Along" button or check the solutions with the "Solution" button.
+  These notebooks are designed to be browsed directly on this site. You can also work with them interactively using the "Code Along" button or check the solutions with the "Solution" button. For each session, you can also access the presentation slides using the "Presentation" button.
 </div>
 
 <div class="notebook-browser">
@@ -30,6 +30,9 @@ permalink: /pages/workshop-sessions/
     </div>
     <div class="notebook-footer">
       <a href="{{ site.baseurl }}/notebooks/session1">Browse Notebook</a>
+      <a href="{{ site.baseurl }}/slides/SE01_FSE_DL_WORKSHOP.pdf" class="presentation-button" target="_blank">
+        <i class="fas fa-file-pdf"></i> Presentation
+      </a>
       <div class="colab-buttons">
         <a href="https://colab.research.google.com/github/CLDiego/uom_fse_dl_workshop/blob/main/notebooks/SE01_CA_Intro_to_pytorch.ipynb" class="colab-button code-along" target="_blank">
           <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/> Code Along
@@ -59,6 +62,9 @@ permalink: /pages/workshop-sessions/
     </div>
     <div class="notebook-footer">
       <a href="{{ site.baseurl }}/notebooks/session2">Browse Notebook</a>
+      <a href="{{ site.baseurl }}/slides/SE02_FSE_DL_WORKSHOP.pdf" class="presentation-button" target="_blank">
+        <i class="fas fa-file-pdf"></i> Presentation
+      </a>
       <div class="colab-buttons">
         <a href="https://colab.research.google.com/github/CLDiego/uom_fse_dl_workshop/blob/main/notebooks/SE02_CA_Artificial_neural_networks.ipynb" class="colab-button code-along" target="_blank">
           <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/> Code Along
@@ -88,6 +94,9 @@ permalink: /pages/workshop-sessions/
     </div>
     <div class="notebook-footer">
       <a href="{{ site.baseurl }}/notebooks/session3">Browse Notebook</a>
+      <a href="{{ site.baseurl }}/slides/SE03_FSE_DL_WORKSHOP.pdf" class="presentation-button" target="_blank">
+        <i class="fas fa-file-pdf"></i> Presentation
+      </a>
       <div class="colab-buttons">
         <a href="https://colab.research.google.com/github/CLDiego/uom_fse_dl_workshop/blob/main/notebooks/SE03_CA_Training_neural_networks.ipynb" class="colab-button code-along" target="_blank">
           <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/> Code Along
@@ -117,6 +126,9 @@ permalink: /pages/workshop-sessions/
     </div>
     <div class="notebook-footer">
       <a href="{{ site.baseurl }}/notebooks/session3b">Browse Notebook</a>
+      <a href="{{ site.baseurl }}/slides/SE03_FSE_DL_WORKSHOP.pdf" class="presentation-button" target="_blank">
+        <i class="fas fa-file-pdf"></i> Presentation
+      </a>
       <div class="colab-buttons">
         <a href="https://colab.research.google.com/github/CLDiego/uom_fse_dl_workshop/blob/main/notebooks/SE03_CA_Physics_informed_neural_networks.ipynb" class="colab-button code-along" target="_blank">
           <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/> Code Along
@@ -146,6 +158,9 @@ permalink: /pages/workshop-sessions/
     </div>
     <div class="notebook-footer">
       <a href="{{ site.baseurl }}/notebooks/session4">Browse Notebook</a>
+      <a href="{{ site.baseurl }}/slides/SE04_FSE_DL_WORKSHOP.pdf" class="presentation-button" target="_blank">
+        <i class="fas fa-file-pdf"></i> Presentation
+      </a>
       <div class="colab-buttons">
         <a href="https://colab.research.google.com/github/CLDiego/uom_fse_dl_workshop/blob/main/notebooks/SE04_CA_Convolutional_Neural_Networks.ipynb" class="colab-button code-along" target="_blank">
           <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/> Code Along
@@ -175,6 +190,9 @@ permalink: /pages/workshop-sessions/
     </div>
     <div class="notebook-footer">
       <a href="{{ site.baseurl }}/notebooks/session5">Browse Notebook</a>
+      <a href="{{ site.baseurl }}/slides/SE05_FSE_DL_WORKSHOP.pdf" class="presentation-button" target="_blank">
+        <i class="fas fa-file-pdf"></i> Presentation
+      </a>
       <div class="colab-buttons">
         <a href="https://colab.research.google.com/github/CLDiego/uom_fse_dl_workshop/blob/main/notebooks/SE05_CA_Transfer_Learning.ipynb" class="colab-button code-along" target="_blank">
           <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/> Code Along
