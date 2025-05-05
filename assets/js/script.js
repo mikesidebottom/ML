@@ -286,28 +286,29 @@ function initWaveAnimation() {
         
         // Animation loop
         function animate() {
-            // Clear canvas with background color
+            // Clear canvas with background color (match the site background)
             ctx.fillStyle = backgroundColor;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             
-            // Set the wave starting position
+            // Draw waves predominantly at the bottom half of the page
             ctx.save();
-            ctx.translate(0, canvas.height/3);
+            const bottomOffset = canvas.height * 0.6; // Position waves in bottom 40% of the canvas
+            ctx.translate(0, bottomOffset);
             
             // Draw multiple wave layers
             for(let i = 0; i < 15; i++) {
                 let xWave = 0;
                 
-                // Calculate color based on noise and time
-                const brightness = 180 + noise(noise(i) * time * 5) * 75;
+                // Calculate color based on noise and time - more subtle color changes
+                const brightness = 150 + noise(noise(i) * time * 3) * 60;
                 ctx.strokeStyle = `rgb(${brightness}, ${brightness}, ${brightness})`;
-                ctx.lineWidth = 1 + noise(i * 0.2) * 1.5; // Vary line width for more interest
+                ctx.lineWidth = 1 + noise(i * 0.2) * 1; // Thinner, more subtle lines
                 
                 // Draw each wave
                 ctx.beginPath();
                 while(xWave < canvas.width) {
-                    // Calculate y position using noise
-                    const yPos = 0.5 * canvas.height * noise(xWave/205, time + i*0.05);
+                    // Calculate y position using noise - more subtle movement
+                    const yPos = 0.3 * canvas.height * noise(xWave/250, time + i*0.03);
                     
                     if (xWave === 0) {
                         ctx.moveTo(xWave, yPos);
@@ -315,7 +316,7 @@ function initWaveAnimation() {
                         ctx.lineTo(xWave, yPos);
                     }
                     
-                    xWave += 5; // Increase step size for performance
+                    xWave += 4; // Balanced step size for performance and detail
                 }
                 ctx.stroke();
             }
@@ -323,14 +324,14 @@ function initWaveAnimation() {
             // Reset transform
             ctx.restore();
             
-            // Update time
-            time += 0.01; // Slightly increased speed
+            // Update time - slower for more subtle animation
+            time += 0.006;
             
             // Continue animation loop
             requestAnimationFrame(animate);
         }
         
-        console.log('Starting wave animation');
+        console.log('Starting wave animation as background effect');
         // Start animation
         animate();
         

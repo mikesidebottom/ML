@@ -68,14 +68,15 @@
         </div>
     </header>
 
-    <main class="container">
-        <div class="content-container">
-            {{ content }}
+    <div class="main-container">
+        <div class="wave-animation-container">
+            <canvas id="waveCanvas"></canvas>
         </div>
-    </main>
-
-    <div class="wave-animation-container">
-        <canvas id="waveCanvas"></canvas>
+        <main class="container">
+            <div class="content-container">
+                {{ content }}
+            </div>
+        </main>
     </div>
 
     <footer>

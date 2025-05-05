@@ -104,6 +104,13 @@ main {
   min-height: calc(100vh - 160px); /* account for header and footer */
 }
 
+/* Main container with wave animation
+   ========================================= */
+.main-container {
+  position: relative;
+  min-height: calc(100vh - 160px); /* Account for header and footer */
+}
+
 /* 3. Header & Navigation
    ========================================= */
 header {
@@ -1288,13 +1295,14 @@ table td:hover {
 /* Wave Animation
    ========================================= */
 .wave-animation-container {
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: 180px;
-  margin-bottom: -40px; /* Negative margin to overlap with footer */
-  background-color: var(--bg-color); /* Match the site background color */
-  overflow: hidden;
-  z-index: 0; /* Place it below other elements */
+  height: 100%;
+  z-index: 0; /* Ensure it stays behind content */
+  pointer-events: none; /* Allow clicks to pass through */
+  background-color: var(--bg-color);
 }
 
 #waveCanvas {
