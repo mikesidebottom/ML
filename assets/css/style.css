@@ -97,11 +97,19 @@ body {
   border-radius: 8px;
   box-shadow: var(--shadow-1);
   box-sizing: border-box;
+  position: relative;
+  z-index: 2;
 }
 
 main {
   padding: 40px 0;
   min-height: calc(100vh - 160px); /* account for header and footer */
+}
+
+main.container {
+  position: relative;
+  z-index: 1; /* Place above animation */
+  background-color: transparent;
 }
 
 /* Main container with wave animation
@@ -111,6 +119,7 @@ main {
   min-height: calc(100vh - 160px); /* Account for header and footer */
   overflow: hidden; /* Ensure wave animation doesn't extend beyond container */
   z-index: 0; /* Ensure proper stacking context */
+  background-color: var(--bg-color);
 }
 
 /* 3. Header & Navigation
@@ -1304,11 +1313,9 @@ table td:hover {
   height: 100%;
   z-index: -1; /* Place behind content */
   pointer-events: none; /* Allow clicks to pass through */
-  background-color: var(--bg-color);
 }
 
 #waveCanvas {
-  position: relative !important; /* Override p5.js default absolute positioning */
   display: block;
   width: 100% !important;
   height: 100% !important;
