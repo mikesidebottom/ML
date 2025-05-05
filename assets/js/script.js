@@ -248,72 +248,90 @@ function initSmoothScrolling() {
 function initWaveAnimation() {
     const canvas = document.getElementById('waveCanvas');
     
+    console.log('Wave animation initialization called');
+    console.log('Canvas element found:', !!canvas);
+    
     if (!canvas) return;
     
-    const ctx = canvas.getContext('2d');
-    let time = 0.0;
-    const backgroundColor = '#1F1F1F';
-    
-    // Function to resize canvas to match container size
-    function resizeCanvas() {
-        const container = canvas.parentElement;
-        canvas.width = container.offsetWidth;
-        canvas.height = container.offsetHeight;
-    }
-    
-    // Initial resize
-    resizeCanvas();
-    
-    // Resize canvas when window size changes
-    window.addEventListener('resize', resizeCanvas);
-    
-    // Create noise function (simplified Perlin noise)
-    function noise(x, y = 0) {
-        // Create a simple noise effect using sine waves
-        const value = Math.sin(x * 0.1) * Math.sin(y * 0.1) * 
-                     Math.sin((x + y) * 0.05) * 
-                     Math.sin(Math.sqrt(x*x + y*y) * 0.05);
-        return (value + 1) * 0.5; // Normalize to 0..1
-    }
-    
-    // Animation loop
-    function animate() {
-        // Clear canvas
-        ctx.fillStyle = backgroundColor;
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
+    try {
+        const ctx = canvas.getContext('2d');
+        let time = 0.0;
+        const backgroundColor = '#1F1F1F';
         
-        // Draw the waves
-        ctx.translate(0, canvas.height / 3);
-        
-        for (let i = 0; i < 15 * 3.5; i++) {
-            let xWave = 0;
-            
-            const brightness = 150 + noise(noise(i) * time * 5) * 105;
-            ctx.strokeStyle = `rgb(${brightness}, ${brightness}, ${brightness})`;
-            
-            while (xWave < canvas.width) {
-                const yPos = 0.5 * canvas.height * noise(xWave / 205, time + i * 0.05);
-                
-                // Draw point (as tiny line for better visibility)
-                ctx.beginPath();
-                ctx.moveTo(xWave, yPos);
-                ctx.lineTo(xWave + 1, yPos);
-                ctx.stroke();
-                
-                xWave += 2.5;
-            }
+        // Function to resize canvas to match container size
+        function resizeCanvas() {
+            const container = canvas.parentElement;
+            canvas.width = container.offsetWidth;
+            canvas.height = container.offsetHeight;
+            console.log('Canvas resized to:', canvas.width, 'x', canvas.height);
         }
         
-        // Reset transform
-        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        // Initial resize
+        resizeCanvas();
         
-        // Update time
-        time += 0.0075;
+        // Resize canvas when window size changes
+        window.addEventListener('resize', resizeCanvas);
         
-        // Continue animation loop
-        requestAnimationFrame(animate);
+        // Create noise function (simplified Perlin noise)
+        function noise(x, y = 0) {
+            // Create a simple noise effect using sine waves with different frequencies
+            const value = Math.sin(x * 0.1) * Math.cos(y * 0.1) * 
+                         Math.sin((x + y) * 0.05) * 
+                         Math.cos(Math.sqrt(x*x + y*y) * 0.05);
+            return (value + 1) * 0.5; // Normalize to 0..1
+        }
+        
+        // Animation loop
+        function animate() {
+            // Clear canvas with slightly transparent background for trail effect
+            ctx.fillStyle = backgroundColor;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Set the wave starting position
+            ctx.save();
+            ctx.translate(0, canvas.height/3);
+            
+            // Draw multiple wave layers
+            for(let i = 0; i < 15; i++) {
+                let xWave = 0;
+                
+                // Calculate color based on noise and time
+                const brightness = 180 + noise(noise(i) * time * 5) * 75;
+                ctx.strokeStyle = `rgb(${brightness}, ${brightness}, ${brightness})`;
+                ctx.lineWidth = 1 + noise(i * 0.2) * 1.5; // Vary line width for more interest
+                
+                // Draw each wave
+                ctx.beginPath();
+                while(xWave < canvas.width) {
+                    // Calculate y position using noise
+                    const yPos = 0.5 * canvas.height * noise(xWave/205, time + i*0.05);
+                    
+                    if (xWave === 0) {
+                        ctx.moveTo(xWave, yPos);
+                    } else {
+                        ctx.lineTo(xWave, yPos);
+                    }
+                    
+                    xWave += 5; // Increase step size for performance
+                }
+                ctx.stroke();
+            }
+            
+            // Reset transform
+            ctx.restore();
+            
+            // Update time
+            time += 0.01; // Slightly increased speed
+            
+            // Continue animation loop
+            requestAnimationFrame(animate);
+        }
+        
+        console.log('Starting wave animation');
+        // Start animation
+        animate();
+        
+    } catch (error) {
+        console.error('Error initializing wave animation:', error);
     }
-    
-    // Start animation
-    animate();
 }
