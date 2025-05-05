@@ -1,94 +1,80 @@
 /**
- * Wave animation using p5.js
+ * Wave animation using vanilla JavaScript
  * Creates a dots-based wave animation like the one in 0001.png
  */
 
-// Create a p5.js instance mode sketch to avoid conflicts with global variables
-const waveSketch = (p) => {
-  // Variables for the sketch
-  let time = 0.0;
-  const bgColor = '#1F1F1F';
-  
-  p.setup = function() {
-    console.log('Setting up wave animation');
-    // Get container dimensions and create canvas to fit it
-    const container = document.querySelector('.wave-animation-container');
-    if (!container) {
-      console.error('Wave animation container not found');
-      return;
-    }
-    
-    const canvas = p.createCanvas(container.offsetWidth, container.offsetHeight);
-    canvas.parent('waveCanvas'); // Connect to the #waveCanvas element
-    
-    p.background(bgColor);
-    p.frameRate(30); // Lower framerate for better performance
-    
-    console.log('Wave animation canvas created with size:', container.offsetWidth, 'x', container.offsetHeight);
-    
-    // Add resize listener
-    window.addEventListener('resize', () => {
-      if (container) {
-        p.resizeCanvas(container.offsetWidth, container.offsetHeight);
-        console.log('Wave animation canvas resized');
-      }
-    });
-  };
-
-  p.draw = function() {
-    // Clear the background
-    p.clear();
-    p.background(bgColor);
-    
-    // Position the waves in the bottom part of the screen
-    p.translate(0, p.height * 0.7);
-    
-    // Draw multiple waves for complex pattern
-    const dotSpacing = 6; // Larger spacing for better performance
-    const waveCount = 25;  // Reduced number of waves for better performance
-    
-    // Draw from back to front
-    for(let i = 0; i < waveCount; i++) {
-      // Calculate wave opacity and brightness
-      const opacity = p.map(i, 0, waveCount, 50, 255); // More opaque in front
-      const brightness = p.map(i, 0, waveCount, 150, 255); // Brighter in front
-      
-      p.noStroke();
-      p.fill(brightness, brightness, brightness, opacity);
-      
-      // Draw each wave as a series of dots
-      for(let x = 0; x < p.width; x += dotSpacing) {
-        // Use noise for smooth wave movement
-        const noiseScale = 0.003;
-        const waveHeight = p.map(i, 0, waveCount, 0.05, 0.2);
-        const y = -p.height * waveHeight * p.noise(x * noiseScale, time + i * 0.1);
-        
-        // Draw points with varying sizes
-        const pointSize = p.map(i, 0, waveCount, 1, 3);
-        p.ellipse(x, y, pointSize, pointSize);
-      }
-    }
-    
-    // Update time for animation
-    time += 0.02;
-  };
-};
-
-// Wait for DOM to load before creating the p5 instance
+// Wait for DOM to load before initializing
 document.addEventListener('DOMContentLoaded', function() {
-  console.log('DOM loaded, initializing wave animation');
-  // Create p5 instance with the sketch
-  new p5(waveSketch);
+  // Get reference to the canvas element
+  const container = document.querySelector('.wave-animation-container');
+  if (!container) return;
   
-  // Check if canvas was created properly after a short delay
-  setTimeout(() => {
-    const canvas = document.querySelector('#waveCanvas > canvas');
-    if (!canvas) {
-      console.error('Wave animation canvas not found after initialization');
-      // Try to recreate it
-      new p5(waveSketch);
-    } else {
-      console.log('Wave animation is running with canvas dimensions:', canvas.width, 'x', canvas.height);
+  // Create canvas element manually instead of using p5.js
+  const canvas = document.createElement('canvas');
+  canvas.width = container.offsetWidth;
+  canvas.height = container.offsetHeight;
+  document.getElementById('waveCanvas').appendChild(canvas);
+  
+  // Get 2D context for drawing
+  const ctx = canvas.getContext('2d');
+  let time = 0;
+  
+  // Constants for animation
+  const bgColor = '#1F1F1F';
+  const waveCount = 25;
+  const dotSpacing = 6;
+  
+  // Simple noise function (replacement for p5.noise)
+  function noise(x, y) {
+    return 0.5 * (
+      Math.sin(x * 0.1 + time * 0.1) + 
+      Math.sin(y * 0.1 + time * 0.2) +
+      Math.sin((x + y) * 0.05) + 
+      Math.sin(Math.sqrt(x*x + y*y) * 0.1)
+    ) + 0.5;
+  }
+  
+  // Handle window resize
+  window.addEventListener('resize', function() {
+    canvas.width = container.offsetWidth;
+    canvas.height = container.offsetHeight;
+  });
+  
+  // Animation function
+  function animate() {
+    // Clear the canvas
+    ctx.fillStyle = bgColor;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
+    // Position for waves at the bottom of the screen
+    const baseY = canvas.height * 0.7;
+    
+    // Draw multiple wave layers
+    for (let i = 0; i < waveCount; i++) {
+      // Calculate color based on layer position (brighter at front)
+      const brightness = Math.floor(150 + (i / waveCount) * 105);
+      const opacity = 0.2 + (i / waveCount) * 0.8;
+      ctx.fillStyle = `rgba(${brightness}, ${brightness}, ${brightness}, ${opacity})`;
+      
+      // Draw wave as series of dots
+      for (let x = 0; x < canvas.width; x += dotSpacing) {
+        // Calculate y position using noise function
+        const waveHeight = 80 * ((waveCount - i) / waveCount);
+        const y = baseY - waveHeight * noise(x * 0.01, i * 0.5 + time);
+        
+        // Draw dot with size based on layer position
+        const dotSize = 1 + (i / waveCount) * 2;
+        ctx.beginPath();
+        ctx.arc(x, y, dotSize, 0, Math.PI * 2);
+        ctx.fill();
+      }
     }
-  }, 1000);
+    
+    // Update time for next animation frame
+    time += 0.03;
+    requestAnimationFrame(animate);
+  }
+  
+  // Start the animation
+  animate();
 });
