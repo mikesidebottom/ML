@@ -5,11 +5,8 @@ title: FSE DL Workshop
 
 ![Workshop Banner](https://i.imgur.com/mTltzAc.png)
 
-<div class="info-box">
-  Welcome to the University of Manchester FSE Deep Learning workshop! This course provides a hands-on introduction to deep learning using PyTorch.
-</div>
-
 ## OVERVIEW 📋
+Welcome to the University of Manchester FSE Deep Learning workshop! This course provides a hands-on introduction to deep learning using PyTorch.
 
 This hands-on workshop introduces the fundamentals of deep learning using PyTorch. Participants will learn by building real models and solving practical tasks. The workshop is designed for beginners and covers essential concepts.
 
@@ -18,6 +15,8 @@ This hands-on workshop introduces the fundamentals of deep learning using PyTorc
   <ul>
     <li>Core PyTorch concepts (tensors, autograd, GPU usage)</li>
     <li>Building and training neural networks</li>
+    <li>Understanding the architecture of neural networks</li>
+    <li>Physics-informed neural networks (PINNs)</li>
     <li>Implementing CNNs for vision tasks</li>
     <li>Applying transfer learning with pre-trained models</li>
     <li>Working with real-world datasets</li>
@@ -124,20 +123,19 @@ This hands-on workshop introduces the fundamentals of deep learning using PyTorc
   </ul>
   
   <div class="notebook-footer">
-    <a href="{{ site.baseurl }}/pages/workshop-sessions">Browse Workshop Content</a>
     <a href="{{ site.baseurl }}/pages/setup-guide" class="colab-button">
       Setup Guide
     </a>
   </div>
 </div>
 
-## PREREQUISITES 📾
+## PREREQUISITES ☑
 
 <div class="card">
   <ul>
-    <li>Basic Python skills</li>
-    <li>Some knowledge of basic machine learning concepts</li>
-    <li>Familiarity with linear algebra/calculus (optional)</li>
-    <li>No PyTorch experience required!</li>
+    <li><i class="fab fa-python"></i> Basic Python skills</li>
+      <li>Some knowledge of basic machine learning concepts</li>
+      <li>Familiarity with linear algebra/calculus (optional)</li>
+      <li>No PyTorch experience required!</li>
   </ul>
 </div>
