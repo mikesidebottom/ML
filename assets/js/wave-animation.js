@@ -26,42 +26,42 @@ document.addEventListener('DOMContentLoaded', function() {
   const ctx = canvas.getContext('2d');
   let time = 0;
   
-  // Mouse interaction variables
-  let mouseX = 0;
-  let mouseY = 0;
-  let targetMouseX = 0;
-  let targetMouseY = 0;
-  const mouseDampingFactor = 0.05; // Lower = smoother, less reactive
-  const mouseInfluence = 0.3; // How much the mouse affects the waves (0-1)
+  // Mouse interaction variables - ENHANCED for more visible effect
+  let mouseX = 0.5; // Default to center
+  let mouseY = 0.5; 
+  let targetMouseX = 0.5;
+  let targetMouseY = 0.5;
+  const mouseDampingFactor = 0.08; // Slightly more responsive
+  const mouseInfluence = 0.6; // INCREASED from 0.3 for more noticeable effect
   
-  // Track mouse position with damping for smoothness
-  canvas.addEventListener('mousemove', function(e) {
-    // Get mouse position relative to canvas
-    const rect = canvas.getBoundingClientRect();
-    targetMouseX = (e.clientX - rect.left) / canvas.width;
-    targetMouseY = (e.clientY - rect.top) / canvas.height;
+  // Track mouse position with improved calculation
+  container.addEventListener('mousemove', function(e) {
+    // Get mouse position relative to container (not canvas)
+    const rect = container.getBoundingClientRect();
+    targetMouseX = (e.clientX - rect.left) / rect.width;
+    targetMouseY = (e.clientY - rect.top) / rect.height;
   });
   
-  // Constants for animation - SIGNIFICANTLY REDUCED for better performance
+  // Constants for animation - ADJUSTED to improve visual appeal while keeping performance
   const bgColor = '#1F1F1F';
-  const waveCount = 15; // FURTHER REDUCED from 25 to 15 for much better performance
-  const dotSpacing = 8; // INCREASED spacing significantly to reduce total dots rendered
-  const amplitude = 220;
+  const waveCount = 18; // Slightly increased for better visuals
+  const dotSpacing = 7; // Slightly reduced for more dots
+  const amplitude = 230; // Slightly increased for more dramatic effect
   const baseWaveFreq = 0.018;
-  const speed = 0.015; // REDUCED speed slightly to compensate for fewer frames
+  const speed = 0.015;
   
-  // Simplified random offset with fewer waves
+  // Random offset with improved parameters for better visual effect
   const randomOffsets = Array.from({length: waveCount}, () => ({
-    freq: (Math.random() * 0.025) + 0.01,
-    phase: Math.random() * Math.PI * 4,
+    freq: (Math.random() * 0.03) + 0.01,
+    phase: Math.random() * Math.PI * 5,
     amp: (Math.random() * 0.6) + 0.8,
     speed: (Math.random() * 0.7) + 0.6,
     initialX: Math.random() * 800,
     initialY: Math.random() * 800,
-    turbulence: (Math.random() * 0.5) + 0.7
+    turbulence: (Math.random() * 0.5) + 0.8 // Increased for more variation
   }));
   
-  // Simplified noise function with fewer computations
+  // Improved noise function with stronger mouse influence
   function noise(x, y, i) {
     const offset = randomOffsets[i % randomOffsets.length];
     const waveFreq = baseWaveFreq * offset.freq;
@@ -71,17 +71,23 @@ document.addEventListener('DOMContentLoaded', function() {
     const turbX = x + offset.initialX;
     const turbY = y + offset.initialY;
     
-    // Add subtle mouse influence to the noise
-    const mouseEffect = Math.sin((turbX * 0.01) + (mouseX * 5)) * 
-                        Math.cos((turbY * 0.01) + (mouseY * 5)) * 
-                        mouseInfluence;
+    // Enhanced mouse effect - more directly impacts wave behavior
+    // Mouse X affects horizontal wave frequency, Mouse Y affects amplitude
+    const mouseXEffect = (mouseX - 0.5) * 2; // -1 to 1 range
+    const mouseYEffect = (mouseY - 0.5) * 2; // -1 to 1 range
     
-    // Reduced complexity - fewer sine/cosine calculations
+    // More pronounced and visible mouse influence
+    const mouseEffect = 
+      Math.sin((turbX * (0.01 + mouseYEffect * 0.01)) + (mouseXEffect * 6)) * 
+      Math.cos((turbY * 0.01) + (mouseX * mouseY * 5)) * 
+      mouseInfluence * (1 + mouseYEffect);
+    
+    // Improved sine wave combination for better visual effect
     return (
-      Math.sin(turbX * waveFreq + waveTime + wavePhase) * 0.5 + 
-      Math.cos(turbX * waveFreq * 0.5 + waveTime * 1.2) * 0.3 +
-      Math.sin(turbX * 0.02 * offset.turbulence + turbY * 0.02) * 0.2 +
-      mouseEffect // Add mouse influence
+      Math.sin(turbX * waveFreq * (1 + mouseXEffect * 0.2) + waveTime + wavePhase) * 0.5 + 
+      Math.cos(turbX * waveFreq * 0.6 + waveTime * 1.3) * 0.35 +
+      Math.sin(turbX * 0.02 * offset.turbulence + turbY * 0.02) * 0.25 +
+      mouseEffect
     ) * 0.5 + 0.5;
   }
   
@@ -122,25 +128,27 @@ document.addEventListener('DOMContentLoaded', function() {
       // Increased amplitude for individual waves since there are fewer of them
       const layerAmplitude = amplitude * (0.4 + layerDepth * 0.8) * offset.amp;
       
-      // Optimize color calculations
+      // Enhanced dot appearance for better visual effect
       const brightness = Math.floor(120 + layerDepth * 135);
-      const opacity = 0.1 + layerDepth * 0.9;
+      const opacity = 0.12 + layerDepth * 0.88; // Slightly increased base opacity
       ctx.fillStyle = `rgba(${brightness}, ${brightness}, ${brightness}, ${opacity})`;
       
-      // Larger dots with fewer waves for similar visual impact
-      const dotSize = 1.0 + layerDepth * 3.2;
+      // Adjusted dot sizes for better visual balance
+      const dotSize = 0.9 + layerDepth * 3.0;
       const xOffset = i * 25;
       
-      // Draw wave with increased step size for better performance
+      // Draw wave with improved y calculation
       for (let x = -xOffset % dotSpacing; x < canvas.width; x += dotSpacing) {
         const phase = time * (1 + layerDepth * 0.8) * offset.speed;
         const noiseVal = noise(x, i * 10, i);
         
-        // Simplified y calculation with fewer sine calculations
+        // Enhanced y calculation with mouse influence
+        const mouseYInfluence = (mouseY - 0.5) * 60 * layerDepth; // Higher layers move more with mouse
         const y = baseY - 
                  layerAmplitude * noiseVal + 
                  Math.sin(x * 0.05 * offset.freq + phase) * layerAmplitude * 0.5 +
-                 (1 - layerDepth) * 120;
+                 (1 - layerDepth) * 120 + 
+                 mouseYInfluence; // Direct mouse Y influence
         
         // Draw dot
         ctx.beginPath();
