@@ -752,13 +752,7 @@ checker.check_exercise(9, answer)</code></pre>
 ***
 While we can use a simple loss function like binary cross-entropy for segmentation tasks since we are dealing with binary masks, it is often not sufficient. This is because the model may learn to predict the background class (0) more often than the foreground class (1), leading to poor performance on the actual segmentation task.
 
-To address this, we are going to introduce a more sophisticated loss function called the **Dice Loss**. The Dice Loss is based on the Dice coefficient, which measures the overlap between two sets. 
-
-<div align="center">
-  <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/dice.png" width="80%">
-</div>
-
-It is defined as:
+To address this, we are going to introduce a more sophisticated loss function called the **Dice Loss**. The Dice Loss is based on the Dice coefficient, which measures the overlap between two sets. It is defined as:
 
 $$
 \text{Dice} = \frac{2 |X \cap Y|}{|X| + |Y|}$$
@@ -766,9 +760,13 @@ $$
 Where:
 - $X$ is the predicted segmentation mask
 - $Y$ is the ground truth segmentation mask
-- $|X|$ is the number of pixels in the predicted mask
-- $|Y|$ is the number of pixels in the ground truth mask
-- $|X \cap Y|$ is the number of pixels in the intersection of the predicted and ground truth masks
+- $ |X| $ is the number of pixels in the predicted mask
+- $ |Y| $ is the number of pixels in the ground truth mask
+- $ |X \cap Y| $ is the number of pixels in the intersection of the predicted and ground truth masks
+
+<div align="center">
+  <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/dice.png" width="80%">
+</div>
 
 The Dice Loss is defined as:
 
