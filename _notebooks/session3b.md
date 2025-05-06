@@ -311,6 +311,7 @@ $$
 \text{Loss} = \text{Data Loss} + \text{Physics Loss}$$
 
 $$\text{Data Loss} = \frac{1}{N} \sum_{i=1}^{N} (u_i - u_{\text{pred}, i})^2 + (v_i - v_{\text{pred}, i})^2$$
+
 $$\text{Physics Loss} = \frac{1}{M} \sum_{j=1}^{M} (f_{u,j}^2 + f_{v,j}^2 + f_{c,j}^2)$$
 
 Where:

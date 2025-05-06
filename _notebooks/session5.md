@@ -758,6 +758,7 @@ $$
 \text{Dice} = \frac{2 |X \cap Y|}{|X| + |Y|}$$
 
 Where:
+
 - $X$ is the predicted segmentation mask
 - $Y$ is the ground truth segmentation mask
 - $|X|$ is the number of pixels in the predicted mask

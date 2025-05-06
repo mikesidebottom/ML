@@ -65,6 +65,7 @@ The workflow consists of the following steps:
 In this notebook we are going to be using the [ARKOMA dataset](https://www.sciencedirect.com/science/article/pii/S2352340923007989). The dataset is intended to be used as a benchmark for the creation of Neural Networks to perform inverse kinematics for robotic arms using a NAO robot. The dataset contains data for two different robotic arms: the left arm and the right arm. The data is generated using a physics engine that simulates the movement of the robotic arms in a 3D environment. The dataset contain 10,000 input-output data pairs for both arms. The input data is the end-effector position of the robotic arm, and the output data is the joint angles of the robotic arm. 
 
 The input parameters are:
+
 | Notation | Description |
 |------|----------|
 | $ P_{x} $ | The end-effector position with respect to the torso's x-axis |
@@ -152,6 +153,7 @@ print(f"X_val shape: {X_val.shape} | y_val shape: {y_val.shape}")</code></pre>
 ### Normalisation
 ***
 Normalisation is a crucial step in the pre-processing of data for machine learning models. It involves scaling the input features to a similar range, which helps improve the convergence speed and performance of the model. In this notebook, we will use Min-Max normalization to scale the input features to a range of [0, 1]. The formula for Min-Max normalization is as follows:
+
 $$ X_{norm} = \frac{X - X_{min}}{X_{max} - X_{min}} $$
 
 Where:
@@ -297,6 +299,7 @@ The number of layers and neurons in each layer is a hyperparameter that needs to
 | Hidden Layers | 1-3 hidden layers are common for most tasks. More complex tasks may require more layers. |
 | Output Layer | Number of neurons = number of output features (e.g., 1 for regression, number of classes for classification) |
 | Number of Neurons | Common practices: 2^n, where n is the number of layers. A common practice is to start with a number of neurons equal to the number of input features and then reduce the number of neurons in each subsequent layer. |
+
 ***
 
 > <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/reminder.svg" width="20" /> **Tips**:
@@ -335,7 +338,9 @@ The importance of initialising weights and biases lies in the fact that they can
 | Kaiming Uniform Initialisation | $\displaystyle W \sim \mathcal{U}(-\sqrt{\frac{6}{n_{in}}}, \sqrt{\frac{6}{n_{in}}})$ | `torch.nn.init.kaiming_uniform_(tensor)` | Suitable for ReLU activations. |
 | Zero Initialisation | $\displaystyle W = 0$ | `torch.nn.init.zeros_(tensor)` | All weights are set to zero. Not recommended. |
 | Random Initialisation | $\displaystyle W \sim \mathcal{U}(-1, 1)$ | `torch.nn.init.uniform_(tensor)` | Weights are randomly initialised between -1 and 1. |
+
 ***
+
 > <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/reminder.svg" width="20"/> **Tips**:
 > - Use Xavier or He initialisation for most cases, as they are designed to maintain the variance of activations across layers.
 > - Avoid zero initialisation, as it can lead to symmetry problems where all neurons learn the same features.

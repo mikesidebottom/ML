@@ -61,6 +61,7 @@ Images present unique challenges that make standard fully-connected neural netwo
 | **Parameter Explosion** | A 224×224×3 image would require over 150,000 weights per neuron |
 | **Translation Invariance** | Objects can appear anywhere in an image but have the same meaning |
 | **Feature Hierarchy** | Images contain low-level features (edges, textures) that compose into higher-level features |
+
 ***
 
 <div align="center">

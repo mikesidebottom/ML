@@ -10,8 +10,6 @@ permalink: /pages/setup-guide/
   This guide walks you through setting up your environment for the deep learning workshop. For the best experience, we recommend using Google Colab as it provides free GPU acceleration, which is essential for running neural network models efficiently.
 </div>
 
-## RECOMMENDED PLATFORM: GOOGLE COLAB
-
 <div class="setup-card">
   <div class="setup-header">
     <h3>🚀 GETTING STARTED WITH GOOGLE COLAB</h3>
@@ -74,7 +72,6 @@ permalink: /pages/setup-guide/
   
   <pre><code class="language-python">!wget -q --show-progress https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/colab_utils.txt -O colab_utils.txt
 !wget -q --show-progress -x -nH --cut-dirs=3 -i colab_utils.txt</code></pre>
-# Additional libraries will be installed as needed</code></pre>
   
   <p><strong>Always run this cell first!</strong> The setup may take a minute to complete.</p>
 </div>
