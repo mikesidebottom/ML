@@ -129,11 +129,11 @@ This hands-on workshop introduces the fundamentals of deep learning using PyTorc
   </div>
 </div>
 
-## PREREQUISITES ☑
+## PREREQUISITES ✅
 
 <div class="card">
   <ul>
-    <li><i class="fab fa-python"></i> Basic Python skills</li>
+    <li>Basic Python skills <i class="fab fa-python"></i> </li>
       <li>Some knowledge of basic machine learning concepts</li>
       <li>Familiarity with linear algebra/calculus (optional)</li>
       <li>No PyTorch experience required!</li>
