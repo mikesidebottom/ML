@@ -26,13 +26,13 @@ document.addEventListener('DOMContentLoaded', function() {
   const ctx = canvas.getContext('2d');
   let time = 0;
   
-  // Mouse interaction variables - ENHANCED for more visible effect
+  // Mouse interaction variables - SIGNIFICANTLY ENHANCED
   let mouseX = 0.5; // Default to center
   let mouseY = 0.5; 
   let targetMouseX = 0.5;
   let targetMouseY = 0.5;
-  const mouseDampingFactor = 0.08; // Slightly more responsive
-  const mouseInfluence = 0.6; // INCREASED from 0.3 for more noticeable effect
+  const mouseDampingFactor = 0.1; // Increased for more responsive interaction
+  const mouseInfluence = 0.85; // Greatly increased for much more noticeable effect
   
   // Track mouse position with improved calculation
   container.addEventListener('mousemove', function(e) {
@@ -42,11 +42,11 @@ document.addEventListener('DOMContentLoaded', function() {
     targetMouseY = (e.clientY - rect.top) / rect.height;
   });
   
-  // Constants for animation - ADJUSTED to improve visual appeal while keeping performance
+  // Constants for animation - MORE WAVES while balancing performance
   const bgColor = '#1F1F1F';
-  const waveCount = 18; // Slightly increased for better visuals
-  const dotSpacing = 7; // Slightly reduced for more dots
-  const amplitude = 230; // Slightly increased for more dramatic effect
+  const waveCount = 28; // Increased from 18 to 28 for more layers
+  const dotSpacing = 8; // Balance between performance and density
+  const amplitude = 230;
   const baseWaveFreq = 0.018;
   const speed = 0.015;
   
@@ -58,10 +58,11 @@ document.addEventListener('DOMContentLoaded', function() {
     speed: (Math.random() * 0.7) + 0.6,
     initialX: Math.random() * 800,
     initialY: Math.random() * 800,
-    turbulence: (Math.random() * 0.5) + 0.8 // Increased for more variation
+    turbulence: (Math.random() * 0.5) + 0.8,
+    freqMultiplier: (Math.random() * 0.5) + 0.75 // New property for frequency variation
   }));
   
-  // Improved noise function with stronger mouse influence
+  // Improved noise function with MUCH stronger mouse influence
   function noise(x, y, i) {
     const offset = randomOffsets[i % randomOffsets.length];
     const waveFreq = baseWaveFreq * offset.freq;
@@ -71,22 +72,27 @@ document.addEventListener('DOMContentLoaded', function() {
     const turbX = x + offset.initialX;
     const turbY = y + offset.initialY;
     
-    // Enhanced mouse effect - more directly impacts wave behavior
-    // Mouse X affects horizontal wave frequency, Mouse Y affects amplitude
-    const mouseXEffect = (mouseX - 0.5) * 2; // -1 to 1 range
-    const mouseYEffect = (mouseY - 0.5) * 2; // -1 to 1 range
+    // Enhanced mouse effect with dramatic frequency changes
+    // Mouse X heavily affects horizontal wave frequency
+    // Mouse Y dramatically affects amplitude and turbulence
+    const mouseXEffect = (mouseX - 0.5) * 4; // -2 to 2 range (doubled impact)
+    const mouseYEffect = (mouseY - 0.5) * 4; // -2 to 2 range (doubled impact)
     
-    // More pronounced and visible mouse influence
+    // Dynamic frequency that changes with mouse position
+    const dynamicFreq = waveFreq * (1 + mouseXEffect * offset.freqMultiplier * 0.5);
+    
+    // Much more pronounced mouse influence
     const mouseEffect = 
-      Math.sin((turbX * (0.01 + mouseYEffect * 0.01)) + (mouseXEffect * 6)) * 
-      Math.cos((turbY * 0.01) + (mouseX * mouseY * 5)) * 
-      mouseInfluence * (1 + mouseYEffect);
+      Math.sin((turbX * (0.015 + mouseYEffect * 0.02)) + (mouseXEffect * 8)) * 
+      Math.cos((turbY * 0.015) + (mouseX * mouseY * 8)) * 
+      mouseInfluence * (1 + Math.abs(mouseYEffect));
     
-    // Improved sine wave combination for better visual effect
+    // Wave calculation with dramatic mouse influence on frequency
     return (
-      Math.sin(turbX * waveFreq * (1 + mouseXEffect * 0.2) + waveTime + wavePhase) * 0.5 + 
-      Math.cos(turbX * waveFreq * 0.6 + waveTime * 1.3) * 0.35 +
-      Math.sin(turbX * 0.02 * offset.turbulence + turbY * 0.02) * 0.25 +
+      Math.sin(turbX * dynamicFreq + waveTime + wavePhase + mouseXEffect) * 0.5 + 
+      Math.cos(turbX * dynamicFreq * 0.6 + waveTime * 1.3 + mouseYEffect) * 0.35 +
+      Math.sin(turbX * 0.02 * offset.turbulence * (1 + Math.abs(mouseYEffect) * 0.3) + 
+              turbY * 0.02) * 0.25 +
       mouseEffect
     ) * 0.5 + 0.5;
   }
@@ -125,30 +131,37 @@ document.addEventListener('DOMContentLoaded', function() {
       const layerDepth = i / waveCount;
       const offset = randomOffsets[i % randomOffsets.length];
       
-      // Increased amplitude for individual waves since there are fewer of them
-      const layerAmplitude = amplitude * (0.4 + layerDepth * 0.8) * offset.amp;
+      // Dynamic amplitude based on mouse Y position
+      const mouseAmplitudeEffect = 1 + (mouseY - 0.5) * 0.6; // 0.7 to 1.3 range
+      const layerAmplitude = amplitude * (0.4 + layerDepth * 0.8) * offset.amp * mouseAmplitudeEffect;
       
-      // Enhanced dot appearance for better visual effect
-      const brightness = Math.floor(120 + layerDepth * 135);
-      const opacity = 0.12 + layerDepth * 0.88; // Slightly increased base opacity
+      // Enhanced dot appearance with mouse influence on brightness
+      const mouseColorEffect = Math.abs(mouseX - 0.5) * 30; // 0 to 15 range
+      const brightness = Math.floor(120 + layerDepth * 135 + mouseColorEffect);
+      const opacity = 0.12 + layerDepth * 0.88;
       ctx.fillStyle = `rgba(${brightness}, ${brightness}, ${brightness}, ${opacity})`;
       
-      // Adjusted dot sizes for better visual balance
-      const dotSize = 0.9 + layerDepth * 3.0;
+      // Dot sizes slightly affected by mouse X position
+      const dotSizeEffect = 1 + (mouseX - 0.5) * 0.3; // 0.85 to 1.15 range
+      const dotSize = (0.9 + layerDepth * 3.0) * dotSizeEffect;
       const xOffset = i * 25;
       
-      // Draw wave with improved y calculation
+      // Draw wave with dramatically improved mouse influence
       for (let x = -xOffset % dotSpacing; x < canvas.width; x += dotSpacing) {
         const phase = time * (1 + layerDepth * 0.8) * offset.speed;
         const noiseVal = noise(x, i * 10, i);
         
-        // Enhanced y calculation with mouse influence
-        const mouseYInfluence = (mouseY - 0.5) * 60 * layerDepth; // Higher layers move more with mouse
+        // Enhanced y calculation with stronger mouse influence
+        const mouseYInfluence = (mouseY - 0.5) * 100 * layerDepth; // Much stronger vertical effect
+        const mouseXWaveEffect = Math.sin(x * 0.01 + mouseX * 10) * 20 * layerDepth * Math.abs(mouseX - 0.5);
+        
         const y = baseY - 
                  layerAmplitude * noiseVal + 
-                 Math.sin(x * 0.05 * offset.freq + phase) * layerAmplitude * 0.5 +
+                 Math.sin(x * 0.05 * offset.freq * (1 + Math.abs(mouseX - 0.5)) + phase) * 
+                    layerAmplitude * 0.5 +
                  (1 - layerDepth) * 120 + 
-                 mouseYInfluence; // Direct mouse Y influence
+                 mouseYInfluence + 
+                 mouseXWaveEffect; // New X position wave effect
         
         // Draw dot
         ctx.beginPath();
