@@ -326,6 +326,7 @@ Matrix multiplication is a common operation in algebra and is used in many machi
 - **Matrix inverse**: This is the operation of finding the inverse of a matrix, which is denoted by the `torch.inverse()` function in Python. This operation is also known as the matrix inverse.
 
 ***
+
 | Operation | Description | Method | Example |
 |-----------|-------------|--------|---------|
 | Matrix Multiplication | Standard matrix product | @ or matmul() | `a @ b` |
@@ -436,6 +437,7 @@ Sometimes, we need to change the shape of a tensor without changing its data. We
 | `squeeze()` | Remove single dims | `x.squeeze()` | Removes size 1 dims |
 | `unsqueeze()` | Add single dim | `x.unsqueeze(0)` | Adds size 1 dim |
 | `expand()` | Broadcast dimensions | `x.expand(2,3)` | No data copy |
+
 ***
 
 > <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/code.svg" width="20"/> **Snippet 5**: Reshaping a tensor
@@ -488,6 +490,7 @@ $$f(x) = x^2 + 42y^2 + 3$$
 where $x$ and $y$ are tensors. The gradient of this function with respect to $x$ and $y$ is given by:
 
 $$\frac{\partial f}{\partial x} = 2x$$
+
 $$\frac{\partial f}{\partial y} = 84y$$
 
 using the chain rule of calculus. PyTorch allows us to compute these gradients automatically using the `backward()` method.
@@ -508,6 +511,7 @@ In PyTorch, the autograd engine keeps track of all operations performed on tenso
 | `requires_grad` | Flag to track gradients | `x = torch.tensor(1.0, requires_grad=True)` |
 | `backward()` | Compute gradients | `y.backward()` |
 | `grad` | Access gradients | `x.grad` |
+
 ***
 
 > <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/code.svg" width="20"/> **Snippet 6**: Using autograd to compute gradients
