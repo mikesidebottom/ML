@@ -42,16 +42,16 @@ document.addEventListener('DOMContentLoaded', function() {
     targetMouseY = (e.clientY - rect.top) / rect.height;
   });
   
-  // Constants for animation - MORE WAVES while balancing performance
+  // Constants for animation - MODIFIED for more visible horizontal movement
   const bgColor = '#1F1F1F';
-  const waveCount = 28; // Increased from 18 to 28 for more layers
-  const dotSpacing = 8; // Balance between performance and density
+  const waveCount = 28; 
+  const dotSpacing = 8;
   const amplitude = 230;
   const baseWaveFreq = 0.018;
   const speed = 0.015;
-  const horizontalMovementSpeed = 0.4; // Controls horizontal wave movement speed
+  const horizontalMovementSpeed = 1.2; // SIGNIFICANTLY INCREASED from 0.4 for much more visible horizontal movement
   
-  // Random offset with improved parameters for better visual effect
+  // Random offset with improved parameters - MODIFIED for better horizontal diversity
   const randomOffsets = Array.from({length: waveCount}, () => ({
     freq: (Math.random() * 0.03) + 0.01,
     phase: Math.random() * Math.PI * 5,
@@ -60,42 +60,43 @@ document.addEventListener('DOMContentLoaded', function() {
     initialX: Math.random() * 800,
     initialY: Math.random() * 800,
     turbulence: (Math.random() * 0.5) + 0.8,
-    freqMultiplier: (Math.random() * 0.5) + 0.75, // New property for frequency variation
-    horizontalOffset: Math.random() * 1000, // New property for horizontal movement
-    horizontalSpeed: (Math.random() * 0.5 + 0.5) // Variable horizontal speeds
+    freqMultiplier: (Math.random() * 0.5) + 0.75,
+    horizontalOffset: Math.random() * 1000,
+    // Much more varied horizontal speeds to clearly see different layers moving
+    horizontalSpeed: (Math.random() * 1.2 + 0.3) * (Math.random() < 0.5 ? -1 : 1) // Some waves move left, some right
   }));
   
-  // Improved noise function with MUCH stronger mouse influence and horizontal movement
+  // Improved noise function with stronger horizontal component
   function noise(x, y, i, horizontalShift) {
     const offset = randomOffsets[i % randomOffsets.length];
     const waveFreq = baseWaveFreq * offset.freq;
     const wavePhase = offset.phase;
     const waveTime = time * offset.speed;
     
-    // Apply horizontal movement
+    // Apply horizontal movement - THIS IS THE KEY PART FOR HORIZONTAL MOTION
     const shiftedX = x + horizontalShift;
     
     const turbX = shiftedX + offset.initialX;
     const turbY = y + offset.initialY;
     
     // Enhanced mouse effect with dramatic frequency changes
-    const mouseXEffect = (mouseX - 0.5) * 4; // -2 to 2 range (doubled impact)
-    const mouseYEffect = (mouseY - 0.5) * 4; // -2 to 2 range (doubled impact)
+    const mouseXEffect = (mouseX - 0.5) * 4;
+    const mouseYEffect = (mouseY - 0.5) * 4;
     
     // Dynamic frequency that changes with mouse position
     const dynamicFreq = waveFreq * (1 + mouseXEffect * offset.freqMultiplier * 0.5);
     
     // Much more pronounced mouse influence
     const mouseEffect = 
-      Math.sin((turbX * (0.015 + mouseYEffect * 0.02)) + (mouseXEffect * 8)) * 
+      Math.sin((shiftedX * (0.015 + mouseYEffect * 0.02)) + (mouseXEffect * 8)) * // Using shiftedX instead of turbX
       Math.cos((turbY * 0.015) + (mouseX * mouseY * 8)) * 
       mouseInfluence * (1 + Math.abs(mouseYEffect));
     
     // Wave calculation with dramatic mouse influence on frequency and horizontal movement
     return (
-      Math.sin(turbX * dynamicFreq + waveTime + wavePhase + mouseXEffect) * 0.5 + 
-      Math.cos(turbX * dynamicFreq * 0.6 + waveTime * 1.3 + mouseYEffect) * 0.35 +
-      Math.sin(turbX * 0.02 * offset.turbulence * (1 + Math.abs(mouseYEffect) * 0.3) + 
+      Math.sin(shiftedX * dynamicFreq + waveTime + wavePhase + mouseXEffect) * 0.5 + // Using shiftedX instead of turbX
+      Math.cos(shiftedX * dynamicFreq * 0.6 + waveTime * 1.3 + mouseYEffect) * 0.35 + // Using shiftedX instead of turbX
+      Math.sin(shiftedX * 0.02 * offset.turbulence * (1 + Math.abs(mouseYEffect) * 0.3) + 
               turbY * 0.02) * 0.25 +
       mouseEffect
     ) * 0.5 + 0.5;
@@ -135,13 +136,12 @@ document.addEventListener('DOMContentLoaded', function() {
       const layerDepth = i / waveCount;
       const offset = randomOffsets[i % randomOffsets.length];
       
-      // Calculate horizontal movement for this layer
-      // Different layers move at different speeds
-      const horizontalShift = time * horizontalMovementSpeed * offset.horizontalSpeed * 100;
+      // SIGNIFICANTLY ENHANCED horizontal movement calculation
+      // This makes the waves actually move horizontally across the screen
+      const horizontalShift = time * horizontalMovementSpeed * offset.horizontalSpeed * 200; // Doubled multiplication factor
       
-      // Calculate mouse-influenced horizontal shift
-      // Mouse X position affects horizontal movement direction and speed
-      const mouseHorizontalEffect = (mouseX - 0.5) * 200 * layerDepth;
+      // Mouse influence on horizontal motion
+      const mouseHorizontalEffect = (mouseX - 0.5) * 300 * layerDepth; // Increased from 200 to 300
       const totalHorizontalShift = horizontalShift + mouseHorizontalEffect;
       
       // Dynamic amplitude based on mouse Y position
@@ -159,20 +159,23 @@ document.addEventListener('DOMContentLoaded', function() {
       const dotSize = (0.9 + layerDepth * 3.0) * dotSizeEffect;
       const xOffset = i * 25;
       
-      // Draw wave with dramatically improved mouse influence and horizontal movement
+      // Draw wave with dramatically improved horizontal movement
       for (let x = -xOffset % dotSpacing; x < canvas.width; x += dotSpacing) {
         const phase = time * (1 + layerDepth * 0.8) * offset.speed;
-        // Pass horizontal shift to noise function
+        
+        // Pass horizontal shift to noise function for true horizontal movement
         const noiseVal = noise(x, i * 10, i, totalHorizontalShift);
         
         // Enhanced y calculation with stronger mouse influence
-        const mouseYInfluence = (mouseY - 0.5) * 100 * layerDepth; 
-        const mouseXWaveEffect = Math.sin(x * 0.01 + mouseX * 10 + horizontalShift * 0.01) * 
+        const mouseYInfluence = (mouseY - 0.5) * 100 * layerDepth;
+        // Add horizontal shift component to the wave effect
+        const mouseXWaveEffect = Math.sin((x + totalHorizontalShift * 0.2) * 0.01 + mouseX * 10) * 
                                 20 * layerDepth * Math.abs(mouseX - 0.5);
         
         const y = baseY - 
                  layerAmplitude * noiseVal + 
-                 Math.sin((x + totalHorizontalShift * 0.3) * 0.05 * offset.freq * 
+                 // Incorporate horizontal shift into the sine calculation to make waves move horizontally
+                 Math.sin((x + totalHorizontalShift * 0.5) * 0.05 * offset.freq * 
                     (1 + Math.abs(mouseX - 0.5)) + phase) * layerAmplitude * 0.5 +
                  (1 - layerDepth) * 120 + 
                  mouseYInfluence + 
