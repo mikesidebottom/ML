@@ -2,7 +2,7 @@
 layout: notebook
 title: "SESSION 3B: PHYSICS-INFORMED NEURAL NETWORKS"
 notebook_file: SE03_CA_Physics_informed_neural_networks.ipynb
-permalink: /notebooks/session3/
+permalink: /notebooks/session3b/
 banner_image: https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/se_03.png
 ---
 
