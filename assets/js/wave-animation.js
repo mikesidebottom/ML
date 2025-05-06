@@ -26,24 +26,23 @@ document.addEventListener('DOMContentLoaded', function() {
   const ctx = canvas.getContext('2d');
   let time = 0;
   
-  // Constants for animation - increased for more impact
+  // Constants for animation - REDUCED wave count for better performance
   const bgColor = '#1F1F1F';
-  const waveCount = 60; // Increased for more layers
-  const dotSpacing = 4; // More spacing between dots to make lines thinner
-  const amplitude = 220; // INCREASED amplitude for more dramatic waves
-  const baseWaveFreq = 0.018; // INCREASED base frequency for more dramatic waves
-  const speed = 0.02; // INCREASED for even faster animation
+  const waveCount = 25; // REDUCED from 60 to 25 for better performance
+  const dotSpacing = 5; // Slightly increased spacing for even less rendering
+  const amplitude = 220; // Keep amplitude dramatic
+  const baseWaveFreq = 0.018;
+  const speed = 0.02;
   
-  // More varied random offset for each wave to increase diversity
+  // Random offset for each wave - maintained for diversity
   const randomOffsets = Array.from({length: waveCount}, () => ({
-    freq: (Math.random() * 0.03) + 0.008,  // INCREASED frequency variation
-    phase: Math.random() * Math.PI * 6,    // INCREASED phase offset range
-    amp: (Math.random() * 0.7) + 0.7,      // INCREASED amplitude variation (0.7-1.4)
-    speed: (Math.random() * 0.9) + 0.5,    // INCREASED speed variation (0.7-1.6)
-    // Add initial chaos factors to make it interesting from the start
+    freq: (Math.random() * 0.03) + 0.008,
+    phase: Math.random() * Math.PI * 6,
+    amp: (Math.random() * 0.7) + 0.7,
+    speed: (Math.random() * 0.9) + 0.5,
     initialX: Math.random() * 1000,
     initialY: Math.random() * 1000,
-    turbulence: (Math.random() * 0.7) + 0.7 // INCREASED turbulence factor
+    turbulence: (Math.random() * 0.7) + 0.7
   }));
   
   // Enhanced noise function with more initial randomization
@@ -91,17 +90,18 @@ document.addEventListener('DOMContentLoaded', function() {
       const layerDepth = i / waveCount; // 0 = back, 1 = front
       const offset = randomOffsets[i % randomOffsets.length];
       
-      // Larger and more varied amplitude between layers
-      const layerAmplitude = amplitude * (0.3 + layerDepth * 0.7) * offset.amp;
+      // Slightly increased individual wave amplitudes to compensate for fewer waves
+      const layerAmplitude = amplitude * (0.35 + layerDepth * 0.75) * offset.amp;
       
       // Calculate color based on layer position (brighter in front)
-      const brightness = Math.floor(120 + layerDepth * 135); // Adjusted brightness
-      const opacity = 0.06 + layerDepth * 0.94; // More transparency in the back layers
+      // Adjusted opacity to ensure good visibility with fewer layers
+      const brightness = Math.floor(120 + layerDepth * 135);
+      const opacity = 0.08 + layerDepth * 0.92; // Slightly increased minimum opacity
       ctx.fillStyle = `rgba(${brightness}, ${brightness}, ${brightness}, ${opacity})`;
       
-      // Draw smaller dots with varying sizes for thinner lines
-      const dotSize = 0.5 + layerDepth * 2.8; // Smaller dots overall
-      const xOffset = i * 18; // INCREASED horizontal offset for more variation
+      // Draw slightly larger dots to maintain visual impact with fewer waves
+      const dotSize = 0.7 + layerDepth * 3.0; // Slightly increased dot size
+      const xOffset = i * 22; // Increased offset for better horizontal distribution with fewer waves
       
       // Draw wave as series of dots
       for (let x = -xOffset % dotSpacing; x < canvas.width; x += dotSpacing) {
@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
     
-    // Update time for next animation frame - faster animation
+    // Update time for next animation frame
     time += speed;
     requestAnimationFrame(animate);
   }
