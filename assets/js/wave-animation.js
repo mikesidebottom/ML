@@ -39,11 +39,11 @@ document.addEventListener('DOMContentLoaded', function() {
     freq: (Math.random() * 0.03) + 0.008,  // INCREASED frequency variation
     phase: Math.random() * Math.PI * 6,    // INCREASED phase offset range
     amp: (Math.random() * 0.7) + 0.7,      // INCREASED amplitude variation (0.7-1.4)
-    speed: (Math.random() * 0.9) + 0.7,    // INCREASED speed variation (0.7-1.6)
+    speed: (Math.random() * 0.9) + 0.5,    // INCREASED speed variation (0.7-1.6)
     // Add initial chaos factors to make it interesting from the start
     initialX: Math.random() * 1000,
     initialY: Math.random() * 1000,
-    turbulence: (Math.random() * 0.7) + 0.5 // INCREASED turbulence factor
+    turbulence: (Math.random() * 0.7) + 0.7 // INCREASED turbulence factor
   }));
   
   // Enhanced noise function with more initial randomization
@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function() {
       ctx.fillStyle = `rgba(${brightness}, ${brightness}, ${brightness}, ${opacity})`;
       
       // Draw smaller dots with varying sizes for thinner lines
-      const dotSize = 1.2 + layerDepth * 2.8; // Smaller dots overall
+      const dotSize = 0.5 + layerDepth * 2.8; // Smaller dots overall
       const xOffset = i * 18; // INCREASED horizontal offset for more variation
       
       // Draw wave as series of dots
