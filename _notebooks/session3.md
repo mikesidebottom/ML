@@ -172,8 +172,7 @@ The normalisation parameters will be computed from the training set and then app
 ***
 > <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/code.svg" width="20"/> **Snippet 1**: Normalisation using Min-Max scaling
 
-```python
-from sklearn.preprocessing import MinMaxScaler
+<pre class="snippet-code"><code class="python">from sklearn.preprocessing import MinMaxScaler
 
 scaler = MinMaxScaler()
 
@@ -185,7 +184,7 @@ X_train_scaled = scaler.transform(X_train)
 
 # Inverse transform the scaled data to get the original values
 X_train_original = scaler.inverse_transform(X_train_scaled)
-```
+</code></pre>
 
 <pre class='code-terminal python-terminal'><code class='python'># Exercise 1: Data Loading and Preprocessing 🎯
 
@@ -662,8 +661,7 @@ For this step we are going to use the test set to evaluate the model.
 ***
 > <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/code.svg" width="20"/> **Snippet 3**: Evaluate Model
 
-```python
-# Set model to evaluation mode
+<pre class="snippet-code"><code class="python"># Set model to evaluation mode
 model.eval()
 
 # Disable gradient calculation
@@ -673,7 +671,7 @@ with torch.no_grad():
 
     # Compute loss
     loss = criterion(predictions, targets)
-```
+</code></pre>
 
 <pre class='code-terminal python-terminal'><code class='python'># Exercise 5: Model Evaluation 🎯
 # In this exercise, you will:

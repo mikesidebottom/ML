@@ -74,12 +74,11 @@ To create a tensor in PyTorch, we can use the class `torch.Tensor`.
 ***
 > <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/code.svg" width="20"/> **Snippet 1**: Creating a scalar tensor
 
-```python
-x = torch.tensor(101)
+<pre class="snippet-code"><code class="python">x = torch.tensor(101)
 
 # Get the type and shape of the tensor
 print(f'x: {x}, type: {type(x)}, shape: {x.shape}')
-```
+</code></pre>
 
 <pre class='code-terminal python-terminal'><code class='python'># Exercise 1: Creating Your First Tensor 🎯
 # Try to create:
@@ -195,8 +194,7 @@ Indexing tensors is similar to indexing arrays in Python. We can use square brac
 ***
 > <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/code.svg" width="20" /> **Snippet 2**: Indexing a tensor
 
-```python
-# Get corners of a matrix
+<pre class="snippet-code"><code class="python"># Get corners of a matrix
 corners = tensor[...,[0,-1]]  # First and last elements of last dimension
 
 # Get last row of a matrix
@@ -204,7 +202,7 @@ last_row = tensor[-1,...]  # Last row of all columns
 
 # Extract diagonal
 diagonal = tensor.diagonal()  # More efficient than indexing
-```
+</code></pre>
 
 <pre class='code-terminal python-terminal'><code class='python'># Create a 4x4 tensor for practice
 practice_tensor = torch.tensor([
@@ -287,11 +285,10 @@ PyTorch allows us to manipulate tensors in different ways. Since PyTorch is buil
 ***
 > <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/code.svg" width="20"/> **Snippet 3**: Inplace operations
 
-```python
-# Instead of: x = x + 1
+<pre class="snippet-code"><code class="python"># Instead of: x = x + 1
 x.add_(1)  # Inplace addition
 y.add_(x)  # Inplace addition with another tensor
-```
+</code></pre>
 
 <pre class='code-terminal python-terminal'><code class='python'># Exercise 4: Basic Operations 🎯
 # Create two 2x2 matrices:
@@ -380,15 +377,14 @@ For example, if we have a 1D array of shape `(3,)` and a 2D array of shape `(3, 
 ***
 > <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/code.svg" width="20"/> **Snippet 4**: Broadcasting example
 
-```python
-# Create a 1D tensor of shape (3,)
+<pre class="snippet-code"><code class="python"># Create a 1D tensor of shape (3,)
 a = torch.tensor([1, 2, 3])
 # Create a 2D tensor of shape (3, 2)
 b = torch.tensor([[1, 2], [3, 4], [5, 6]])
 # Add the two tensors together
 c = a + b  # Broadcasting occurs here
 print(c)  # Output: tensor([[ 2,  4], [ 6,  8], [10, 12]])
-```
+</code></pre>
 
 <pre class='code-terminal python-terminal'><code class='python'># Exercise 6: Broadcasting 🎯
 # Setup tensors
@@ -444,12 +440,11 @@ Sometimes, we need to change the shape of a tensor without changing its data. We
 
 > <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/code.svg" width="20"/> **Snippet 5**: Reshaping a tensor
 
-```python
-# Create a 1D tensor of shape (6,)
+<pre class="snippet-code"><code class="python"># Create a 1D tensor of shape (6,)
 x = torch.tensor([1, 2, 3, 4, 5, 6])
 # Reshape to (2, 3)
 print(x.reshape(2, 3))  # Output: tensor([[1, 2, 3], [4, 5, 6]])
-```
+</code></pre>
 
 <pre class='code-terminal python-terminal'><code class='python'># Exercise 7: Reshaping 🎯
 # Setup tensors
@@ -517,8 +512,7 @@ In PyTorch, the autograd engine keeps track of all operations performed on tenso
 
 > <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/code.svg" width="20"/> **Snippet 6**: Using autograd to compute gradients
 
-```python
-# Create tensor with gradient tracking
+<pre class="snippet-code"><code class="python"># Create tensor with gradient tracking
 x = torch.tensor([1.0], requires_grad=True)
 
 # Compute function
@@ -529,7 +523,7 @@ y.backward()
 
 # Access gradient
 x.grad  # Should be 2.0
-```
+</code></pre>
 
 <pre class='code-terminal python-terminal'><code class='python'># Exercise 8: Autograd 🎯
 x = torch.tensor([2.0], requires_grad=True)
@@ -587,10 +581,9 @@ To pass the data to PyTorch, we need to convert the DataFrame to a NumPy array a
 ***
 > <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/code.svg" width="20"/> **Snippet 7**: Creating a tensor from a DataFrame
 
-```python
-col_val = df['column_name'].values  # Get column values as NumPy array
+<pre class="snippet-code"><code class="python">col_val = df['column_name'].values  # Get column values as NumPy array
 tensor = torch.tensor(col_val)  # Convert to tensor
-```
+</code></pre>
 
 <pre class='code-terminal python-terminal'><code class='python'># Exercise 9: Pandas to Tensors 🎯
 # Given the DataFrame df with NAO robot arm data
@@ -630,13 +623,12 @@ PyTorch allows us to use the GPU to accelerate computations. This is done by mov
 ***
 > <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/code.svg" width="20"/> **Snippet 8**: Checking for GPU availability
 
-```python
-# Check if GPU is available
+<pre class="snippet-code"><code class="python"># Check if GPU is available
 if torch.cuda.is_available():
     device = torch.device('cuda')  # Use GPU
 else:
     device = torch.device('cpu')  # Use CPU
-```
+</code></pre>
 
 <pre class='code-terminal python-terminal'><code class='python'># Check GPU availability
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")

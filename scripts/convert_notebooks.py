@@ -28,6 +28,7 @@ def convert_notebooks_to_md(source_dir, target_dir, repo_owner='CLDiego', repo_n
         "SE01_CA_Intro_to_pytorch.ipynb": "session1.md",
         "SE02_CA_Artificial_neural_networks.ipynb": "session2.md",
         "SE03_CA_Training_neural_networks.ipynb": "session3.md",
+        "SE03_CA_Physics_informed_neural_networks.ipynb": "session3b.md",
         "SE04_CA_Convolutional_Neural_Networks.ipynb": "session4.md", 
         "SE05_CA_Transfer_Learning.ipynb": "session5.md"
     }
@@ -36,6 +37,7 @@ def convert_notebooks_to_md(source_dir, target_dir, repo_owner='CLDiego', repo_n
         "SE01_CA_Intro_to_pytorch.ipynb": "SESSION 1: INTRODUCTION TO PYTORCH",
         "SE02_CA_Artificial_neural_networks.ipynb": "SESSION 2: ARTIFICIAL NEURAL NETWORKS",
         "SE03_CA_Training_neural_networks.ipynb": "SESSION 3: MODEL TRAINING & OPTIMIZATION",
+        "SE03_CA_Physics_informed_neural_networks.ipynb": "SESSION 3B: PHYSICS-INFORMED NEURAL NETWORKS",
         "SE04_CA_Convolutional_Neural_Networks.ipynb": "SESSION 4: CONVOLUTIONAL NEURAL NETWORKS", 
         "SE05_CA_Transfer_Learning.ipynb": "SESSION 5: TRANSFER LEARNING & U-NET"
     }

@@ -92,11 +92,10 @@ Now let's implement a neuron in Python using PyTorch. We'll create a `Neuron` cl
 
 > <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/code.svg" width="20"/> **Snippet 1**: nn.Module and nn.Parameter
 
-```python
-weight = torch.nn.Parameter(torch.randn(2, 1), requires_grad=True)
+<pre class="snippet-code"><code class="python">weight = torch.nn.Parameter(torch.randn(2, 1), requires_grad=True)
 bias = torch.nn.Parameter(torch.randn(1))
 
-```
+</code></pre>
 
 
 <pre class='code-terminal python-terminal'><code class='python'># Exercise 1: Implementing a Neuron 🎯
@@ -227,11 +226,10 @@ We'll build a model that predicts launch success based on temperature. Our goal 
 
 > <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/code.svg" width="20"/> **Snippet 2**: Splitting data with sklearn
 
-```python
-from sklearn.model_selection import train_test_split
+<pre class="snippet-code"><code class="python">from sklearn.model_selection import train_test_split
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-```
+</code></pre>
 
 
 
@@ -321,17 +319,15 @@ $$\hat{y} = \sigma(w \cdot \text{temperature} + b)$$
 
 In our implementation, we're processing one sample at a time in our loops:
 
-```python
-for i in range(len(X_normalized)): 
+<pre class="snippet-code"><code class="python">for i in range(len(X_normalized)): 
     predictions[i] = model(X_normalized[i])
-```
+</code></pre>
 
 This approach works for our small dataset (23 samples) and single feature, but in production machine learning, data is typically processed in batches for efficiency:
 
-```python
-# Process all samples in a single operation
+<pre class="snippet-code"><code class="python"># Process all samples in a single operation
 predictions = model(X_normalized)  # For batch-compatible models
-```
+</code></pre>
 
 ## 2.3 Loss Functions and Error Measurement
 ***

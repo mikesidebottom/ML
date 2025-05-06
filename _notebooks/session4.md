@@ -362,15 +362,14 @@ These transformations can be combined to create a preprocessing pipeline that pr
 
 > <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/code.svg" width="20"/> **Snippet 1**: Composing transformations
 
-```python
-from torchvision import transforms
+<pre class="snippet-code"><code class="python">from torchvision import transforms
 
 ts = transforms.Compose([
     transforms.Resize((224, 224)),  # Resize to 224x224
     transforms.ToTensor(),          # Convert to tensor
     transforms.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5])  # Normalize
 ])
-```
+</code></pre>
 
 
 <pre class='code-terminal python-terminal'><code class='python'># Exercise 3: Implementing Image Transformations 🎯
@@ -591,8 +590,7 @@ While we can load images using `PIL`, PyTorch provides a more efficient way to h
 
 The `ImageFolder` class requires a root directory containing subdirectories for each class. The directory structure should look like this:
 
-```bash
-dataset/
+<pre class="snippet-code"><code class="bash">dataset/
     ├── class-1/
     │   ├── image1.jpg
     │   ├── image2.jpg
@@ -601,7 +599,7 @@ dataset/
         ├── image1.jpg
         ├── image2.jpg
         └── ...
-```
+</code></pre>
 
 The function automatically assigns labels to the images based on the subdirectory names. Moreover, it can also apply transformations to the images using the `transform` parameter.
 
@@ -619,14 +617,13 @@ The key parameters of the `ImageFolder` class are:
 
 > <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/code.svg" width="20"/> **Snippet 2**: Using ImageFolder
 
-```python
-from torchvision.datasets import ImageFolder
+<pre class="snippet-code"><code class="python">from torchvision.datasets import ImageFolder
 
 dataset = ImageFolder(root='path/to/dataset', transform=ts)
 # Accessing the first image and its label
 image, label = dataset[0]
 print(f"Image shape: {image.shape}, Label: {label}")
-```
+</code></pre>
 
 <pre class='code-terminal python-terminal'><code class='python'># Exercise 4: Data Augmentation and Loading with PyTorch 🎯
 # Implement:
@@ -691,8 +688,7 @@ The `DataLoader` class provides several key parameters to customize the data loa
 
 > <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/code.svg" width="20"/> **Snippet 3**: Creating a DataLoader
 
-```python
-from torch.utils.data import DataLoader
+<pre class="snippet-code"><code class="python">from torch.utils.data import DataLoader
 
 # Create a DataLoader for the dataset
 train_loader = DataLoader(dataset, batch_size=32, shuffle=True, num_workers=4, pin_memory=True)
@@ -700,7 +696,7 @@ train_loader = DataLoader(dataset, batch_size=32, shuffle=True, num_workers=4, p
 for images, labels in train_loader:
     print(f"Batch shape: {images.shape}, Labels: {labels}")
     break  # Just to show the first batch
-```
+</code></pre>
 
 <pre class='code-terminal python-terminal'><code class='python'># Exercise 5: DataLoader 🎯
 # Create DataLoaders for train, test, and validation data
@@ -797,8 +793,7 @@ To predict the class, we can use the `torch.argmax` function to get the index of
 
 > <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/code.svg" width="20"/> **Snippet 4**: Obtaining the predicted class
 
-```python
-model_v1.eval()
+<pre class="snippet-code"><code class="python">model_v1.eval()
 
 with torch.no_grad():
     for images, labels in test_dl:
@@ -807,7 +802,7 @@ with torch.no_grad():
         _, predicted = torch.max(outputs, dim=1)
         print(predicted)
         break
-```
+</code></pre>
 
 <pre class='code-terminal python-terminal'><code class='python'># Exercise 7: Evaluating the Model 🎯
 # Compute accuracy and classification report
