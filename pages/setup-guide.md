@@ -21,9 +21,9 @@ permalink: /pages/setup-guide/
     
     <h4>WHAT YOU NEED</h4>
     <ul>
-      <li>A Google account</li>
-      <li>Reliable internet connection</li>
-      <li>Web browser (Chrome recommended)</li>
+      <li><i class="fab fa-google"></i> A Google account</li>
+        <li>Reliable internet connection</li>
+        <li>Web browser (Chrome recommended)</li>
     </ul>
     
     <div class="progress-container">
@@ -72,7 +72,8 @@ permalink: /pages/setup-guide/
   <h4>📦 PACKAGE INSTALLATION</h4>
   <p>Each notebook starts with a setup cell that installs all required libraries:</p>
   
-  <pre><code class="language-python">!pip install torch torchvision tqdm matplotlib
+  <pre><code class="language-python">!wget -q --show-progress https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/colab_utils.txt -O colab_utils.txt
+!wget -q --show-progress -x -nH --cut-dirs=3 -i colab_utils.txt</code></pre>
 # Additional libraries will be installed as needed</code></pre>
   
   <p><strong>Always run this cell first!</strong> The setup may take a minute to complete.</p>
@@ -89,8 +90,6 @@ permalink: /pages/setup-guide/
   <h3>NEED HELP? 🆘</h3>
   <p>If you encounter any setup issues:</p>
   <ul>
-    <li>Check the <a href="{{ site.baseurl }}/pages/faq">FAQ page</a></li>
-    <li>Post your question in the workshop's discussion forum</li>
     <li>Ask a workshop instructor during the session</li>
   </ul>
 </div>
