@@ -6,38 +6,91 @@ permalink: /pages/setup-guide/
 
 # SETUP GUIDE 🛠️
 
+<div class="info-box">
+  This guide walks you through setting up your environment for the deep learning workshop. For the best experience, we recommend using Google Colab as it provides free GPU acceleration, which is essential for running neural network models efficiently.
+</div>
+
 ## RECOMMENDED PLATFORM: GOOGLE COLAB
 
-We recommend using [Google Colab](https://colab.research.google.com/) for this workshop as it provides a free, GPU-enabled environment.
+<div class="setup-card">
+  <div class="setup-header">
+    <h3>🚀 GETTING STARTED WITH GOOGLE COLAB</h3>
+  </div>
+  <div class="setup-content">
+    <p>Google Colab provides a free, GPU-enabled Jupyter notebook environment that requires no setup.</p>
+    
+    <h4>WHAT YOU NEED</h4>
+    <ul>
+      <li>A Google account</li>
+      <li>Reliable internet connection</li>
+      <li>Web browser (Chrome recommended)</li>
+    </ul>
+    
+    <div class="progress-container">
+      <div class="progress-bar" style="width: 100%"></div>
+    </div>
+  </div>
+</div>
 
-### WHAT YOU NEED
+<div class="notebook-card">
+  <div class="notebook-header">
+    <h3>📓 RUNNING THE NOTEBOOKS</h3>
+  </div>
+  <div class="notebook-content">
+    <ol>
+      <li>Navigate to the <a href="{{ site.baseurl }}/pages/workshop-sessions">Workshop Sessions</a> page</li>
+      <li>For each session, you'll find two Colab options:
+        <ul>
+          <li><strong>Code Along</strong> - Start with the exercise notebook</li>
+          <li><strong>Solution</strong> - View the completed notebook with solutions</li>
+        </ul>
+      </li>
+      <li>Click the <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" style="vertical-align: middle;"> button for your chosen notebook</li>
+    </ol>
+  </div>
+</div>
 
-* A Google account
-* Reliable internet connection
+<div class="warning-box">
+  <strong>⚠️ IMPORTANT:</strong> Enable GPU acceleration for best performance! Neural network training will be significantly slower without it.
+</div>
 
-### RUNNING THE NOTEBOOKS
-
-1. Navigate to the [Workshop Sessions](/pages/workshop-sessions) page
-2. Click the "Open in Colab" button for the notebook you want to run
-
-### ENABLE GPU IN COLAB
-
-For best performance, enable GPU acceleration:
+## ENABLING GPU ACCELERATION
 
 <div class="card">
+  <h4>📊 GPU SETUP STEPS</h4>
   <ol>
-    <li><strong>Runtime > Change runtime type</strong></li>
+    <li>In your Colab notebook, select <strong>Runtime > Change runtime type</strong></li>
     <li>Set <strong>Hardware Accelerator</strong> to <code>GPU</code></li>
     <li>Click <strong>Save</strong></li>
   </ol>
+  <img src="{{ site.baseurl }}/assets/images/colab-gpu-setup.png" alt="Colab GPU Setup" class="setup-image">
+</div>
+
+## INSTALLING DEPENDENCIES
+
+<div class="card">
+  <h4>📦 PACKAGE INSTALLATION</h4>
+  <p>Each notebook starts with a setup cell that installs all required libraries:</p>
+  
+  <pre><code class="language-python">!pip install torch torchvision tqdm matplotlib
+# Additional libraries will be installed as needed</code></pre>
+  
+  <p><strong>Always run this cell first!</strong> The setup may take a minute to complete.</p>
 </div>
 
 <div class="info-box">
-  <strong>📘 Resources:</strong> 
-  <a href="https://colab.research.google.com/notebooks/basic_features_overview.ipynb">Colab Tips</a> | 
-  <a href="https://research.google.com/colaboratory/faq.html">Colab FAQ</a>
+  <strong>📘 ADDITIONAL RESOURCES:</strong><br>
+  <a href="https://colab.research.google.com/notebooks/basic_features_overview.ipynb" target="_blank">Colab Tips & Features</a> | 
+  <a href="https://research.google.com/colaboratory/faq.html" target="_blank">Colab FAQ</a> |
+  <a href="https://pytorch.org/tutorials/" target="_blank">PyTorch Tutorials</a>
 </div>
 
-### INSTALL DEPENDENCIES
-
-Each notebook starts with a setup cell. Run it first to install all required libraries.
+<div class="card">
+  <h3>NEED HELP? 🆘</h3>
+  <p>If you encounter any setup issues:</p>
+  <ul>
+    <li>Check the <a href="{{ site.baseurl }}/pages/faq">FAQ page</a></li>
+    <li>Post your question in the workshop's discussion forum</li>
+    <li>Ask a workshop instructor during the session</li>
+  </ul>
+</div>

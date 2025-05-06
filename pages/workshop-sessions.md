@@ -10,6 +10,10 @@ permalink: /pages/workshop-sessions/
   These notebooks are designed to be browsed directly on this site. You can also work with them interactively using the "Code Along" button or check the solutions with the "Solution" button. For each session, you can also access the presentation slides using the "Presentation" button.
 </div>
 
+<div class="warning-box">
+  <strong>Note:</strong> When using Colab, make sure to enable GPU acceleration for best performance. Go to Runtime → Change runtime type and select GPU as the Hardware accelerator.
+</div>
+
 <div class="notebook-browser">
 
   <div class="notebook-card">
@@ -34,7 +38,7 @@ permalink: /pages/workshop-sessions/
         <i class="fas fa-file-pdf"></i> Presentation
       </a>
       <div class="colab-buttons">
-        <a href="https://colab.research.google.com/github/CLDiego/uom_fse_dl_workshop/blob/main/notebooks/SE01_CA_Intro_to_pytorch.ipynb" class="colab-button code-along" target="_blank">
+        <a href="https://colab.research.google.com/github/CLDiego/uom_fse_dl_workshop/blob/main/SE01_CA_Intro_to_pytorch.ipynb" class="colab-button code-along" target="_blank">
           <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/> Code Along
         </a>
         <a href="https://colab.research.google.com/github/CLDiego/uom_fse_dl_workshop/blob/main/solutions/SE01_SL_Intro_to_pytorch.ipynb" class="colab-button solution" target="_blank">
@@ -66,7 +70,7 @@ permalink: /pages/workshop-sessions/
         <i class="fas fa-file-pdf"></i> Presentation
       </a>
       <div class="colab-buttons">
-        <a href="https://colab.research.google.com/github/CLDiego/uom_fse_dl_workshop/blob/main/notebooks/SE02_CA_Artificial_neural_networks.ipynb" class="colab-button code-along" target="_blank">
+        <a href="https://colab.research.google.com/github/CLDiego/uom_fse_dl_workshop/blob/main/SE02_CA_Artificial_neural_networks.ipynb" class="colab-button code-along" target="_blank">
           <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/> Code Along
         </a>
         <a href="https://colab.research.google.com/github/CLDiego/uom_fse_dl_workshop/blob/main/solutions/SE02_SL_Artificial_neural_networks.ipynb" class="colab-button solution" target="_blank">
@@ -98,7 +102,7 @@ permalink: /pages/workshop-sessions/
         <i class="fas fa-file-pdf"></i> Presentation
       </a>
       <div class="colab-buttons">
-        <a href="https://colab.research.google.com/github/CLDiego/uom_fse_dl_workshop/blob/main/notebooks/SE03_CA_Training_neural_networks.ipynb" class="colab-button code-along" target="_blank">
+        <a href="https://colab.research.google.com/github/CLDiego/uom_fse_dl_workshop/blob/main/SE03_CA_Training_neural_networks.ipynb" class="colab-button code-along" target="_blank">
           <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/> Code Along
         </a>
         <a href="https://colab.research.google.com/github/CLDiego/uom_fse_dl_workshop/blob/main/solutions/SE03_SL_Training_neural_networks.ipynb" class="colab-button solution" target="_blank">
@@ -130,7 +134,7 @@ permalink: /pages/workshop-sessions/
         <i class="fas fa-file-pdf"></i> Presentation
       </a>
       <div class="colab-buttons">
-        <a href="https://colab.research.google.com/github/CLDiego/uom_fse_dl_workshop/blob/main/notebooks/SE03_CA_Physics_informed_neural_networks.ipynb" class="colab-button code-along" target="_blank">
+        <a href="https://colab.research.google.com/github/CLDiego/uom_fse_dl_workshop/blob/main/SE03_CA_Physics_informed_neural_networks.ipynb" class="colab-button code-along" target="_blank">
           <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/> Code Along
         </a>
         <a href="https://colab.research.google.com/github/CLDiego/uom_fse_dl_workshop/blob/main/solutions/SE03_SL_Physics_informed_neural_networks.ipynb" class="colab-button solution" target="_blank">
@@ -162,7 +166,7 @@ permalink: /pages/workshop-sessions/
         <i class="fas fa-file-pdf"></i> Presentation
       </a>
       <div class="colab-buttons">
-        <a href="https://colab.research.google.com/github/CLDiego/uom_fse_dl_workshop/blob/main/notebooks/SE04_CA_Convolutional_Neural_Networks.ipynb" class="colab-button code-along" target="_blank">
+        <a href="https://colab.research.google.com/github/CLDiego/uom_fse_dl_workshop/blob/main/SE04_CA_Convolutional_Neural_Networks.ipynb" class="colab-button code-along" target="_blank">
           <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/> Code Along
         </a>
         <a href="https://colab.research.google.com/github/CLDiego/uom_fse_dl_workshop/blob/main/solutions/SE04_SL_Convolutional_Neural_Networks.ipynb" class="colab-button solution" target="_blank">
@@ -194,7 +198,7 @@ permalink: /pages/workshop-sessions/
         <i class="fas fa-file-pdf"></i> Presentation
       </a>
       <div class="colab-buttons">
-        <a href="https://colab.research.google.com/github/CLDiego/uom_fse_dl_workshop/blob/main/notebooks/SE05_CA_Transfer_Learning.ipynb" class="colab-button code-along" target="_blank">
+        <a href="https://colab.research.google.com/github/CLDiego/uom_fse_dl_workshop/blob/main/SE05_CA_Transfer_Learning.ipynb" class="colab-button code-along" target="_blank">
           <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/> Code Along
         </a>
         <a href="https://colab.research.google.com/github/CLDiego/uom_fse_dl_workshop/blob/main/solutions/SE05_SL_Transfer_Learning.ipynb" class="colab-button solution" target="_blank">
@@ -204,10 +208,6 @@ permalink: /pages/workshop-sessions/
     </div>
   </div>
 
-</div>
-
-<div class="warning-box">
-  <strong>Note:</strong> When using Colab, make sure to enable GPU acceleration for best performance. Go to Runtime → Change runtime type and select GPU as the Hardware accelerator.
 </div>
 
 <div class="card">
