@@ -19,7 +19,7 @@ permalink: /pages/setup-guide/
     
     <h4>WHAT YOU NEED</h4>
     <ul>
-      <li><i class="fab fa-google"></i> A Google account</li>
+      <li>A Google account <i class="fab fa-google"></i></li>
         <li>Reliable internet connection</li>
         <li>Web browser (Chrome recommended)</li>
     </ul>
