@@ -760,9 +760,7 @@ $$
 Where:
 - $X$ is the predicted segmentation mask
 - $Y$ is the ground truth segmentation mask
-- $ \abs{X} $ is the number of pixels in the predicted mask
-- $ \abs{Y} $ is the number of pixels in the ground truth mask
-- $ \abs{X \cap Y} $ is the number of pixels in the intersection of the predicted and ground truth masks
+- $X \cap Y$ is the number of pixels in the intersection of the predicted and ground truth masks
 
 <div align="center">
   <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/dice.png" width="80%">
