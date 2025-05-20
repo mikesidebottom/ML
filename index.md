@@ -70,12 +70,11 @@ This hands-on workshop introduces the fundamentals of deep learning using PyTorc
             </td>
           </tr>
           <tr>
-          <tr>
             <td><strong>3B</strong></td>
             <td>Physics-Informed Neural Networks (PINNS) </td>
             <td>~1 hr</td>
             <td>
-              <a href="{{ site.baseurl }}/notebooks/session3">Notebook</a> | 
+              <a href="{{ site.baseurl }}/notebooks/session3b">Notebook</a> | 
               <a href="{{ site.baseurl }}/slides/SE03B_FSE_DL_WORKSHOP.pdf" target="_blank"><i class="fas fa-file-pdf"></i> Slides</a>
             </td>
           </tr>
