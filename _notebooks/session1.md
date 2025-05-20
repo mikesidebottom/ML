@@ -378,13 +378,13 @@ For example, if we have a 1D array of shape `(3,)` and a 2D array of shape `(3, 
 ***
 > <img src="https://raw.githubusercontent.com/CLDiego/uom_fse_dl_workshop/main/figs/icons/code.svg" width="20"/> **Snippet 4**: Broadcasting example
 
-<pre class="snippet-code"><code class="python"># Create a 1D tensor of shape (3,)
-a = torch.tensor([1, 2, 3])
+<pre class="snippet-code"><code class="python"># Broadcasting example
+a = torch.tensor([1, 2])
 # Create a 2D tensor of shape (3, 2)
 b = torch.tensor([[1, 2], [3, 4], [5, 6]])
 # Add the two tensors together
 c = a + b  # Broadcasting occurs here
-print(c)  # Output: tensor([[ 2,  4], [ 6,  8], [10, 12]])
+print(c)  # Output: tensor([[ 2,  4], [ 4,  6], [6, 8]])
 </code></pre>
 
 <pre class='code-terminal python-terminal'><code class='python'># Exercise 6: Broadcasting 🎯
