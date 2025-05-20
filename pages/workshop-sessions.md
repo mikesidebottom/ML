@@ -130,7 +130,7 @@ permalink: /pages/workshop-sessions/
     </div>
     <div class="notebook-footer">
       <a href="{{ site.baseurl }}/notebooks/session3b">Browse Notebook</a>
-      <a href="{{ site.baseurl }}/slides/SE03_FSE_DL_WORKSHOP.pdf" class="presentation-button" target="_blank">
+      <a href="{{ site.baseurl }}/slides/SE03B_FSE_DL_WORKSHOP.pdf" class="presentation-button" target="_blank">
         <i class="fas fa-file-pdf"></i> Presentation
       </a>
       <div class="colab-buttons">
