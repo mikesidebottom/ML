@@ -150,6 +150,5 @@ This hands-on workshop introduces the fundamentals of deep learning using PyTorc
 </div>
 
 <div class="visitor-counter">
-  <p>Page Visitors</p>
   <img src="https://visitor-badge.laobi.icu/badge?page_id=fse_dl_workshop.index" alt="Visitor Count">
 </div>
