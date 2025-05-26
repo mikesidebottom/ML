@@ -1322,3 +1322,15 @@ table td:hover {
   position: relative;
   display: block;
 }
+
+.visitor-counter {
+  text-align: center;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.visitor-counter p {
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: #555;
+}
