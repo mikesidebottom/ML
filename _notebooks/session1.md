@@ -565,7 +565,7 @@ dataset_path = utils.data.download_dataset('ARKOMA',
                                    dest_path=data_path,
                                    extract=True)
 
-dataset_path = dataset_path / 'Dataset on NAO Robot Arms' / 'Left Arm Dataset' / 'LTrain_x.csv'</code></pre>
+dataset_path = dataset_path / 'Left Arm Dataset' / 'LTrain_x.csv'</code></pre>
 
 ## 6.1 Loading data with pandas
 ***
